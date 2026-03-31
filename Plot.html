@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Physics Experiment</title>
+    <script src="chart.js"></script>
+</head>
+<body>
+
+<h1>Physics Experiment: Scatter Plot & Linear Regression</h1>
+
+<div>
+    <input id="x" placeholder="x (e.g., time)">
+    <input id="y" placeholder="y (e.g., distance)">
+    <button onclick="addData()">Add Point</button>
+    <button onclick="resetData()">Reset</button>
+</div>
+
+<p>Points: <span id="count">0</span></p>
+
+<!-- 图表显示 -->
+<canvas id="myChart" width="600" height="400"></canvas>
+
+<!-- 斜率和截距 -->
+<p id="fitResult"></p>
+
+<script src="plot.js"></script>
+</body>
+</html>
