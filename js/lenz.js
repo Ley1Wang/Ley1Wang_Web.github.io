@@ -17,11 +17,11 @@ let direction = 1;
 function animate() {
     pos += direction * 0.5;
 
-    if (pos > 200 || pos < 0) {
-        direction *= -1; // 反方向
+    if (pos > 300 || pos < 0) {
+        direction *= -1; 
     }
 
-    document.getElementById("magnet").style.top = pos + "px";
+    document.getElementById("magnet").style.left = pos + "px";
 
     requestAnimationFrame(animate);
 }
