@@ -4,8 +4,8 @@ function calc() {
     let v = parseFloat(document.getElementById("v").value);
     let N = parseFloat(document.getElementById("N").value);
 
-    let emf = B * v * N;
-    let current = emf / 5;
+    let emf = B * v * N * direction;
+    let current = emf / 5 * direction;
 
     document.getElementById("emf").innerText = "EMF: " + emf.toFixed(2);
     document.getElementById("current").innerText = "Current: " + current.toFixed(2);
@@ -19,6 +19,7 @@ function animate() {
 
     if (pos > 300 || pos < 0) {
         direction *= -1; 
+
     }
 
     document.getElementById("magnet").style.left = pos + "px";
