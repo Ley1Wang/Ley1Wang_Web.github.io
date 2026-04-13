@@ -34,6 +34,35 @@ button {
     display: inline-block;
     border-radius: 10px;
 }
+.scene {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin: 40px auto;
+    border: 2px solid #ccc;
+}
+
+#coil {
+    width: 100px;
+    height: 100px;
+    border: 4px solid black;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 磁铁（会动） */
+#magnet {
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(red, blue);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
 </style>
 
 </head>
@@ -49,6 +78,7 @@ button {
     <button onclick="calc()">Calculate</button>
 </div>
 
+
 <div class="box">
     <p id="emf">EMF: </p>
     <p id="current">Current: </p>
@@ -56,5 +86,9 @@ button {
 
 <script src="../js/lenz.js"></script>
 
+<div class="scene">
+    <div id="coil"></div>
+    <div id="magnet"></div>
+</div>
 </body>
 </html>
