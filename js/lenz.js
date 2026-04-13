@@ -15,7 +15,7 @@ let pos = 0;
 let direction = 1;
 
 function animate() {
-    pos += direction * 1;
+    pos += direction * 0.5;
 
     if (pos > 200 || pos < 0) {
         direction *= -1; // 反方向
