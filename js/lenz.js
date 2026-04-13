@@ -4,11 +4,11 @@ function calc() {
     let v = parseFloat(document.getElementById("v").value);
     let N = parseFloat(document.getElementById("N").value);
 
-    let emf = B * v * N * direction;
-    let current = emf / 5 * direction;
+    let emf = B * v * N ;
+    let current = emf / 5 ;
 
-    document.getElementById("emf").innerText = "EMF: " + emf.toFixed(2);
-    document.getElementById("current").innerText = "Current: " + current.toFixed(2);
+    document.getElementById("emf").innerText = "emf: " + emf.toFixed(2);
+    document.getElementById("current").innerText = "current: " + current.toFixed(2);
 }
 
 let pos = 0;
@@ -18,7 +18,9 @@ function animate() {
     pos += direction * 0.5;
 
     if (pos > 300 || pos < 0) {
+
         direction *= -1; 
+        
 
     }
 
