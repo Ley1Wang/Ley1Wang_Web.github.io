@@ -36,10 +36,13 @@ button {
 }
 .scene {
     position: relative;
-    width: 200px;
-    height: 300px;
+    width: 400px;
+    height: 200px; 
     margin: 40px auto;
     border: 2px solid #ccc;
+    transform: scale(1.5);
+    transform-origin: center;
+
 }
 
 #coil {
@@ -53,15 +56,15 @@ button {
     transform: translateX(-50%);
 }
 
-/* 磁铁（会动） */
 #magnet {
-    width: 60px;
-    height: 40px;
+    width: 80px;
+    height: 50px;
     background: linear-gradient(red, blue);
+
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;          
+    top: 50%;     
+    transform: translateY(-50%);
 }
 </style>
 
