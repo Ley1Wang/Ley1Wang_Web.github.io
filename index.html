@@ -165,26 +165,34 @@
         background: var(--accent-light);
         color: var(--primary);
     }
+    .sidebar a.active {
+        background: var(--accent);
+        color: white;
+    }
     .topbar, .footer {
         width: 100%;
-        height: 70px;
-        line-height: 40px;
+        height: 60px;
         font-size: 14px;
 
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
 
         z-index: 1000;
     }
 
     .topbar {
-        top: 0;
-        background-color: #11212D;
-        color: rgb(0, 0, 0);
+        background: white;
+        border-bottom: 1px solid var(--border);
+
+        color: var(--text);
     }
 
     .footer {
-        bottom: 0;
-        background-color: #253745;
-        color: #CCD0CF;
+        background: var(--primary);
+        color: #d1fae5;
+
+        justify-content: flex-end; 
     }
 </style>
 <div class="topbar">
