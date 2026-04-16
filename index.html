@@ -182,24 +182,25 @@
     }
 
     .topbar {
-        background: #072E33;
-        color: white;
+        position: relative;
 
         height: 60px;
-        padding: 0 25px;
+        background: #072E33;
 
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        padding: 0 20px;
     }
     .name {
         font-size: 18px;
         font-weight: 500;
     }
-    .top-right {
-        margin-right: 20px;
+    .top-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
         display: flex;
-        align-items: center;
         gap: 15px;
     }
     .top-right img {
