@@ -192,7 +192,35 @@
         justify-content: space-between;
         align-items: center;
     }
+    .name {
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .top-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .top-right img {
+        height: 26px;
+        width: auto;
 
+        opacity: 0.8;
+        transition: all 0.2s ease;
+    }
+    .top-right a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+
+        border-radius: 50%;
+    }
+    .top-right a:hover {
+        background: rgba(255,255,255,0.1);
+    }
     .footer {
         background: var(--primary);
         color: #d1fae5;
