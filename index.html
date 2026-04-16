@@ -182,9 +182,15 @@
     }
 
     .topbar {
-        background: rgba(7, 46, 51, 0.85);
-        backdrop-filter: blur(8px);
+        background: #072E33;
         color: white;
+
+        height: 60px;
+        padding: 0 25px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .footer {
@@ -195,14 +201,21 @@
     }
 </style>
 <div class="topbar">
-        <p1 style="margin-right: 20px;">
-            <div class="logo-row">
-            <div class="logo-box"><img src="../images/Instagram-Logo.png" alt="Ins"></div>
-            <br>
-            <div class="logo-box"><img src="../images/GitHub-Logo.png" alt="Git"></div>
-            <br>
-            </div>
-        </p1>
+
+    <div class="top-left">
+        <span class="name">Leyi Wang</span>
+    </div>
+
+    <div class="top-right">
+        <a href="https://github.com/你的用户名" target="_blank">
+            <img src="images/GitHub-Logo.png">
+        </a>
+
+        <a href="https://instagram.com/你的用户名" target="_blank">
+            <img src="images/Instagram-Logo.png">
+        </a>
+    </div>
+
 </div>
 </head>
 
