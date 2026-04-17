@@ -1,16 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=0.5">
-<title>Physics Teaching Material</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Physics Projects</title>
 <link rel="icon" href="../assets/physics.ico">
-<h1 style="font-size: 50px;">Physics Visualization Projects Collection</h1>
+
+<style>
+:root {
+    --bg: #f3fdf8;
+    --card: #ffffff;
+    --primary: #065f46;
+    --accent: #10b981;
+    --text: #1f2937;
+    --subtext: #6b7280;
+}
+
+/* 全局 */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* 顶部 */
+.topbar {
+    height: 60px;
+    background: #072E33;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+}
+
+.topbar .title {
+    color: white;
+    font-size: 18px;
+}
+
+.topbar a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.topbar a:hover {
+    opacity: 1;
+}
+
+/* 主体 */
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    color: var(--primary);
+    margin-bottom: 30px;
+}
+
+
+.card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+.card h3 {
+    margin: 0;
+    color: var(--primary);
+}
+
+
+.card p {
+    color: var(--subtext);
+    margin: 10px 0;
+}
+
+
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+
+    background: var(--accent);
+    color: white;
+
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+</style>
 </head>
-<body style="font-size:30px">   
-<a href="https://wangleyi.top/pages/Plot">Plot Graphs</a>
-<details>
-  <summary>Tag to view</summary>
-  <img src="../images/Plot_Example.jpg" alt="Plot">
-</details>
+
+<body>
+
+
+<div class="topbar">
+    <div class="title">Physics Projects</div>
+    <a href="https://wangleyi.top">Home</a>
+</div>
+
+<div class="container">
+
+    <h1>Physics Visualization Projects</h1>
+
+    <div class="card">
+        <h3>Scatter Plot Visualization</h3>
+        <p>Plot experimental data points and visualize relationships.</p>
+
+        <img src="../images/Plot_Example.jpg" alt="Plot preview">
+
+        <a href="https://wangleyi.top/pages/Plot" class="button">
+            Open →
+        </a>
+    </div>
+
+
+    <div class="card">
+        <h3>Linear Regression Simulator</h3>
+        <p>Calculate best-fit lines and explore relationships between variables.</p>
+
+        <img src="../images/Plot_Example.jpg" alt="Regression preview">
+
+        <a href="https://wangleyi.top/pages/Plot" class="button">
+            Open →
+        </a>
+    </div>
+
+</div>
+
 </body>
 </html>
