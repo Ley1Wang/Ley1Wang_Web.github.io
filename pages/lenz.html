@@ -7,6 +7,35 @@
 <title>Lenz Law Demo</title>
 
 <style>
+
+.topbar {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    height: 50px;
+    background: #072E33;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 15px;
+}
+
+.topbar span {
+    color: white;
+}
+
+.topbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     text-align: center;
@@ -115,28 +144,36 @@ button {
 </head>
 
 <body>
-
-<h1>⚡Lenz Law Simulator⚡</h1>
-
-<div>
-    <input id="B" placeholder="B (Tesla)">
-    <input id="v" placeholder="v (m/s)">
-    <input id="N" placeholder="Turns">
-    <button onclick="calc()">Calculate</button>
+<div class="topbar">
+    <span>Physics</span>
+    <div>
+        <a href="https://wangleyi.top">Home</a>
+        <a href="https://wangleyi.top/pages/physics">Projects</a>
+    </div>
 </div>
-<br>
+<div class="container">
+    <h1>⚡Lenz Law Simulator⚡</h1>
 
-<div class="box">
-    <p id="emf">EMF: </p>
-    <p id="current">Current: </p>
-</div>
-<br>
+    <div>
+        <input id="B" placeholder="B (Tesla)">
+        <input id="v" placeholder="v (m/s)">
+        <input id="N" placeholder="Turns">
+        <button onclick="calc()">Calculate</button>
+    </div>
+    <br>
 
-<div class="scene">
-    <div class="wrapper">
-        <div id="coil-back"></div>
-        <div id="magnet"></div>
-        <div id="coil-front"></div>
+    <div class="box">
+        <p id="emf">EMF: </p>
+        <p id="current">Current: </p>
+    </div>
+    <br>
+
+    <div class="scene">
+        <div class="wrapper">
+            <div id="coil-back"></div>
+            <div id="magnet"></div>
+            <div id="coil-front"></div>
+        </div>
     </div>
 </div>
 
