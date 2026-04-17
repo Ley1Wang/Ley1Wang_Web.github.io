@@ -285,7 +285,6 @@
         <div class="gallery">
             <button onclick="prev()">⬅</button>
             <img id="slide" src="images/Plot_Example.jpg">
-            <img id="slide" src="images/Lenz_Example.jpg">
             <button onclick="next()">➡</button>
         </div>
         <div id="Physics">
@@ -337,25 +336,26 @@
     // gallery
         let images = [
             "images/Plot_Example.jpg",
+            "images/Lenz_Example.jpg",
         ];
         let index = 0;
-        // 显示图片
+
         function show() {
             document.getElementById("slide").src = images[index];
         }
-        // 下一张
+
         function next() {
             index = (index + 1) % images.length;
             show();
         }
 
-        // 上一张（点按钮就暂停自动播放）
+  
         function prev() {
             clearInterval(timer);
             index = (index - 1 + images.length) % images.length;
             show();
         }
-        // 自动播放
+
         let timer = setInterval(next, 3000);
 
         let img = document.getElementById("slide");
