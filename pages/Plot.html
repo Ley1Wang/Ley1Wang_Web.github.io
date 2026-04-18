@@ -1,5 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #f3fdf8;
+    --primary: #065f46;
+    --accent: #10b981;
+    --text: #1f2937;
+    --subtext: #6b7280;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.topbar {
+    height: 50px;
+    background: #072E33;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 15px;
+}
+
+.topbar span {
+    color: white;
+}
+
+.topbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+
+input {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+button {
+    padding: 8px 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+
+canvas {
+    margin-top: 20px;
+    width: 100% !important;
+    max-width: 600px;
+}
+
+#fitResult {
+    margin-top: 15px;
+    color: var(--subtext);
+}
+</style>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -9,7 +96,17 @@
 </head>
 <body>
 
-<h1>Physics Experiment: Scatter Plot & Linear Regression</h1>
+<div class="topbar">
+    <span>Physics</span>
+    <div>
+        <a href="https://wangleyi.top">Home</a>
+        <a href="https://wangleyi.top/pages/physics">Projects</a>
+    </div>
+</div>
+
+<div class="container">
+
+<h1>Scatter Plot & Linear Regression</h1>
 
 <div>
     <input id="x" placeholder="x (e.g., time)">
@@ -20,11 +117,11 @@
 
 <p>Points: <span id="count">0</span></p>
 
-<!-- 图表显示 -->
-<canvas id="myChart" width="600" height="400"></canvas>
+<canvas id="myChart"></canvas>
 
-<!-- 斜率和截距 -->
 <p id="fitResult"></p>
+
+</div>
 
 <script src="../js/Plot.js"></script>
 </body>
