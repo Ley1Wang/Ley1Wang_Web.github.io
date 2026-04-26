@@ -18,6 +18,28 @@
     --text: #1f2937;
     --subtext: #6b7280;
 }
+img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    display: block;
+}
+.log {
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+.image-row {
+    display: flex;
+    gap: 10px;
+}
+
+.image-row img {
+    width: 48%;
+}
 
 
 body {
@@ -102,13 +124,24 @@ p {
 <canvas id="radar" width="400" height="400"></canvas>
 <script src="../js/Radar.js"></script>
 </div>
-<h1>Detector Fabrication Log : From mmWave Radar to Waterproof Sonar</h1>
-<p>April 26 Updates
-    On 4-26-2026, Electric materials, Arduino R3, breadboard, slip ring, steering engines and mmWave modules are all delievered and collected; Wires and powers connected and primary installation is correctly set up.
-    <br>Test codes written in C++ uploaded to the Arduino without any Errors in the whole device.(๑•̀ㅂ•́)و✧ Mechanics and containers are not designed yet, wait for further actions after AP exams.
+<div class="log">
+<h2>Detector Development Log</h2>
+<h3>April 26, 2026</h3>
+<p>
+All core components have been successfully received, including electronic modules, an Arduino Uno R3, breadboards, a slip ring, servo motors, and the mmWave radar module. Initial wiring and power distribution have been completed, and the system is now correctly assembled at a basic functional level.
+<br>
+Test programs written in C++ have been uploaded to the Arduino without compilation errors, confirming that the core control pipeline is operational.
+<br>
+Mechanical structure and enclosure design are still pending and will be developed after the AP examination period.
+<br>
     <img src="../images/radar_code1.png" alt="Code">
     <img src="../images/radar_photo1.jpg" alt="Display">
 </p>
+<div class="image-row">
+    <img src="../images/radar_code1.png">
+    <img src="../images/radar_photo1.jpg">
+</div>
+</div>
 
 
 </body>
