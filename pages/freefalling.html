@@ -65,8 +65,33 @@ h1 {
     font-weight: 600;
     color: var(--primary);
 }
+.scene {
+    position: relative;
+
+    width: 300px;
+    height: 400px;
+
+    margin: 30px auto;
+
+    border: 2px solid #ccc;
+    background: white;
+}
+
+#ball {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+    background: #10b981;
+
+    position: absolute;
+
+    top: 0;
+    left: 135px;
+}
 </style>
 </head>
+<script src="../js/freefalling.js"></script>
 <body>
 <div class="topbar">
     <span>Physics</span>
@@ -75,13 +100,41 @@ h1 {
         <a href="https://wangleyi.top/pages/physics">Projects</a>
     </div>
 </div>
-<select id="planet">
-    <option>Earth</option>
-    <option>Moon</option>
-    <option>Mars</option>
-    <option>Jupiter</option>
-</select>
+
 <div class="container">
+    <h1>Free Fall Simulator</h1>
+
+    <p>
+        Compare free-fall motion on different planets.
+    </p>
+    <div class="scene">
+        <div id="ball"></div>
+    </div>
+    <select id="planet">
+        <option>Mercury</option>
+        <option>Venus</option>
+        <option>Earth</option>
+        <option>Moon</option>
+        <option>Mars</option>
+        <option>Jupiter</option>
+        <option>Saturn</option>
+        <option>Uranus</option>
+        <option>Neptune</option>
+    </select>
+
+    <input
+        id="heightInput"
+        type="number"
+        value="100"
+        placeholder="Height (m)">
+
+    <button onclick="startFall()">
+        Start
+    </button>
+
+    <button onclick="resetFall()">
+        Reset
+    </button>
 
 </div>
 </body>
