@@ -11,13 +11,26 @@ const planets = {
 };
 
 y = 0.5 * g * t * t
-document.getElementById("time").innerText =
-t.toFixed(2);
+function startFall() {
+    console.log("start");
+}
 
-document.getElementById("velocity").innerText =
-v.toFixed(2);
+function resetFall() {
+    console.log("reset");
+}
+let y = 0;
 
-document.getElementById("height").innerText =
-(h0-y).toFixed(2);
-timeData.push(t);
-velocityData.push(v);
+function startFall() {
+
+    function animate() {
+
+        y += 1;
+
+        document.getElementById("ball").style.top =
+            y + "px";
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
