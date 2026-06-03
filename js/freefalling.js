@@ -18,7 +18,7 @@ function startFall() {
 function resetFall() {
     console.log("reset");
 }
-let y = 0;
+let y = 10;
 
 function startFall() {
 
@@ -33,4 +33,12 @@ function startFall() {
     }
 
     animate();
+}
+
+function resetFall() {
+
+    y = 10;
+
+    document.getElementById("ball").style.top =
+        y + "px";
 }

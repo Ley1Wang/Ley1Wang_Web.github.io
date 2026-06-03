@@ -68,26 +68,45 @@ h1 {
 .scene {
     position: relative;
 
-    width: 300px;
-    height: 400px;
+    width: 320px;
+    height: 420px;
 
     margin: 30px auto;
 
-    border: 2px solid #ccc;
-    background: white;
-}
+    border-radius: 16px;
 
+    background:
+        linear-gradient(
+            to bottom,
+            #e8f8ff,
+            #ffffff
+        );
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.08);
+
+    overflow: hidden;
+}
 #ball {
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
 
     border-radius: 50%;
-    background: #10b981;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #34d399,
+            #065f46
+        );
 
     position: absolute;
 
-    top: 0;
-    left: 135px;
+    top: 10px;
+    left: 142px;
+
+    box-shadow:
+        0 4px 12px rgba(16,185,129,0.4);
 }
 select {
     padding: 8px 12px;
@@ -200,7 +219,6 @@ button:active {
 
 </style>
 </head>
-<script src="../js/freefalling.js"></script>
 <body>
 <div class="topbar">
     <span>Physics</span>
@@ -253,5 +271,5 @@ button:active {
 
 </div>
 </body>
-
+<script src="../js/freefalling.js"></script>
 </html>
