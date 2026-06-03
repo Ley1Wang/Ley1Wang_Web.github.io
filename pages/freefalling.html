@@ -88,7 +88,7 @@ h1 {
 
     top: 0;
     left: 135px;
-
+}
 select {
     padding: 8px 12px;
 
@@ -139,23 +139,65 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* 点击 */
 button:active {
     transform: translateY(0);
 }
 .controls {
     display: flex;
-
     justify-content: center;
     align-items: center;
-
-    gap: 10px;
-
-    margin: 20px 0;
-
+    gap: 12px;
     flex-wrap: wrap;
+    margin: 25px 0;
 }
+
+.controls select,
+.controls input {
+    height: 42px;
+
+    padding: 0 16px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: white;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.08);
+
+    font-size: 14px;
 }
+
+.controls button {
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        135deg,
+        #10b981,
+        #065f46
+    );
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(16,185,129,0.3);
+
+    transition: 0.2s;
+}
+
+.controls button:hover {
+    transform: translateY(-2px);
+}
+
 </style>
 </head>
 <script src="../js/freefalling.js"></script>
@@ -169,40 +211,45 @@ button:active {
 </div>
 
 <div class="container">
+
     <h1>Free Fall Simulator</h1>
 
     <p>
         Compare free-fall motion on different planets.
     </p>
+
+    <div class="controls">
+
         <select id="planet">
-        <option>Mercury</option>
-        <option>Venus</option>
-        <option>Earth</option>
-        <option>Moon</option>
-        <option>Mars</option>
-        <option>Jupiter</option>
-        <option>Saturn</option>
-        <option>Uranus</option>
-        <option>Neptune</option>
-    </select>
+            <option>Mercury</option>
+            <option>Venus</option>
+            <option selected>Earth</option>
+            <option>Moon</option>
+            <option>Mars</option>
+            <option>Jupiter</option>
+            <option>Saturn</option>
+            <option>Uranus</option>
+            <option>Neptune</option>
+        </select>
 
-    <input
-        id="heightInput"
-        type="number"
-        value="100"
-        placeholder="Height (m)">
+        <input
+            id="heightInput"
+            type="number"
+            value="100">
 
-    <button onclick="startFall()">
-        Start
-    </button>
+        <button onclick="startFall()">
+            ▶ Start
+        </button>
 
-    <button onclick="resetFall()">
-        Reset
-    </button>
+        <button onclick="resetFall()">
+            ↺ Reset
+        </button>
+
+    </div>
+
     <div class="scene">
         <div id="ball"></div>
     </div>
-
 
 </div>
 </body>
