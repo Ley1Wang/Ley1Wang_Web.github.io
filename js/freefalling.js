@@ -45,6 +45,26 @@ const ballColors = {
     Uranus: "radial-gradient(circle at 25% 25%,#b8ffff,#66cccc)",
     Neptune: "radial-gradient(circle at 25% 25%,#8ab6ff,#1457a6)"
 };
+const grounds = {
+
+    Mercury: "#6b7280",
+
+    Venus: "#b9773b",
+
+    Earth: "#2e8b57",
+
+    Moon: "#8a8a8a",
+
+    Mars: "#a3472d",
+
+    Jupiter: "#c08a5b",
+
+    Saturn: "#d6ba87",
+
+    Uranus: "#7ad6e8",
+
+    Neptune: "#2f5ea8"
+};
 
 const planetSelect =
     document.getElementById("planet");
@@ -102,6 +122,8 @@ function updatePlanet() {
 
     ball.style.background =
         ballColors[planet];
+        
+    document.getElementById("horizon").style.background =grounds[planet];
 }
 
 updatePlanet();
