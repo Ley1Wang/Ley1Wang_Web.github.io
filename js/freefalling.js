@@ -23,47 +23,68 @@ const images = {
 };
 
 const skies = {
-    Mercury: "linear-gradient(to bottom,#b8b8b8,#6e6e6e)",
-    Venus: "linear-gradient(to bottom,#f6d39a,#c9873c)",
+    Mercury: "linear-gradient(to bottom,#bfc3c7,#71767b)",
+    Venus: "linear-gradient(to bottom,#f7d89a,#cb8a3d)",
     Earth: "linear-gradient(to bottom,#5aa8ff,#dff5ff)",
-    Moon: "linear-gradient(to bottom,#0f172a,#334155)",
-    Mars: "linear-gradient(to bottom,#ffb08a,#a3472d)",
-    Jupiter: "linear-gradient(to bottom,#f7d8b0,#b37b52)",
-    Saturn: "linear-gradient(to bottom,#f6e2b8,#d0b07a)",
-    Uranus: "linear-gradient(to bottom,#8cecff,#d8ffff)",
-    Neptune: "linear-gradient(to bottom,#1457a6,#7dc2ff)"
+    Moon: "linear-gradient(to bottom,#0f172a,#475569)",
+    Mars: "linear-gradient(to bottom,#ffb08a,#b55337)",
+    Jupiter: "linear-gradient(to bottom,#f8d9b0,#c48b62)",
+    Saturn: "linear-gradient(to bottom,#f5e5c3,#d4b27b)",
+    Uranus: "linear-gradient(to bottom,#9df4ff,#dfffff)",
+    Neptune: "linear-gradient(to bottom,#1f66c2,#8fd1ff)"
+};
+
+const grounds = {
+    Mercury: "#7a7f84",
+    Venus: "#ba7d3e",
+    Earth: "#3b7d4a",
+    Moon: "#9a9a9a",
+    Mars: "#a3472d",
+    Jupiter: "#c08a5b",
+    Saturn: "#d7bb86",
+    Uranus: "#83dce8",
+    Neptune: "#356bc2"
+};
+
+const horizonLines = {
+    Mercury: "#d1d5db",
+    Venus: "#ffe0a3",
+    Earth: "#ffffff",
+    Moon: "#f3f4f6",
+    Mars: "#ffd1b8",
+    Jupiter: "#ffe4c4",
+    Saturn: "#fff3d4",
+    Uranus: "#e0ffff",
+    Neptune: "#b7d8ff"
 };
 
 const ballColors = {
-    Mercury: "radial-gradient(circle at 25% 25%,#e0e0e0,#808080)",
-    Venus: "radial-gradient(circle at 25% 25%,#ffd28a,#c9873c)",
-    Earth: "radial-gradient(circle at 25% 25%,#7fffd4,#10b981)",
-    Moon: "radial-gradient(circle at 25% 25%,#ffffff,#999999)",
-    Mars: "radial-gradient(circle at 25% 25%,#ff9a76,#b7410e)",
-    Jupiter: "radial-gradient(circle at 25% 25%,#f4c28a,#b37b52)",
-    Saturn: "radial-gradient(circle at 25% 25%,#f7e3b5,#c9a96b)",
-    Uranus: "radial-gradient(circle at 25% 25%,#b8ffff,#66cccc)",
-    Neptune: "radial-gradient(circle at 25% 25%,#8ab6ff,#1457a6)"
-};
-const grounds = {
+    Mercury:
+        "radial-gradient(circle at 25% 25%,#f3f4f6,#9ca3af,#6b7280)",
 
-    Mercury: "#6b7280",
+    Venus:
+        "radial-gradient(circle at 25% 25%,#ffe2b8,#d89a54,#b9773b)",
 
-    Venus: "#b9773b",
+    Earth:
+        "radial-gradient(circle at 25% 25%,#dfffff,#34d399,#059669)",
 
-    Earth: "#2e8b57",
+    Moon:
+        "radial-gradient(circle at 25% 25%,#ffffff,#cfcfcf,#8a8a8a)",
 
-    Moon: "#8a8a8a",
+    Mars:
+        "radial-gradient(circle at 25% 25%,#ffc0a5,#d46a44,#a3472d)",
 
-    Mars: "#a3472d",
+    Jupiter:
+        "radial-gradient(circle at 25% 25%,#ffe0b8,#d9a476,#b37b52)",
 
-    Jupiter: "#c08a5b",
+    Saturn:
+        "radial-gradient(circle at 25% 25%,#fff0d4,#e1c58d,#c9a96b)",
 
-    Saturn: "#d6ba87",
+    Uranus:
+        "radial-gradient(circle at 25% 25%,#e8ffff,#9be8ef,#66c6d1)",
 
-    Uranus: "#7ad6e8",
-
-    Neptune: "#2f5ea8"
+    Neptune:
+        "radial-gradient(circle at 25% 25%,#b8d5ff,#4d86d8,#1457a6)"
 };
 
 const planetSelect =
@@ -92,6 +113,9 @@ const planetName =
 
 const planetPreview =
     document.getElementById("planetPreview");
+
+const horizon =
+    document.getElementById("horizon");
 
 const SCALE = 4;
 
@@ -122,15 +146,25 @@ function updatePlanet() {
 
     ball.style.background =
         ballColors[planet];
-        
-    document.getElementById("horizon").style.background =grounds[planet];
+
+    horizon.style.background =
+        `linear-gradient(
+            to bottom,
+            ${grounds[planet]},
+            rgba(0,0,0,0.25)
+        )`;
+
+    horizon.style.borderTop =
+        `4px solid ${horizonLines[planet]}`;
 }
 
 updatePlanet();
 
 function startFall() {
 
-    cancelAnimationFrame(animationId);
+    cancelAnimationFrame(
+        animationId
+    );
 
     const planet =
         planetSelect.value;
@@ -139,10 +173,15 @@ function startFall() {
         planets[planet];
 
     const height =
-        Number(heightInput.value);
+        Number(
+            heightInput.value
+        );
 
     const maxY =
-        height * SCALE;
+        Math.min(
+            height * SCALE,
+            scene.clientHeight - 120
+        );
 
     startTime =
         performance.now();
@@ -197,7 +236,9 @@ function startFall() {
 
 function resetFall() {
 
-    cancelAnimationFrame(animationId);
+    cancelAnimationFrame(
+        animationId
+    );
 
     ball.style.top =
         "20px";
