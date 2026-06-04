@@ -88,6 +88,26 @@ h1 {
     box-shadow:
         0 15px 40px rgba(0,0,0,0.12);
 }
+.scene::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
+
+    background-size:
+        40px 40px;
+
+    opacity: 0.25;
+
+    z-index: 0;
+}
 .scene::after {
     content: "";
 
@@ -104,11 +124,18 @@ h1 {
 
     pointer-events: none;
 
-    z-index: 2;
+    z-index: 3;
 }
 #ball {
     width: 40px;
     height: 40px;
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 50%;
+    transform: translateX(-50%);
 
     border-radius: 50%;
 
