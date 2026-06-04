@@ -66,32 +66,31 @@ h1 {
     color: var(--primary);
 }
 .scene {
-    width: 320px;
-    height: 420px;
+    width: 500px;
+    height: 550px;
 
     margin: 30px auto;
 
-    border-radius: 16px;
+    border-radius: 20px;
 
     overflow: hidden;
+
+    position: relative;
 
     background:
     linear-gradient(
         to bottom,
-        #6ec6ff 0%,
-        #b3e5fc 40%,
-        #e1f5fe 100%
+        #5aa8ff 0%,
+        #8dc8ff 55%,
+        #dff5ff 100%
     );
 
-    position: relative;
-
     box-shadow:
-        0 10px 25px rgba(0,0,0,0.08);
+        0 15px 40px rgba(0,0,0,0.12);
 }
-
 #ball {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
 
     border-radius: 50%;
 
@@ -103,48 +102,50 @@ h1 {
         #065f46
     );
 
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.25);
-
     position: absolute;
 
-    top: 10px;
-    left: 142px;
+    top: 20px;
 
-    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.25);
 }
 #ground {
     position: absolute;
 
-    bottom: 0;
+    bottom: -260px;
 
-    width: 100%;
-    height: 100px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 900px;
+    height: 900px;
 
     background-image:
-        url("../images/earth_surface.jpg");
-    box-shadow:
-        0 -10px 20px rgba(0,0,0,0.15);
-    background-size: cover;
+        url("../images/earth.png");
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
     z-index: 2;
 }
-#ground::before {
-    content: "";
-
-    position: absolute;
-
-    top: -40px;
-    left: 0;
-
-    width: 100%;
-    height: 40px;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(255,255,255,0),
-            rgba(255,255,255,0.6)
-        );
+#gravityInfo,
+#timeInfo,
+#velocityInfo,
+#planetName {
+    text-align: center;
+}
+#gravityInfo,
+#timeInfo,
+#velocityInfo {
+    font-size: 18px;
+    margin: 8px 0;
 }
 #planetName {
     color: var(--primary);
