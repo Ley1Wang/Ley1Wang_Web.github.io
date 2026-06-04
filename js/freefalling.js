@@ -22,38 +22,64 @@ const images = {
     Neptune: "../images/neptune.png"
 };
 
-const planetSelect =
-    document.getElementById("planet");
+const skies = {
+    Mercury: "linear-gradient(to bottom,#b8b8b8,#6e6e6e)",
+    Venus: "linear-gradient(to bottom,#f6d39a,#c9873c)",
+    Earth: "linear-gradient(to bottom,#5aa8ff,#dff5ff)",
+    Moon: "linear-gradient(to bottom,#0f172a,#334155)",
+    Mars: "linear-gradient(to bottom,#ffb08a,#a3472d)",
+    Jupiter: "linear-gradient(to bottom,#f7d8b0,#b37b52)",
+    Saturn: "linear-gradient(to bottom,#f6e2b8,#d0b07a)",
+    Uranus: "linear-gradient(to bottom,#8cecff,#d8ffff)",
+    Neptune: "linear-gradient(to bottom,#1457a6,#7dc2ff)"
+};
 
-const ball =
-    document.getElementById("ball");
+const ballColors = {
+    Mercury: "radial-gradient(circle at 25% 25%,#e0e0e0,#808080)",
+    Venus: "radial-gradient(circle at 25% 25%,#ffd28a,#c9873c)",
+    Earth: "radial-gradient(circle at 25% 25%,#7fffd4,#10b981)",
+    Moon: "radial-gradient(circle at 25% 25%,#ffffff,#999999)",
+    Mars: "radial-gradient(circle at 25% 25%,#ff9a76,#b7410e)",
+    Jupiter: "radial-gradient(circle at 25% 25%,#f4c28a,#b37b52)",
+    Saturn: "radial-gradient(circle at 25% 25%,#f7e3b5,#c9a96b)",
+    Uranus: "radial-gradient(circle at 25% 25%,#b8ffff,#66cccc)",
+    Neptune: "radial-gradient(circle at 25% 25%,#8ab6ff,#1457a6)"
+};
 
-const scene =
-    document.querySelector(".scene");
+const planetSelect = document.getElementById("planet");
+const ball = document.getElementById("ball");
+const scene = document.querySelector(".scene");
+const ground = document.getElementById("ground");
 
-const gravityInfo =
-    document.getElementById("gravityInfo");
+const gravityInfo = document.getElementById("gravityInfo");
+const timeInfo = document.getElementById("timeInfo");
+const velocityInfo = document.getElementById("velocityInfo");
+const planetName = document.getElementById("planetName");
 
 const SCALE = 4;
 
 let animationId = null;
 let startTime = 0;
 
-planetSelect.addEventListener(
-    "change",
-    updatePlanet
-);
+planetSelect.addEventListener("change", updatePlanet);
 
 function updatePlanet() {
 
-    const planet =
-        planetSelect.value;
+    const planet = planetSelect.value;
 
-    scene.style.backgroundImage =
-        `url(${images[planet]})`;
+    planetName.innerText = planet;
 
     gravityInfo.innerText =
         `Gravity: ${planets[planet]} m/s²`;
+
+    scene.style.background =
+        skies[planet];
+
+    ground.style.backgroundImage =
+        `url(${images[planet]})`;
+
+    ball.style.background =
+        ballColors[planet];
 }
 
 updatePlanet();
@@ -62,14 +88,10 @@ function startFall() {
 
     cancelAnimationFrame(animationId);
 
-    const planet =
-        planetSelect.value;
+    const planet = planetSelect.value;
+    const g = planets[planet];
 
-    const g =
-        planets[planet];
-
-    startTime =
-        performance.now();
+    startTime = performance.now();
 
     function animate(now) {
 
@@ -79,16 +101,26 @@ function startFall() {
         let y =
             0.5 * g * t * t * SCALE;
 
-        const maxY = 300;
+        let v =
+            g * t;
+
+        const maxY = 380;
 
         if (y > maxY) {
             y = maxY;
         }
 
         ball.style.top =
-            (10 + y) + "px";
+            (20 + y) + "px";
+
+        timeInfo.innerText =
+            `Time: ${t.toFixed(2)} s`;
+
+        velocityInfo.innerText =
+            `Velocity: ${v.toFixed(2)} m/s`;
 
         if (y < maxY) {
+
             animationId =
                 requestAnimationFrame(
                     animate
@@ -106,5 +138,11 @@ function resetFall() {
 
     cancelAnimationFrame(animationId);
 
-    ball.style.top = "10px";
+    ball.style.top = "20px";
+
+    timeInfo.innerText =
+        "Time: 0.00 s";
+
+    velocityInfo.innerText =
+        "Velocity: 0.00 m/s";
 }
