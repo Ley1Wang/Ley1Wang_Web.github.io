@@ -1,377 +1,251 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+const planets = {
+    Mercury: 3.7,
+    Venus: 8.87,
+    Earth: 9.81,
+    Moon: 1.62,
+    Mars: 3.71,
+    Jupiter: 24.79,
+    Saturn: 10.44,
+    Uranus: 8.69,
+    Neptune: 11.15
+};
 
-<title>Freefalling Simulation</title>
-<link rel="icon" href="../assets/freefalling.ico">
+const images = {
+    Mercury: "../images/mercury.png",
+    Venus: "../images/venus.png",
+    Earth: "../images/earth.png",
+    Moon: "../images/moon.png",
+    Mars: "../images/mars.png",
+    Jupiter: "../images/jupiter.png",
+    Saturn: "../images/saturn.png",
+    Uranus: "../images/uranus.png",
+    Neptune: "../images/neptune.png"
+};
 
+const skies = {
+    Mercury: "linear-gradient(to bottom,#bfc3c7,#71767b)",
+    Venus: "linear-gradient(to bottom,#f7d89a,#cb8a3d)",
+    Earth: "linear-gradient(to bottom,#5aa8ff,#dff5ff)",
+    Moon: "linear-gradient(to bottom,#0f172a,#475569)",
+    Mars: "linear-gradient(to bottom,#ffb08a,#b55337)",
+    Jupiter: "linear-gradient(to bottom,#f8d9b0,#c48b62)",
+    Saturn: "linear-gradient(to bottom,#f5e5c3,#d4b27b)",
+    Uranus: "linear-gradient(to bottom,#9df4ff,#dfffff)",
+    Neptune: "linear-gradient(to bottom,#1f66c2,#8fd1ff)"
+};
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+const grounds = {
+    Mercury: "#7a7f84",
+    Venus: "#ba7d3e",
+    Earth: "#3b7d4a",
+    Moon: "#9a9a9a",
+    Mars: "#a3472d",
+    Jupiter: "#c08a5b",
+    Saturn: "#d7bb86",
+    Uranus: "#83dce8",
+    Neptune: "#356bc2"
+};
 
-<style>
-:root {
-    --bg: #f3fdf8;
-    --primary: #065f46;
-    --accent: #10b981;
-    --text: #1f2937;
-    --subtext: #6b7280;
-}
+const horizonLines = {
+    Mercury: "#d1d5db",
+    Venus: "#ffe0a3",
+    Earth: "#ffffff",
+    Moon: "#f3f4f6",
+    Mars: "#ffd1b8",
+    Jupiter: "#ffe4c4",
+    Saturn: "#fff3d4",
+    Uranus: "#e0ffff",
+    Neptune: "#b7d8ff"
+};
 
+const ballColors = {
+    Mercury:
+        "radial-gradient(circle at 25% 25%,#f3f4f6,#9ca3af,#6b7280)",
 
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-    background: var(--bg);
-    color: var(--text);
-}
+    Venus:
+        "radial-gradient(circle at 25% 25%,#ffe2b8,#d89a54,#b9773b)",
 
-.topbar {
-    height: 50px;
-    background: #072E33;
+    Earth:
+        "radial-gradient(circle at 25% 25%,#dfffff,#34d399,#059669)",
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    Moon:
+        "radial-gradient(circle at 25% 25%,#ffffff,#cfcfcf,#8a8a8a)",
 
-    padding: 0 15px;
-}
+    Mars:
+        "radial-gradient(circle at 25% 25%,#ffc0a5,#d46a44,#a3472d)",
 
-.topbar span {
-    color: white;
-    font-weight: 500;
-}
+    Jupiter:
+        "radial-gradient(circle at 25% 25%,#ffe0b8,#d9a476,#b37b52)",
 
-.topbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 10px;
-    opacity: 0.85;
-}
+    Saturn:
+        "radial-gradient(circle at 25% 25%,#fff0d4,#e1c58d,#c9a96b)",
 
-.topbar a:hover {
-    opacity: 1;
-}
-.container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 15px;
-}
+    Uranus:
+        "radial-gradient(circle at 25% 25%,#e8ffff,#9be8ef,#66c6d1)",
 
+    Neptune:
+        "radial-gradient(circle at 25% 25%,#b8d5ff,#4d86d8,#1457a6)"
+};
 
-h1 {
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--primary);
-}
+const planetSelect =
+    document.getElementById("planet");
 
-.planet-preview {
+const heightInput =
+    document.getElementById("heightInput");
 
-    width: 180px;
+const ball =
+    document.getElementById("ball");
 
-    display: block;
+const scene =
+    document.querySelector(".scene");
 
-    margin: 20px auto;
+const gravityInfo =
+    document.getElementById("gravityInfo");
 
-    border-radius: 50%;
+const timeInfo =
+    document.getElementById("timeInfo");
 
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.15);
-}
+const velocityInfo =
+    document.getElementById("velocityInfo");
 
-.scene {
+const planetName =
+    document.getElementById("planetName");
 
-    width: 500px;
-    height: 550px;
+const planetPreview =
+    document.getElementById("planetPreview");
 
-    margin: 30px auto;
+const horizon =
+    document.getElementById("horizon");
 
-    position: relative;
+const SCALE = 4;
 
-    overflow: hidden;
+let animationId = null;
+let startTime = 0;
 
-    border-radius: 20px;
+planetSelect.addEventListener(
+    "change",
+    updatePlanet
+);
 
-    background:
-        linear-gradient(
+function updatePlanet() {
+
+    const planet =
+        planetSelect.value;
+
+    planetName.innerText =
+        planet;
+
+    gravityInfo.innerText =
+        `Gravity: ${planets[planet]} m/s²`;
+
+    scene.style.background =
+        skies[planet];
+
+    planetPreview.src =
+        images[planet];
+
+    ball.style.background =
+        ballColors[planet];
+
+    horizon.style.background =
+        `linear-gradient(
             to bottom,
-            #5aa8ff,
-            #dff5ff
-        );
+            ${grounds[planet]},
+            rgba(0,0,0,0.25)
+        )`;
 
-    box-shadow:
-        0 15px 40px rgba(0,0,0,0.12);
+    horizon.style.borderTop =
+        `4px solid ${horizonLines[planet]}`;
 }
 
-#ball {
+updatePlanet();
 
-    width: 40px;
-    height: 40px;
+function startFall() {
 
-    position: absolute;
-
-    top: 20px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 25% 25%,
-            white,
-            #7fffd4,
-            #10b981
-        );
-
-    box-shadow:
-        0 0 20px rgba(255,255,255,0.7);
-
-    z-index: 10;
-}
-
-#horizon {
-
-    position: absolute;
-
-    bottom: -260px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 1200px;
-    height: 500px;
-
-    border-radius:
-        50% 50% 0 0;
-
-    background:
-        #4b5563;
-
-    border-top:
-        5px solid rgba(255,255,255,0.6);
-
-    z-index: 2;
-}
-
-#gravityInfo,
-#timeInfo,
-#velocityInfo,
-#planetName {
-    text-align: center;
-}
-
-#gravityInfo,
-#timeInfo,
-#velocityInfo,
-#planetName {
-    text-align: center;
-}
-#gravityInfo,
-#timeInfo,
-#velocityInfo {
-    font-size: 18px;
-    margin: 8px 0;
-}
-#planetName {
-    color: var(--primary);
-
-    margin-top: 10px;
-    margin-bottom: 0;
-
-    text-align: center;
-
-    font-weight: 600;
-}
-select {
-    padding: 8px 12px;
-
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-
-    background: white;
-
-    font-family: inherit;
-    font-size: 14px;
-
-    cursor: pointer;
-}
-
-input {
-    padding: 8px 12px;
-
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-
-    font-family: inherit;
-    font-size: 14px;
-}
-
-
-button {
-    padding: 8px 16px;
-
-    border: none;
-    border-radius: 6px;
-
-    background: var(--accent);
-    color: white;
-
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-}
-
-
-button:hover {
-    background: var(--primary);
-
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(0);
-}
-.controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 25px 0;
-}
-
-.controls select,
-.controls input {
-    height: 42px;
-
-    padding: 0 16px;
-
-    border: none;
-    border-radius: 999px;
-
-    background: white;
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,0.08);
-
-    font-size: 14px;
-}
-
-.controls button {
-    height: 42px;
-
-    padding: 0 20px;
-
-    border: none;
-    border-radius: 999px;
-
-    background: linear-gradient(
-        135deg,
-        #10b981,
-        #065f46
+    cancelAnimationFrame(
+        animationId
     );
 
-    color: white;
+    const planet =
+        planetSelect.value;
 
-    font-weight: 600;
+    const g =
+        planets[planet];
 
-    cursor: pointer;
+    const height =
+        Number(
+            heightInput.value
+        );
 
-    box-shadow:
-        0 4px 12px rgba(16,185,129,0.3);
+    const maxY =
+        Math.min(
+            height * SCALE,
+            scene.clientHeight - 120
+        );
 
-    transition: 0.2s;
+    startTime =
+        performance.now();
+
+    function animate(now) {
+
+        const t =
+            (now - startTime) / 1000;
+
+        let y =
+            0.5 * g * t * t * SCALE;
+
+        let v =
+            g * t;
+
+        if (y >= maxY) {
+
+            y = maxY;
+
+            ball.style.top =
+                (20 + y) + "px";
+
+            timeInfo.innerText =
+                `Time: ${t.toFixed(2)} s`;
+
+            velocityInfo.innerText =
+                `Velocity: ${v.toFixed(2)} m/s`;
+
+            return;
+        }
+
+        ball.style.top =
+            (20 + y) + "px";
+
+        timeInfo.innerText =
+            `Time: ${t.toFixed(2)} s`;
+
+        velocityInfo.innerText =
+            `Velocity: ${v.toFixed(2)} m/s`;
+
+        animationId =
+            requestAnimationFrame(
+                animate
+            );
+    }
+
+    animationId =
+        requestAnimationFrame(
+            animate
+        );
 }
 
-.controls button:hover {
-    transform: translateY(-2px);
+function resetFall() {
+
+    cancelAnimationFrame(
+        animationId
+    );
+
+    ball.style.top =
+        "20px";
+
+    timeInfo.innerText =
+        "Time: 0.00 s";
+
+    velocityInfo.innerText =
+        "Velocity: 0.00 m/s";
 }
-
-</style>
-</head>
-<body>
-<div class="topbar">
-    <span>Physics</span>
-    <div>
-        <a href="https://wangleyi.top">Home</a>
-        <a href="https://wangleyi.top/pages/physics">Projects</a>
-    </div>
-</div>
-
-<div class="container">
-
-    <h1>Free Fall Simulator</h1>
-    <p>
-        Compare free-fall motion on different planets.
-    </p>
-
-    <div class="controls">
-
-        <select id="planet">
-            <option>Mercury</option>
-            <option>Venus</option>
-            <option selected>Earth</option>
-            <option>Moon</option>
-            <option>Mars</option>
-            <option>Jupiter</option>
-            <option>Saturn</option>
-            <option>Uranus</option>
-            <option>Neptune</option>
-        </select>
-
-        <input
-            id="heightInput"
-            type="number"
-            value="100">
-
-        <button onclick="startFall()">
-            ▶ Start
-        </button>
-
-        <button onclick="resetFall()">
-            ↺ Reset
-        </button>
-
-    </div>
-
-    <p id="gravityInfo">
-        Gravity: 9.81 m/s²
-    </p>
-
-    <p id="timeInfo">
-        Time: 0.00 s
-    </p>
-
-    <p id="velocityInfo">
-        Velocity: 0.00 m/s
-    </p>
-
-    <h3 id="planetName">
-        Earth
-    </h3>
-
-    <img
-        id="planetPreview"
-        class="planet-preview"
-        src="../images/earth.png">
-
-    <div class="scene">
-
-        <div id="ball"></div>
-
-        <div id="horizon"></div>
-
-    </div>
-</div>
-</body>
-<script src="../js/freefalling.js"></script>
-</html>
