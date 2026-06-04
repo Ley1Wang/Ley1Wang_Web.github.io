@@ -11,15 +11,15 @@ const planets = {
 };
 
 const images = {
-    Mercury: "../images/mercury.jpg",
-    Venus: "../images/venus.jpg",
-    Earth: "../images/earth.jpg",
-    Moon: "../images/moon.jpg",
-    Mars: "../images/mars.jpg",
-    Jupiter: "../images/jupiter.jpg",
-    Saturn: "../images/saturn.jpg",
-    Uranus: "../images/uranus.jpg",
-    Neptune: "../images/neptune.jpg"
+    Mercury: "../images/mercury.png",
+    Venus: "../images/venus.png",
+    Earth: "../images/earth.png",
+    Moon: "../images/moon.png",
+    Mars: "../images/mars.png",
+    Jupiter: "../images/jupiter.png",
+    Saturn: "../images/saturn.png",
+    Uranus: "../images/uranus.png",
+    Neptune: "../images/neptune.png"
 };
 
 const planetSelect =
