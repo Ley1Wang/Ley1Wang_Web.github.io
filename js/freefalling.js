@@ -46,28 +46,50 @@ const ballColors = {
     Neptune: "radial-gradient(circle at 25% 25%,#8ab6ff,#1457a6)"
 };
 
-const planetSelect = document.getElementById("planet");
-const ball = document.getElementById("ball");
-const scene = document.querySelector(".scene");
-const ground = document.getElementById("ground");
+const planetSelect =
+    document.getElementById("planet");
 
-const gravityInfo = document.getElementById("gravityInfo");
-const timeInfo = document.getElementById("timeInfo");
-const velocityInfo = document.getElementById("velocityInfo");
-const planetName = document.getElementById("planetName");
+const heightInput =
+    document.getElementById("heightInput");
+
+const ball =
+    document.getElementById("ball");
+
+const scene =
+    document.querySelector(".scene");
+
+const gravityInfo =
+    document.getElementById("gravityInfo");
+
+const timeInfo =
+    document.getElementById("timeInfo");
+
+const velocityInfo =
+    document.getElementById("velocityInfo");
+
+const planetName =
+    document.getElementById("planetName");
+
+const planetPreview =
+    document.getElementById("planetPreview");
 
 const SCALE = 4;
 
 let animationId = null;
 let startTime = 0;
 
-planetSelect.addEventListener("change", updatePlanet);
+planetSelect.addEventListener(
+    "change",
+    updatePlanet
+);
 
 function updatePlanet() {
 
-    const planet = planetSelect.value;
+    const planet =
+        planetSelect.value;
 
-    planetName.innerText = planet;
+    planetName.innerText =
+        planet;
 
     gravityInfo.innerText =
         `Gravity: ${planets[planet]} m/s²`;
@@ -75,8 +97,8 @@ function updatePlanet() {
     scene.style.background =
         skies[planet];
 
-    ground.style.backgroundImage =
-        `url(${images[planet]})`;
+    planetPreview.src =
+        images[planet];
 
     ball.style.background =
         ballColors[planet];
@@ -88,10 +110,20 @@ function startFall() {
 
     cancelAnimationFrame(animationId);
 
-    const planet = planetSelect.value;
-    const g = planets[planet];
+    const planet =
+        planetSelect.value;
 
-    startTime = performance.now();
+    const g =
+        planets[planet];
+
+    const height =
+        Number(heightInput.value);
+
+    const maxY =
+        height * SCALE;
+
+    startTime =
+        performance.now();
 
     function animate(now) {
 
@@ -104,10 +136,20 @@ function startFall() {
         let v =
             g * t;
 
-        const maxY = 380;
+        if (y >= maxY) {
 
-        if (y > maxY) {
             y = maxY;
+
+            ball.style.top =
+                (20 + y) + "px";
+
+            timeInfo.innerText =
+                `Time: ${t.toFixed(2)} s`;
+
+            velocityInfo.innerText =
+                `Velocity: ${v.toFixed(2)} m/s`;
+
+            return;
         }
 
         ball.style.top =
@@ -119,13 +161,10 @@ function startFall() {
         velocityInfo.innerText =
             `Velocity: ${v.toFixed(2)} m/s`;
 
-        if (y < maxY) {
-
-            animationId =
-                requestAnimationFrame(
-                    animate
-                );
-        }
+        animationId =
+            requestAnimationFrame(
+                animate
+            );
     }
 
     animationId =
@@ -138,7 +177,8 @@ function resetFall() {
 
     cancelAnimationFrame(animationId);
 
-    ball.style.top = "20px";
+    ball.style.top =
+        "20px";
 
     timeInfo.innerText =
         "Time: 0.00 s";
