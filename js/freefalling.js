@@ -59,57 +59,27 @@ const horizonLines = {
 };
 
 const ballColors = {
-    Mercury:
-        "radial-gradient(circle at 25% 25%,#f3f4f6,#9ca3af,#6b7280)",
-
-    Venus:
-        "radial-gradient(circle at 25% 25%,#ffe2b8,#d89a54,#b9773b)",
-
-    Earth:
-        "radial-gradient(circle at 25% 25%,#dfffff,#34d399,#059669)",
-
-    Moon:
-        "radial-gradient(circle at 25% 25%,#ffffff,#cfcfcf,#8a8a8a)",
-
-    Mars:
-        "radial-gradient(circle at 25% 25%,#ffc0a5,#d46a44,#a3472d)",
-
-    Jupiter:
-        "radial-gradient(circle at 25% 25%,#ffe0b8,#d9a476,#b37b52)",
-
-    Saturn:
-        "radial-gradient(circle at 25% 25%,#fff0d4,#e1c58d,#c9a96b)",
-
-    Uranus:
-        "radial-gradient(circle at 25% 25%,#e8ffff,#9be8ef,#66c6d1)",
-
-    Neptune:
-        "radial-gradient(circle at 25% 25%,#b8d5ff,#4d86d8,#1457a6)"
+    Mercury: "radial-gradient(circle at 25% 25%,#f3f4f6,#9ca3af,#6b7280)",
+    Venus: "radial-gradient(circle at 25% 25%,#ffe2b8,#d89a54,#b9773b)",
+    Earth: "radial-gradient(circle at 25% 25%,#dfffff,#34d399,#059669)",
+    Moon: "radial-gradient(circle at 25% 25%,#ffffff,#cfcfcf,#8a8a8a)",
+    Mars: "radial-gradient(circle at 25% 25%,#ffc0a5,#d46a44,#a3472d)",
+    Jupiter: "radial-gradient(circle at 25% 25%,#ffe0b8,#d9a476,#b37b52)",
+    Saturn: "radial-gradient(circle at 25% 25%,#fff0d4,#e1c58d,#c9a96b)",
+    Uranus: "radial-gradient(circle at 25% 25%,#e8ffff,#9be8ef,#66c6d1)",
+    Neptune: "radial-gradient(circle at 25% 25%,#b8d5ff,#4d86d8,#1457a6)"
 };
 
-const planetSelect =
-    document.getElementById("planet");
+const planetSelect = document.getElementById("planet");
+const heightInput = document.getElementById("heightInput");
 
-const heightInput =
-    document.getElementById("heightInput");
+const ball = document.getElementById("ball");
+const scene = document.querySelector(".scene");
 
-const ball =
-    document.getElementById("ball");
-
-const scene =
-    document.querySelector(".scene");
-
-const gravityInfo =
-    document.getElementById("gravityInfo");
-
-const timeInfo =
-    document.getElementById("timeInfo");
-
-const velocityInfo =
-    document.getElementById("velocityInfo");
-
-const planetName =
-    document.getElementById("planetName");
+const gravityInfo = document.getElementById("gravityInfo");
+const timeInfo = document.getElementById("timeInfo");
+const velocityInfo = document.getElementById("velocityInfo");
+const planetName = document.getElementById("planetName");
 
 const planetPreview =
     document.getElementById("planetPreview");
@@ -121,9 +91,14 @@ const SCALE = 4;
 
 let animationId = null;
 let startTime = 0;
-let chart;
+
+let velocityChart;
+let distanceChart;
+
 let timeData = [];
 let velocityData = [];
+let distanceData = [];
+
 planetSelect.addEventListener(
     "change",
     updatePlanet
@@ -161,65 +136,79 @@ function updatePlanet() {
 }
 
 updatePlanet();
-const ctx =
+
+velocityChart = new Chart(
     document
-    .getElementById("velocityChart")
-    .getContext("2d");
-
-chart = new Chart(ctx, {
-
+        .getElementById("velocityChart")
+        .getContext("2d"),
+{
     type: "line",
 
     data: {
-
         labels: [],
-
         datasets: [{
-
-            label:
-            "Velocity (m/s)",
-
+            label: "Velocity (m/s)",
             data: [],
-
-            borderWidth: 2,
-
-            tension: 0.2
+            borderColor: "#10b981",
+            backgroundColor:
+                "rgba(16,185,129,0.2)",
+            fill: true,
+            borderWidth: 3,
+            tension: 0.3
         }]
     },
 
     options: {
-
         animation: false,
-
-        scales: {
-
-            x: {
-                title: {
-                    display: true,
-                    text: "Time (s)"
-                }
-            },
-
-            y: {
-                title: {
-                    display: true,
-                    text: "Velocity (m/s)"
-                }
-            }
-        }
+        responsive: true
     }
 });
+
+distanceChart = new Chart(
+    document
+        .getElementById("distanceChart")
+        .getContext("2d"),
+{
+    type: "line",
+
+    data: {
+        labels: [],
+        datasets: [{
+            label: "Distance (m)",
+            data: [],
+            borderColor: "#3b82f6",
+            backgroundColor:
+                "rgba(59,130,246,0.2)",
+            fill: true,
+            borderWidth: 3,
+            tension: 0.3
+        }]
+    },
+
+    options: {
+        animation: false,
+        responsive: true
+    }
+});
+
 function startFall() {
+
     cancelAnimationFrame(
         animationId
     );
+
     timeData = [];
     velocityData = [];
+    distanceData = [];
 
-    chart.data.labels = [];
-    chart.data.datasets[0].data = [];
+    velocityChart.data.labels = [];
+    velocityChart.data.datasets[0].data = [];
 
-    chart.update();
+    distanceChart.data.labels = [];
+    distanceChart.data.datasets[0].data = [];
+
+    velocityChart.update();
+    distanceChart.update();
 
     const planet =
         planetSelect.value;
@@ -228,9 +217,7 @@ function startFall() {
         planets[planet];
 
     const height =
-        Number(
-            heightInput.value
-        );
+        Number(heightInput.value);
 
     const maxY =
         Math.min(
@@ -252,18 +239,15 @@ function startFall() {
         let v =
             g * t;
 
+        let d =
+            0.5 * g * t * t;
+
         if (y >= maxY) {
 
             y = maxY;
 
             ball.style.top =
                 (20 + y) + "px";
-
-            timeInfo.innerText =
-                `Time: ${t.toFixed(2)} s`;
-
-            velocityInfo.innerText =
-                `Velocity: ${v.toFixed(2)} m/s`;
 
             return;
         }
@@ -276,21 +260,30 @@ function startFall() {
 
         velocityInfo.innerText =
             `Velocity: ${v.toFixed(2)} m/s`;
-        timeData.push(
-            t.toFixed(2)
-        );
 
-        velocityData.push(
-            v.toFixed(2)
-        );
+        timeData.push(t);
+        velocityData.push(v);
+        distanceData.push(d);
 
-        chart.data.labels =
+        velocityChart.data.labels =
             timeData;
 
-        chart.data.datasets[0].data =
+        velocityChart.data.datasets[0].data =
             velocityData;
 
-        chart.update();
+        distanceChart.data.labels =
+            timeData;
+
+        distanceChart.data.datasets[0].data =
+            distanceData;
+
+        if (timeData.length % 5 === 0) {
+
+            velocityChart.update();
+
+            distanceChart.update();
+        }
+
         animationId =
             requestAnimationFrame(
                 animate
@@ -317,4 +310,17 @@ function resetFall() {
 
     velocityInfo.innerText =
         "Velocity: 0.00 m/s";
+
+    timeData = [];
+    velocityData = [];
+    distanceData = [];
+
+    velocityChart.data.labels = [];
+    velocityChart.data.datasets[0].data = [];
+
+    distanceChart.data.labels = [];
+    distanceChart.data.datasets[0].data = [];
+
+    velocityChart.update();
+    distanceChart.update();
 }
