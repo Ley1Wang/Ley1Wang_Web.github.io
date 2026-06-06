@@ -85,7 +85,7 @@ const planetName = document.getElementById("planetName");
 const planetPreview = document.getElementById("planetPreview");
 const horizon = document.getElementById("horizon");
 
-const SCALE = 2;
+const SCALE = 3;
 
 let animationId = null;
 let startTime = 0;
