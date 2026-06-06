@@ -77,15 +77,13 @@ const ball = document.getElementById("ball");
 const scene = document.querySelector(".scene");
 
 const gravityInfo = document.getElementById("gravityInfo");
+const theoryTime = document.getElementById("theoryTime");
 const timeInfo = document.getElementById("timeInfo");
 const velocityInfo = document.getElementById("velocityInfo");
+
 const planetName = document.getElementById("planetName");
-
-const planetPreview =
-    document.getElementById("planetPreview");
-
-const horizon =
-    document.getElementById("horizon");
+const planetPreview = document.getElementById("planetPreview");
+const horizon = document.getElementById("horizon");
 
 const SCALE = 2;
 
@@ -99,22 +97,14 @@ let timeData = [];
 let velocityData = [];
 let distanceData = [];
 
-heightInput.addEventListener(
-    "input",
-    updatePlanet
-);
-planetSelect.addEventListener(
-    "change",
-    updatePlanet
-);
+planetSelect.addEventListener("change", updatePlanet);
+heightInput.addEventListener("input", updatePlanet);
 
 function updatePlanet() {
 
-    const planet =
-        planetSelect.value;
+    const planet = planetSelect.value;
 
-    planetName.innerText =
-        planet;
+    planetName.innerText = planet;
 
     gravityInfo.innerText =
         `Gravity: ${planets[planet]} m/s²`;
@@ -137,25 +127,22 @@ function updatePlanet() {
 
     horizon.style.borderTop =
         `4px solid ${horizonLines[planet]}`;
+
+    const g = planets[planet];
+
+    const h =
+        Number(heightInput.value) || 0;
+
+    const theory =
+        h > 0
+        ? Math.sqrt(2 * h / g)
+        : 0;
+
+    theoryTime.innerText =
+        `Expected Time: ${theory.toFixed(2)} s`;
 }
 
 updatePlanet();
-const g =
-    planets[planet];
-
-const h =
-    Number(heightInput.value);
-
-const theory =
-    Math.sqrt(
-        2 * h / g
-    );
-
-document
-    .getElementById("theoryTime")
-    .innerText =
-    `Expected Time: ${theory.toFixed(2)} s`;
-
 
 velocityChart = new Chart(
     document
@@ -171,16 +158,16 @@ velocityChart = new Chart(
             data: [],
             borderColor: "#10b981",
             backgroundColor:
-                "rgba(16,185,129,0.2)",
+                "rgba(16,185,129,0.15)",
             fill: true,
             borderWidth: 3,
-            tension: 0.3
+            tension: 0.25
         }]
     },
 
     options: {
-        animation: false,
-        responsive: true
+        responsive: true,
+        animation: false
     }
 });
 
@@ -198,24 +185,24 @@ distanceChart = new Chart(
             data: [],
             borderColor: "#3b82f6",
             backgroundColor:
-                "rgba(59,130,246,0.2)",
+                "rgba(59,130,246,0.15)",
             fill: true,
             borderWidth: 3,
-            tension: 0.3
+            tension: 0.25
         }]
     },
 
     options: {
-        animation: false,
-        responsive: true
+        responsive: true,
+        animation: false
     }
 });
 
 function startFall() {
 
-    cancelAnimationFrame(
-        animationId
-    );
+    cancelAnimationFrame(animationId);
+
+    ball.style.top = "20px";
 
     timeData = [];
     velocityData = [];
@@ -256,10 +243,10 @@ function startFall() {
         let y =
             0.5 * g * t * t * SCALE;
 
-        let v =
+        const v =
             g * t;
 
-        let d =
+        const d =
             0.5 * g * t * t;
 
         if (y >= maxY) {
@@ -268,6 +255,15 @@ function startFall() {
 
             ball.style.top =
                 (20 + y) + "px";
+
+            timeInfo.innerText =
+                `Time: ${t.toFixed(2)} s`;
+
+            velocityInfo.innerText =
+                `Velocity: ${v.toFixed(2)} m/s`;
+
+            velocityChart.update();
+            distanceChart.update();
 
             return;
         }
@@ -281,9 +277,9 @@ function startFall() {
         velocityInfo.innerText =
             `Velocity: ${v.toFixed(2)} m/s`;
 
-        timeData.push(t);
-        velocityData.push(v);
-        distanceData.push(d);
+        timeData.push(t.toFixed(2));
+        velocityData.push(v.toFixed(2));
+        distanceData.push(d.toFixed(2));
 
         velocityChart.data.labels =
             timeData;
@@ -300,7 +296,6 @@ function startFall() {
         if (timeData.length % 5 === 0) {
 
             velocityChart.update();
-
             distanceChart.update();
         }
 
@@ -318,22 +313,15 @@ function startFall() {
 
 function resetFall() {
 
-    cancelAnimationFrame(
-        animationId
-    );
+    cancelAnimationFrame(animationId);
 
-    ball.style.top =
-        "20px";
+    ball.style.top = "20px";
 
     timeInfo.innerText =
         "Time: 0.00 s";
 
     velocityInfo.innerText =
         "Velocity: 0.00 m/s";
-
-    timeData = [];
-    velocityData = [];
-    distanceData = [];
 
     velocityChart.data.labels = [];
     velocityChart.data.datasets[0].data = [];
