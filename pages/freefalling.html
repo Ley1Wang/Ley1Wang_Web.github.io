@@ -354,6 +354,9 @@ button:active {
     <p id="velocityInfo">
         Velocity: 0.00 m/s
     </p>
+    <p id="theoryTime">
+        Expected Time: 0.00 s
+    </p>
 
     <h3 id="planetName">
         Earth
@@ -371,18 +374,31 @@ button:active {
         <div id="horizon"></div>
 
     </div>
-    <h2>Velocity-Time Graph</h2>
+    <div style="
+        width: 90%;
+        max-width: 900px;
+        margin: 30px auto;">
 
-    <canvas
-        id="velocityChart"
-        width="700"
-        height="300">
-    </canvas>
-    <canvas 
-        id="distanceChart"
-        width="700"
-        height="300">
-    </canvas>
+        <h2>Velocity-Time Graph</h2>
+
+        <canvas
+            id="velocityChart">
+        </canvas>
+
+    </div>
+
+    <div style="
+        width: 90%;
+        max-width: 900px;
+        margin: 30px auto;">
+
+        <h2>Distance-Time Graph</h2>
+
+        <canvas
+            id="distanceChart">
+        </canvas>
+
+    </div>
 </div>
 </body>
 <script src="../chart.js"></script>
