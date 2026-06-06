@@ -121,7 +121,9 @@ const SCALE = 4;
 
 let animationId = null;
 let startTime = 0;
-
+let chart;
+let timeData = [];
+let velocityData = [];
 planetSelect.addEventListener(
     "change",
     updatePlanet
@@ -159,12 +161,65 @@ function updatePlanet() {
 }
 
 updatePlanet();
+const ctx =
+    document
+    .getElementById("velocityChart")
+    .getContext("2d");
 
+chart = new Chart(ctx, {
+
+    type: "line",
+
+    data: {
+
+        labels: [],
+
+        datasets: [{
+
+            label:
+            "Velocity (m/s)",
+
+            data: [],
+
+            borderWidth: 2,
+
+            tension: 0.2
+        }]
+    },
+
+    options: {
+
+        animation: false,
+
+        scales: {
+
+            x: {
+                title: {
+                    display: true,
+                    text: "Time (s)"
+                }
+            },
+
+            y: {
+                title: {
+                    display: true,
+                    text: "Velocity (m/s)"
+                }
+            }
+        }
+    }
+});
 function startFall() {
-
     cancelAnimationFrame(
         animationId
     );
+    timeData = [];
+    velocityData = [];
+
+    chart.data.labels = [];
+    chart.data.datasets[0].data = [];
+
+    chart.update();
 
     const planet =
         planetSelect.value;
@@ -221,7 +276,21 @@ function startFall() {
 
         velocityInfo.innerText =
             `Velocity: ${v.toFixed(2)} m/s`;
+        timeData.push(
+            t.toFixed(2)
+        );
 
+        velocityData.push(
+            v.toFixed(2)
+        );
+
+        chart.data.labels =
+            timeData;
+
+        chart.data.datasets[0].data =
+            velocityData;
+
+        chart.update();
         animationId =
             requestAnimationFrame(
                 animate
