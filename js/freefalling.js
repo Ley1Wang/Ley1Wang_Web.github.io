@@ -87,7 +87,7 @@ const planetPreview =
 const horizon =
     document.getElementById("horizon");
 
-const SCALE = 4;
+const SCALE = 2;
 
 let animationId = null;
 let startTime = 0;
@@ -99,6 +99,10 @@ let timeData = [];
 let velocityData = [];
 let distanceData = [];
 
+heightInput.addEventListener(
+    "input",
+    updatePlanet
+);
 planetSelect.addEventListener(
     "change",
     updatePlanet
@@ -136,6 +140,22 @@ function updatePlanet() {
 }
 
 updatePlanet();
+const g =
+    planets[planet];
+
+const h =
+    Number(heightInput.value);
+
+const theory =
+    Math.sqrt(
+        2 * h / g
+    );
+
+document
+    .getElementById("theoryTime")
+    .innerText =
+    `Expected Time: ${theory.toFixed(2)} s`;
+
 
 velocityChart = new Chart(
     document
