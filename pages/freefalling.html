@@ -295,6 +295,78 @@ button:active {
 .controls button:hover {
     transform: translateY(-2px);
 }
+.dashboard {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 30px;
+
+    margin-top: 30px;
+}
+
+.charts-column {
+
+    width: 420px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.chart-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 15px;
+
+    box-shadow:
+        0 6px 20px rgba(0,0,0,0.08);
+}
+
+.chart-card h2 {
+
+    margin-top: 0;
+
+    text-align: center;
+
+    font-size: 20px;
+}
+
+.info-panel {
+
+    width: 220px;
+
+    text-align: center;
+}
+
+.info-panel p {
+
+    margin: 12px 0;
+
+    font-size: 17px;
+}
+
+.planet-preview {
+
+    width: 180px;
+
+    display: block;
+
+    margin: 15px auto;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15);
+}
 
 </style>
 </head>
@@ -362,41 +434,72 @@ button:active {
         Earth
     </h3>
 
-    <img
-        id="planetPreview"
-        class="planet-preview"
-        src="../images/earth.png">
+    <div class="dashboard">
 
-    <div class="scene">
+        <div class="charts-column">
 
-        <div id="ball"></div>
+            <div class="chart-card">
 
-        <div id="horizon"></div>
+                <h2>Velocity-Time</h2>
 
-    </div>
-    <div style="
-        width: 90%;
-        max-width: 900px;
-        margin: 30px auto;">
+                <canvas
+                    id="velocityChart"
+                    width="400"
+                    height="250">
+                </canvas>
 
-        <h2>Velocity-Time Graph</h2>
+            </div>
 
-        <canvas
-            id="velocityChart">
-        </canvas>
+            <div class="chart-card">
 
-    </div>
+                <h2>Distance-Time</h2>
 
-    <div style="
-        width: 90%;
-        max-width: 900px;
-        margin: 30px auto;">
+                <canvas
+                    id="distanceChart"
+                    width="400"
+                    height="250">
+                </canvas>
 
-        <h2>Distance-Time Graph</h2>
+            </div>
 
-        <canvas
-            id="distanceChart">
-        </canvas>
+        </div>
+
+        <div class="scene">
+
+            <div id="ball"></div>
+
+            <div id="horizon"></div>
+
+        </div>
+
+        <div class="info-panel">
+
+            <h3 id="planetName">
+                Earth
+            </h3>
+
+            <img
+                id="planetPreview"
+                class="planet-preview"
+                src="../images/earth.png">
+
+            <p id="gravityInfo">
+                Gravity: 9.81 m/s²
+            </p>
+
+            <p id="theoryTime">
+                Expected Time: 4.52 s
+            </p>
+
+            <p id="timeInfo">
+                Time: 0.00 s
+            </p>
+
+            <p id="velocityInfo">
+                Velocity: 0.00 m/s
+            </p>
+
+        </div>
 
     </div>
 </div>
