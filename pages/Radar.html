@@ -46,19 +46,14 @@ img {
 
     margin-top: 20px;
 }
+.image-row img{
 
-.image-row img {
+    width:50%;
 
-    width: 50%;
+    height:320px;
 
-    border-radius: 12px;
-
-    object-fit: cover;
-
-    box-shadow:
-        0 6px 18px rgba(0,0,0,0.08);
+    object-fit:cover;
 }
-
 
 body {
     margin: 0;
@@ -155,6 +150,8 @@ p {
 .info-panel{
 
     width:320px;
+
+    align-self:stretch;
 }
 
 .info-box{
@@ -195,14 +192,13 @@ p {
 }
 video{
 
-    width:100%;
+    width:85%;
 
-    margin-top:15px;
+    display:block;
+
+    margin:20px auto;
 
     border-radius:12px;
-
-    box-shadow:
-        0 6px 18px rgba(0,0,0,.08);
 }
 .status{
 
@@ -266,7 +262,14 @@ video{
         slip-ring transmission and real-time
         visualization software.
     </p>
-
+    <p>
+        This project explores low-cost radar sensing
+        and real-time target visualization using
+        Arduino-based hardware and mmWave radar
+        technology. The goal is to build a complete
+        360° scanning platform capable of detecting
+        and displaying nearby objects.
+        </p>
     <div class="image-row">
 
         <img src="../images/radar_photo1.jpg">
@@ -331,7 +334,7 @@ video{
 
         <div class="info-box">
             <strong>Status</strong>
-            <span class="status">Development</span>
+            <span class="status"> ● Active Development</span>
         </div>
 
     </div>
