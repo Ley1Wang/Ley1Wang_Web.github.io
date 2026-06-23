@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -501,17 +501,17 @@ svg {
                     <text class="svg-small" x="390" y="44" text-anchor="middle">node voltage</text>
                     <text id="nodeSvg" class="svg-label" x="390" y="66" text-anchor="middle">0.00 V</text>
 
-                    <path id="arrowLeft" class="arrow left" d="M260 186 L366 154"></path>
-                    <path id="arrowRight" class="arrow right" d="M520 186 L414 154"></path>
-                    <path id="arrowDown" class="arrow down" d="M438 196 L438 280"></path>
+                    <path id="arrowLeft" class="arrow left" d="M248 92 L360 92"></path>
+                    <path id="arrowRight" class="arrow right" d="M532 92 L420 92"></path>
+                    <path id="arrowDown" class="arrow down" d="M438 196 L438 282"></path>
 
                     <text class="svg-label" x="285" y="145" text-anchor="middle">R1</text>
                     <text class="svg-label" x="495" y="145" text-anchor="middle">R2</text>
                     <text class="svg-label" x="390" y="245" text-anchor="middle">R3</text>
                     <text id="v1Svg" class="svg-label" x="96" y="286" text-anchor="middle">V1</text>
                     <text id="v2Svg" class="svg-label" x="684" y="286" text-anchor="middle">V2</text>
-                    <text id="i1Svg" class="svg-small current left" x="302" y="184" text-anchor="middle">I1</text>
-                    <text id="i2Svg" class="svg-small current right" x="478" y="184" text-anchor="middle">I2</text>
+                    <text id="i1Svg" class="svg-small current left" x="304" y="84" text-anchor="middle">I1</text>
+                    <text id="i2Svg" class="svg-small current right" x="476" y="84" text-anchor="middle">I2</text>
                     <text id="i3Svg" class="svg-small current down" x="480" y="242" text-anchor="middle">I3</text>
                 </svg>
             </div>
@@ -652,20 +652,20 @@ function update() {
     setArrow(
         document.getElementById("arrowLeft"),
         leftIntoNode,
-        "M260 186 L366 154",
-        "M366 154 L260 186"
+        "M248 92 L360 92",
+        "M360 92 L248 92"
     );
     setArrow(
         document.getElementById("arrowRight"),
         rightIntoNode,
-        "M520 186 L414 154",
-        "M414 154 L520 186"
+        "M532 92 L420 92",
+        "M420 92 L532 92"
     );
     setArrow(
         document.getElementById("arrowDown"),
         downOut,
-        "M438 196 L438 280",
-        "M438 280 L438 196"
+        "M438 196 L438 282",
+        "M438 282 L438 196"
     );
 
     const feedback = document.getElementById("feedback");
@@ -723,7 +723,5 @@ document.getElementById("guess").addEventListener("keydown", (event) => {
 ids.forEach((id) => syncPair(id, state[id]));
 update();
 </script>
-<script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
