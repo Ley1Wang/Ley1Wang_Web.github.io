@@ -67,20 +67,17 @@
 
     .gallery {
         width: 100%;
-        max-width: 640px;
+        max-width: 360px;
 
-        margin: 32px auto 38px;
+        margin: 30px auto;
 
         position: relative;
     }
     .gallery img {
         width: 100%;
-        aspect-ratio: 16 / 10;
         height: auto;
-        object-fit: cover;
 
-        border-radius: 12px;
-        box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+        border-radius: 10px;
     }
 
     button {
@@ -100,21 +97,19 @@
         top: 50%;
         transform: translateY(-50%);
 
-        width: 34px;
-        height: 34px;
-        padding: 0;
-        font-size: 16px;
+        padding: 4px 6px;
+        font-size: 12px;
 
-        background: rgba(0,0,0,0.46);
-        border-radius: 50%;
+        background: rgba(0,0,0,0.4);
+        border-radius: 6px;
     }
 
     .gallery button:first-of-type {
-        left: 12px;
+        left: 5px;
     }
 
     .gallery button:last-of-type {
-        right: 12px;
+        right: 5px;
     }
 
 
@@ -410,7 +405,6 @@
 </body>
 
 <script>
-    // é»˜è®¤ä½ç½®
         history.scrollRestoration = "manual";
         window.onload = function() {
             window.scrollTo(0, 0);
@@ -420,6 +414,7 @@
             "images/Plot_Example.jpg",
             "images/Lenz_Example.jpg",
             "images/Freefalling_Example.jpg",
+            "images/Kirchoff_Example.jpg"
         ];
         let index = 0;
 
