@@ -67,17 +67,20 @@
 
     .gallery {
         width: 100%;
-        max-width: 360px;
+        max-width: 640px;
 
-        margin: 30px auto;
+        margin: 32px auto 38px;
 
         position: relative;
     }
     .gallery img {
         width: 100%;
+        aspect-ratio: 16 / 10;
         height: auto;
+        object-fit: cover;
 
-        border-radius: 10px;
+        border-radius: 12px;
+        box-shadow: 0 14px 34px rgba(0,0,0,0.12);
     }
 
     button {
@@ -97,19 +100,21 @@
         top: 50%;
         transform: translateY(-50%);
 
-        padding: 4px 6px;
-        font-size: 12px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        font-size: 16px;
 
-        background: rgba(0,0,0,0.4);
-        border-radius: 6px;
+        background: rgba(0,0,0,0.46);
+        border-radius: 50%;
     }
 
     .gallery button:first-of-type {
-        left: 5px;
+        left: 12px;
     }
 
     .gallery button:last-of-type {
-        right: 5px;
+        right: 12px;
     }
 
 
@@ -373,7 +378,7 @@
             href="pages/physics">Physics</a>
 
             <a class="link-card"
-            href="pages/Radar">Radar</a>
+            href="pages/cs">Computer Science</a>
 
             <a class="link-card"
             href="pages/Plot">Plot</a>
