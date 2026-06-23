@@ -3,67 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kirchhoff Rules Visualization</title>
-<link rel="icon" href="../assets/kirchhoff.ico">
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+<title>Kirchhoff Rules Interactive</title>
 <style>
 :root {
     --bg: #f3fdf8;
+    --panel: #ffffff;
+    --ink: #1f2937;
+    --muted: #667085;
     --primary: #065f46;
     --accent: #10b981;
-    --text: #1f2937;
-    --subtext: #6b7280;
+    --line: #d6e6df;
+    --warn: #d97706;
+    --blue: #2563eb;
+    --red: #dc2626;
 }
 
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     background: var(--bg);
-    color: var(--text);
+    color: var(--ink);
 }
 
 .topbar {
-    height: 50px;
+    height: 56px;
     background: #072E33;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    padding: 0 15px;
+    padding: 0 18px;
 }
 
 .topbar span {
-    color: white;
-    font-weight: 500;
+    color: #fff;
+    font-weight: 600;
 }
 
 .topbar a {
-    color: white;
+    color: #fff;
     text-decoration: none;
-    margin-left: 10px;
-    opacity: 0.85;
+    margin-left: 12px;
+    opacity: 0.86;
 }
 
 .topbar a:hover {
     opacity: 1;
 }
-.container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 15px;
+
+main {
+    width: min(1180px, calc(100% - 28px));
+    margin: 28px auto 48px;
 }
 
+.intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+    gap: 18px;
+    align-items: start;
+}
 
 h1 {
-    font-size: 26px;
-    font-weight: 600;
+    margin: 0 0 10px;
     color: var(--primary);
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    letter-spacing: 0;
+}
+
+h2 {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 1.05rem;
+}
+
+p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.58;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 16px 34px rgba(7, 46, 51, 0.08);
+}
+
+.hero-copy,
+.law-box,
+.controls,
+.readout,
+.practice {
+    padding: 20px;
+}
+
+.law-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.law {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    min-height: 120px;
+}
+
+.formula {
+    display: block;
+    margin-top: 8px;
+    color: var(--ink);
+    font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+    font-weight: 700;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.controls {
+    position: sticky;
+    top: 16px;
+}
+
+.control {
+    display: grid;
+    grid-template-columns: 44px 1fr 70px;
+    gap: 10px;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.control:last-child {
+    border-bottom: 0;
+}
+
+.control label {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+}
+
+input[type="number"],
+.practice input {
+    width: 100%;
+    border: 1px solid #cddbd5;
+    border-radius: 6px;
+    padding: 9px 10px;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+button {
+    border: 0;
+    border-radius: 6px;
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 13px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: #e7f5ef;
+    color: var(--primary);
+}
+
+button:hover {
+    filter: brightness(0.96);
+}
+
+.circuit-wrap {
+    padding: 16px;
+    overflow: hidden;
+}
+
+svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.wire {
+    stroke: #344054;
+    stroke-width: 5;
+    stroke-linecap: round;
+    fill: none;
+}
+
+.resistor,
+.source {
+    stroke: #072E33;
+    stroke-width: 5;
+    fill: #fff;
+}
+
+.node {
+    fill: var(--accent);
+    stroke: #064e3b;
+    stroke-width: 3;
+}
+
+.ground line {
+    stroke: #344054;
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+.meter {
+    fill: #ecfdf3;
+    stroke: #a7f3d0;
+    stroke-width: 2;
+}
+
+.svg-label {
+    font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    fill: #1f2937;
+}
+
+.svg-small {
+    font: 600 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    fill: #667085;
+}
+
+.arrow {
+    stroke-width: 4;
+    stroke-linecap: round;
+    marker-end: url(#arrowHead);
+}
+
+.arrow.left,
+.current.left {
+    stroke: var(--blue);
+    fill: var(--blue);
+}
+
+.arrow.right,
+.current.right {
+    stroke: var(--red);
+    fill: var(--red);
+}
+
+.arrow.down,
+.current.down {
+    stroke: var(--warn);
+    fill: var(--warn);
+}
+
+.readout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    border-top: 1px solid var(--line);
+}
+
+.metric {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    min-height: 96px;
+}
+
+.metric strong {
+    display: block;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.metric .value {
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.equations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.eq-panel {
+    padding: 18px;
+}
+
+.eq-line {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+    color: #344054;
+}
+
+.eq-line:last-child {
+    border-bottom: 0;
+}
+
+.ok {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.practice {
+    margin-top: 18px;
+}
+
+.challenge {
+    display: grid;
+    grid-template-columns: 1fr 120px auto;
+    gap: 10px;
+    align-items: center;
+    margin-top: 12px;
+}
+
+#feedback {
+    min-height: 24px;
+    margin-top: 12px;
+    font-weight: 700;
+}
+
+@media (max-width: 860px) {
+    .intro,
+    .workspace,
+    .equations,
+    .readout {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        position: static;
+    }
+}
+
+@media (max-width: 560px) {
+    main {
+        width: min(100% - 18px, 1180px);
+        margin-top: 18px;
+    }
+
+    .topbar {
+        height: auto;
+        min-height: 56px;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 14px;
+    }
+
+    .law-grid,
+    .challenge {
+        grid-template-columns: 1fr;
+    }
+
+    .control {
+        grid-template-columns: 42px 1fr;
+    }
+
+    .control input[type="number"] {
+        grid-column: 1 / -1;
+    }
 }
 </style>
 </head>
@@ -74,11 +390,327 @@ h1 {
         <a href="https://wangleyi.top">Home</a>
         <a href="https://wangleyi.top/pages/physics">Projects</a>
     </div>
-
 </div>
-<div class="container">
 
-</div>
+<main>
+    <section class="intro">
+        <div class="hero-copy panel">
+            <h1>Kirchhoff Rules Interactive</h1>
+            <p>Adjust the voltage sources and resistors. The circuit updates instantly so you can see how Kirchhoff's Current Law and Voltage Law describe the same circuit from two viewpoints.</p>
+        </div>
+        <div class="law-box panel">
+            <h2>The Two Rules</h2>
+            <div class="law-grid">
+                <div class="law">
+                    <strong>KCL at a node</strong>
+                    <p>All currents entering and leaving one node must balance.</p>
+                    <span class="formula">&Sigma;I = 0</span>
+                </div>
+                <div class="law">
+                    <strong>KVL around a loop</strong>
+                    <p>All voltage rises and drops around a closed loop must balance.</p>
+                    <span class="formula">&Sigma;V = 0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workspace">
+        <aside class="controls panel" aria-label="Circuit controls">
+            <h2>Controls</h2>
+            <div class="control">
+                <label for="v1">V1</label>
+                <input id="v1" type="range" min="1" max="24" step="0.1" value="12">
+                <input id="v1Num" type="number" min="1" max="24" step="0.1" value="12">
+            </div>
+            <div class="control">
+                <label for="v2">V2</label>
+                <input id="v2" type="range" min="1" max="24" step="0.1" value="6">
+                <input id="v2Num" type="number" min="1" max="24" step="0.1" value="6">
+            </div>
+            <div class="control">
+                <label for="r1">R1</label>
+                <input id="r1" type="range" min="10" max="500" step="1" value="120">
+                <input id="r1Num" type="number" min="10" max="500" step="1" value="120">
+            </div>
+            <div class="control">
+                <label for="r2">R2</label>
+                <input id="r2" type="range" min="10" max="500" step="1" value="220">
+                <input id="r2Num" type="number" min="10" max="500" step="1" value="220">
+            </div>
+            <div class="control">
+                <label for="r3">R3</label>
+                <input id="r3" type="range" min="10" max="500" step="1" value="180">
+                <input id="r3Num" type="number" min="10" max="500" step="1" value="180">
+            </div>
+            <div class="button-row">
+                <button type="button" id="balanced">Balance Sources</button>
+                <button type="button" class="secondary" id="reset">Reset</button>
+            </div>
+        </aside>
+
+        <section class="panel">
+            <div class="circuit-wrap">
+                <svg viewBox="0 0 780 430" role="img" aria-label="Interactive Kirchhoff circuit diagram">
+                    <defs>
+                        <marker id="arrowHead" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                            <path d="M0,0 L9,4.5 L0,9 Z" fill="context-stroke"></path>
+                        </marker>
+                    </defs>
+
+                    <path class="wire" d="M170 86 L170 160"></path>
+                    <path class="wire" d="M610 86 L610 160"></path>
+                    <path class="wire" d="M170 280 L170 336 L610 336 L610 280"></path>
+                    <path class="wire" d="M380 86 L390 160 L400 86"></path>
+                    <path class="wire" d="M390 160 L390 246"></path>
+                    <path class="wire" d="M390 294 L390 336"></path>
+
+                    <circle class="source" cx="170" cy="220" r="42"></circle>
+                    <line class="source" x1="150" y1="208" x2="190" y2="208"></line>
+                    <line class="source" x1="170" y1="188" x2="170" y2="228"></line>
+                    <line class="source" x1="153" y1="236" x2="187" y2="236"></line>
+
+                    <circle class="source" cx="610" cy="220" r="42"></circle>
+                    <line class="source" x1="590" y1="208" x2="630" y2="208"></line>
+                    <line class="source" x1="610" y1="188" x2="610" y2="228"></line>
+                    <line class="source" x1="593" y1="236" x2="627" y2="236"></line>
+
+                    <path class="resistor" d="M170 86 h28 l14 -24 l28 48 l28 -48 l28 48 l28 -48 l14 24 h42"></path>
+                    <path class="resistor" d="M400 86 h42 l14 -24 l28 48 l28 -48 l28 48 l28 -48 l14 24 h28"></path>
+                    <path class="resistor" d="M390 246 v-16 l-24 -14 l48 -28 l-48 -28 l48 -28 l-48 -28 l24 -14 v-16"></path>
+
+                    <circle class="node" cx="390" cy="160" r="10"></circle>
+                    <g class="ground">
+                        <line x1="356" y1="356" x2="424" y2="356"></line>
+                        <line x1="368" y1="372" x2="412" y2="372"></line>
+                        <line x1="380" y1="388" x2="400" y2="388"></line>
+                    </g>
+
+                    <rect class="meter" x="310" y="20" width="160" height="48" rx="8"></rect>
+                    <text class="svg-small" x="390" y="39" text-anchor="middle">node voltage</text>
+                    <text id="nodeSvg" class="svg-label" x="390" y="60" text-anchor="middle">0.00 V</text>
+
+                    <path id="arrowLeft" class="arrow left" d="M290 132 C320 120 350 120 374 143"></path>
+                    <path id="arrowRight" class="arrow right" d="M490 132 C460 120 430 120 406 143"></path>
+                    <path id="arrowDown" class="arrow down" d="M414 178 C438 210 438 248 410 286"></path>
+
+                    <text class="svg-label" x="168" y="64" text-anchor="middle">R1</text>
+                    <text class="svg-label" x="612" y="64" text-anchor="middle">R2</text>
+                    <text class="svg-label" x="438" y="222">R3</text>
+                    <text id="v1Svg" class="svg-label" x="96" y="226" text-anchor="middle">V1</text>
+                    <text id="v2Svg" class="svg-label" x="684" y="226" text-anchor="middle">V2</text>
+                    <text id="i1Svg" class="svg-small current left" x="292" y="116" text-anchor="middle">I1</text>
+                    <text id="i2Svg" class="svg-small current right" x="488" y="116" text-anchor="middle">I2</text>
+                    <text id="i3Svg" class="svg-small current down" x="462" y="268" text-anchor="middle">I3</text>
+                </svg>
+            </div>
+
+            <div class="readout" aria-live="polite">
+                <div class="metric">
+                    <strong>Node Voltage</strong>
+                    <span class="value" id="nodeValue">0.00 V</span>
+                </div>
+                <div class="metric">
+                    <strong>KCL Check</strong>
+                    <span class="value" id="kclValue">0.000 mA</span>
+                </div>
+                <div class="metric">
+                    <strong>Dominant Path</strong>
+                    <span class="value" id="dominantPath">R1</span>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="equations">
+        <div class="eq-panel panel">
+            <h2>KCL at the green node</h2>
+            <div class="eq-line" id="kclEquation">I1 + I2 + I3 = 0</div>
+            <div class="eq-line" id="kclNumbers">0 + 0 + 0 = 0 mA</div>
+            <p>Positive current is defined as leaving the node. A negative value means current is entering the node.</p>
+        </div>
+
+        <div class="eq-panel panel">
+            <h2>KVL around each side loop</h2>
+            <div class="eq-line" id="leftLoop">V1 - VR1 - Vnode = 0</div>
+            <div class="eq-line" id="rightLoop">V2 - VR2 - Vnode = 0</div>
+            <p>Each source rise is exactly balanced by resistor drops and the node-to-ground drop.</p>
+        </div>
+    </section>
+
+    <section class="practice panel">
+        <h2>Quick Check</h2>
+        <p>Estimate the node voltage from the circuit above, then type your answer in volts. Within 0.10 V counts as correct.</p>
+        <div class="challenge">
+            <label for="guess">Your estimate</label>
+            <input id="guess" type="number" step="0.01" placeholder="volts">
+            <button type="button" id="check">Check</button>
+        </div>
+        <div id="feedback" aria-live="polite"></div>
+    </section>
+</main>
+
+<script>
+const ids = ["v1", "v2", "r1", "r2", "r3"];
+const state = {
+    v1: 12,
+    v2: 6,
+    r1: 120,
+    r2: 220,
+    r3: 180
+};
+
+const defaults = { ...state };
+
+function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+}
+
+function fmt(value, digits = 2) {
+    return Number(value).toFixed(digits);
+}
+
+function ma(value) {
+    return value * 1000;
+}
+
+function solveCircuit() {
+    const { v1, v2, r1, r2, r3 } = state;
+    const conductance = (1 / r1) + (1 / r2) + (1 / r3);
+    const node = ((v1 / r1) + (v2 / r2)) / conductance;
+    const i1 = (node - v1) / r1;
+    const i2 = (node - v2) / r2;
+    const i3 = node / r3;
+    const kcl = i1 + i2 + i3;
+    return { node, i1, i2, i3, kcl };
+}
+
+function syncPair(id, value) {
+    const range = document.getElementById(id);
+    const number = document.getElementById(id + "Num");
+    range.value = value;
+    number.value = value;
+}
+
+function setState(id, rawValue) {
+    const input = document.getElementById(id);
+    const value = clamp(parseFloat(rawValue) || 0, parseFloat(input.min), parseFloat(input.max));
+    state[id] = value;
+    syncPair(id, value);
+    update();
+}
+
+function setArrow(path, current, forward, reverse) {
+    path.setAttribute("d", current >= 0 ? forward : reverse);
+}
+
+function update() {
+    const result = solveCircuit();
+    const leftIntoNode = -result.i1;
+    const rightIntoNode = -result.i2;
+    const downOut = result.i3;
+    const currents = [
+        { name: "R1", value: Math.abs(leftIntoNode) },
+        { name: "R2", value: Math.abs(rightIntoNode) },
+        { name: "R3", value: Math.abs(downOut) }
+    ].sort((a, b) => b.value - a.value);
+
+    document.getElementById("nodeValue").textContent = `${fmt(result.node)} V`;
+    document.getElementById("nodeSvg").textContent = `${fmt(result.node)} V`;
+    document.getElementById("kclValue").textContent = `${fmt(ma(result.kcl), 4)} mA`;
+    document.getElementById("dominantPath").textContent = currents[0].name;
+
+    document.getElementById("v1Svg").textContent = `${fmt(state.v1, 1)} V`;
+    document.getElementById("v2Svg").textContent = `${fmt(state.v2, 1)} V`;
+    document.getElementById("i1Svg").textContent = `I1 ${fmt(ma(leftIntoNode), 2)} mA`;
+    document.getElementById("i2Svg").textContent = `I2 ${fmt(ma(rightIntoNode), 2)} mA`;
+    document.getElementById("i3Svg").textContent = `I3 ${fmt(ma(downOut), 2)} mA`;
+
+    document.getElementById("kclEquation").innerHTML =
+        `<span class="ok">KCL:</span> I1 + I2 + I3 = 0`;
+    document.getElementById("kclNumbers").textContent =
+        `${fmt(ma(result.i1), 3)} mA + ${fmt(ma(result.i2), 3)} mA + ${fmt(ma(result.i3), 3)} mA = ${fmt(ma(result.kcl), 4)} mA`;
+
+    const vr1 = state.v1 - result.node;
+    const vr2 = state.v2 - result.node;
+    document.getElementById("leftLoop").innerHTML =
+        `<span class="ok">Left loop:</span> ${fmt(state.v1)} - ${fmt(vr1)} - ${fmt(result.node)} = ${fmt(state.v1 - vr1 - result.node, 4)} V`;
+    document.getElementById("rightLoop").innerHTML =
+        `<span class="ok">Right loop:</span> ${fmt(state.v2)} - ${fmt(vr2)} - ${fmt(result.node)} = ${fmt(state.v2 - vr2 - result.node, 4)} V`;
+
+    setArrow(
+        document.getElementById("arrowLeft"),
+        leftIntoNode,
+        "M290 132 C320 120 350 120 374 143",
+        "M374 132 C344 120 314 120 290 143"
+    );
+    setArrow(
+        document.getElementById("arrowRight"),
+        rightIntoNode,
+        "M490 132 C460 120 430 120 406 143",
+        "M406 132 C436 120 466 120 490 143"
+    );
+    setArrow(
+        document.getElementById("arrowDown"),
+        downOut,
+        "M414 178 C438 210 438 248 410 286",
+        "M410 286 C438 248 438 210 414 178"
+    );
+
+    const feedback = document.getElementById("feedback");
+    if (feedback.dataset.checked === "true") {
+        checkGuess();
+    }
+}
+
+function checkGuess() {
+    const guess = parseFloat(document.getElementById("guess").value);
+    const feedback = document.getElementById("feedback");
+    feedback.dataset.checked = "true";
+    if (!Number.isFinite(guess)) {
+        feedback.textContent = "Type a voltage first.";
+        feedback.style.color = "#d97706";
+        return;
+    }
+    const actual = solveCircuit().node;
+    const error = Math.abs(guess - actual);
+    if (error <= 0.1) {
+        feedback.textContent = `Correct. The node voltage is ${fmt(actual)} V.`;
+        feedback.style.color = "#065f46";
+    } else {
+        feedback.textContent = `Close the loop again: the node voltage is ${fmt(actual)} V, so your error is ${fmt(error)} V.`;
+        feedback.style.color = "#dc2626";
+    }
+}
+
+ids.forEach((id) => {
+    const range = document.getElementById(id);
+    const number = document.getElementById(id + "Num");
+    range.addEventListener("input", (event) => setState(id, event.target.value));
+    number.addEventListener("input", (event) => setState(id, event.target.value));
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+    Object.assign(state, defaults);
+    ids.forEach((id) => syncPair(id, state[id]));
+    document.getElementById("feedback").dataset.checked = "false";
+    document.getElementById("feedback").textContent = "";
+    update();
+});
+
+document.getElementById("balanced").addEventListener("click", () => {
+    state.v2 = state.v1;
+    syncPair("v2", state.v2);
+    update();
+});
+
+document.getElementById("check").addEventListener("click", checkGuess);
+document.getElementById("guess").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") checkGuess();
+});
+
+ids.forEach((id) => syncPair(id, state[id]));
+update();
+</script>
 </body>
-
 </html>
