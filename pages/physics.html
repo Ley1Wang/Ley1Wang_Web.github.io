@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,23 +17,19 @@
     --subtext: #6b7280;
 }
 
-/* å…¨å±€ */
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
 }
 
-/* é¡¶éƒ¨ */
 .topbar {
     height: 60px;
     background: #072E33;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 20px;
 }
 
@@ -52,9 +48,8 @@ body {
     opacity: 1;
 }
 
-/* ä¸»ä½“ */
 .container {
-    max-width: 900px;
+    max-width: 960px;
     margin: 60px auto;
     padding: 0 20px;
 }
@@ -64,16 +59,17 @@ h1 {
     margin-bottom: 30px;
 }
 
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
 
 .card {
     background: var(--card);
     border-radius: 12px;
     padding: 20px;
-    margin-bottom: 25px;
-
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    max-width: 800px;
-    margin: 0 auto 25px auto;
     transition: 0.2s;
 }
 
@@ -81,34 +77,31 @@ h1 {
     transform: translateY(-4px);
 }
 
-
 .card img {
     width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
     border-radius: 10px;
     margin-top: 10px;
 }
-
 
 .card h3 {
     margin: 0;
     color: var(--primary);
 }
 
-
 .card p {
     color: var(--subtext);
     margin: 10px 0;
+    line-height: 1.5;
 }
-
 
 .button {
     display: inline-block;
     margin-top: 10px;
     padding: 8px 14px;
-
     background: var(--accent);
     color: white;
-
     border-radius: 6px;
     text-decoration: none;
 }
@@ -116,75 +109,53 @@ h1 {
 .button:hover {
     opacity: 0.9;
 }
-.card {
-    max-width: 400px;
+
+@media (max-width: 720px) {
+    .project-list {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
-
-
 <div class="topbar">
     <div class="title">Physics Projects</div>
     <a href="https://wangleyi.top">Home</a>
 </div>
 
 <div class="container">
-
     <h1>Physics Visualization Projects</h1>
 
-    <div class="card">
-        <h3>Scatter Plot Visualization</h3>
-        <p>Plot experimental data points and visualize relationships.</p>
+    <div class="project-list">
+        <div class="card">
+            <h3>Scatter Plot Visualization</h3>
+            <p>Plot experimental data points and visualize relationships.</p>
+            <img src="../images/Plot_Example.jpg" alt="Plot preview">
+            <a href="https://wangleyi.top/pages/Plot" class="button">Open &rarr;</a>
+        </div>
 
-        <img src="../images/Plot_Example.jpg" alt="Plot preview">
+        <div class="card">
+            <h3>Lenz Effect Simulator</h3>
+            <p>Show a magnet passing through a coil and calculate the induced EMF.</p>
+            <img src="../images/Lenz_Example.jpg" alt="Lenz preview">
+            <a href="https://wangleyi.top/pages/lenz" class="button">Open &rarr;</a>
+        </div>
 
-        <a href="https://wangleyi.top/pages/Plot" class="button">
-            Open â†’
-        </a>
+        <div class="card">
+            <h3>Freefalling Simulator</h3>
+            <p>Compare free-fall motion under different planetary gravities.</p>
+            <img src="../images/Freefalling_Example.jpg" alt="Freefalling preview">
+            <a href="https://wangleyi.top/pages/freefalling" class="button">Open &rarr;</a>
+        </div>
+
+        <div class="card">
+            <h3>Kirchhoff Rules Interactive</h3>
+            <p>Explore KCL and KVL with an adjustable circuit diagram and live equations.</p>
+            <img src="../images/Kirchoff_Example.png" alt="Kirchhoff preview">
+            <a href="https://wangleyi.top/pages/kirchhoff" class="button">Open &rarr;</a>
+        </div>
     </div>
-
-
-    <div class="card">
-        <h3>Lenz Effect Simulator</h3>
-        <p>Showing the effect of a magnet that pass through a coil, calculating the emf.</p>
-        <img src="../images/Lenz_Example.jpg" alt="Lenz preview">
-
-        <a href="https://wangleyi.top/pages/lenz" class="button">
-            Open â†’
-        </a>
-        
-    </div>
-    <div class="card">
-        <h3>Freefalling Simulator</h3>
-        <p>Compare free-fall motion on different planets.</p>
-        <img src="../images/Freefalling_Example.jpg" alt="Freefalling preview">
-
-        <a href="https://wangleyi.top/pages/freefalling" class="button">
-            Open â†’
-        </a>
-    </div>
-
-    <div class="card">
-        <h3>Lenz Effect Simulator</h3>
-        <p>Showing the effect of a magnet that pass through a coil, calculating the emf.</p>
-        <img src="../images/Lenz_Example.jpg" alt="Regression preview">
-
-        <a href="https://wangleyi.top/pages/lenz" class="button">
-            Open â†’
-        </a>
-    </div>
-    <div class="card">
-        <h3>Lenz Effect Simulator</h3>
-        <p>Showing the effect of a magnet that pass through a coil, calculating the emf.</p>
-        <img src="../images/Lenz_Example.jpg" alt="Regression preview">
-
-        <a href="https://wangleyi.top/pages/lenz" class="button">
-            Open â†’
-        </a>
-    </div>
-
 </div>
 
 <script data-goatcounter="https://wangleyi.goatcounter.com/count"
