@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LeyiWang</title>
-<link rel="icon" href="nana.ico">
+<link rel="icon" href="assets/nana.ico">
 <style>  
     html {
         scroll-behavior: smooth;
@@ -67,17 +68,20 @@
 
     .gallery {
         width: 100%;
-        max-width: 360px;
+        max-width: 640px;
 
-        margin: 30px auto;
+        margin: 32px auto 38px;
 
         position: relative;
     }
     .gallery img {
         width: 100%;
+        aspect-ratio: 16 / 10;
         height: auto;
+        object-fit: cover;
 
-        border-radius: 10px;
+        border-radius: 12px;
+        box-shadow: 0 14px 34px rgba(0,0,0,0.12);
     }
 
     button {
@@ -97,19 +101,21 @@
         top: 50%;
         transform: translateY(-50%);
 
-        padding: 4px 6px;
-        font-size: 12px;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        font-size: 16px;
 
-        background: rgba(0,0,0,0.4);
-        border-radius: 6px;
+        background: rgba(0,0,0,0.46);
+        border-radius: 50%;
     }
 
     .gallery button:first-of-type {
-        left: 5px;
+        left: 12px;
     }
 
     .gallery button:last-of-type {
-        right: 5px;
+        right: 12px;
     }
 
 
@@ -313,8 +319,8 @@
     <div class="title">Sections</div>
     <a href="#Home">Home</a>
     <a href="#Projects">Projects</a>
-    <a href="#Physics" style="padding-left: 30px; ">Physics</a>
-    <a href="#Radar" style="padding-left: 30px;">Radar</a>
+    <a href="pages/physics" style="padding-left: 30px; ">Physics</a>
+    <a href="pages/Radar" style="padding-left: 30px;">Radar</a>
     <a href="#Link">Link</a>
     
 </div>
@@ -346,9 +352,9 @@
         <h1>Projects</h1>
     
         <div class="gallery">
-            <button onclick="prev()">â¬…</button>
+            <button onclick="prev()" aria-label="Previous slide">&larr;</button>
             <img id="slide" src="images/Plot_Example.jpg">
-            <button onclick="next()">âž¡</button>
+            <button onclick="next()" aria-label="Next slide">&rarr;</button>
         </div>
 
         <div class="project-grid">
@@ -395,14 +401,13 @@
 
 <footer class="footer">
     <p style="text-align: right; margin: 0 10px 0 0; position: relative; top: 50%; transform: translateY(-50%);">
-        Â© 2026 MySite | All Rights Reserved
+        &copy; 2026 MySite | All Rights Reserved
     </p>
 
 </footer>
 
 <script data-goatcounter="https://wangleyi.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-</body>
 
 <script>
         history.scrollRestoration = "manual";
@@ -414,7 +419,7 @@
             "images/Plot_Example.jpg",
             "images/Lenz_Example.jpg",
             "images/Freefalling_Example.jpg",
-            "images/Kirchoff_Example.jpg"
+            "images/Kirchoff_Example.png"
         ];
         let index = 0;
 
@@ -447,4 +452,5 @@
         });
         
 </script>
+</body>
 </html>
