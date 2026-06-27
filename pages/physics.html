@@ -78,12 +78,26 @@ h1 {
     transform: translateY(-4px);
 }
 
-.card img {
+.preview {
     width: 100%;
     aspect-ratio: 16 / 10;
-    object-fit: cover;
+    margin-top: 16px;
+    padding: 18px;
+    box-sizing: border-box;
+    border: 1px solid #d1fae5;
     border-radius: 10px;
-    margin-top: 10px;
+    background: #fbfffd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 .card h3 {
@@ -135,28 +149,36 @@ h1 {
         <div class="card">
             <h3>Scatter Plot Visualization</h3>
             <p>Plot experimental data points and visualize relationships.</p>
-            <img src="../images/Plot_Example.jpg" alt="Plot preview">
+            <div class="preview">
+                <img src="../images/Plot_Example.jpg" alt="Plot preview">
+            </div>
             <a href="https://wangleyi.top/pages/Plot" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Lenz Effect Simulator</h3>
             <p>Show a magnet passing through a coil and calculate the induced EMF.</p>
-            <img src="../images/Lenz_Example.jpg" alt="Lenz preview">
+            <div class="preview">
+                <img src="../images/Lenz_Example.jpg" alt="Lenz preview">
+            </div>
             <a href="https://wangleyi.top/pages/lenz" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Freefalling Simulator</h3>
             <p>Compare free-fall motion under different planetary gravities.</p>
-            <img src="../images/Freefalling_Example.jpg" alt="Freefalling preview">
+            <div class="preview">
+                <img src="../images/Freefalling_Example.jpg" alt="Freefalling preview">
+            </div>
             <a href="https://wangleyi.top/pages/freefalling" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Kirchhoff Rules Interactive</h3>
             <p>Explore KCL and KVL with an adjustable circuit diagram and live equations.</p>
-            <img src="../images/Kirchoff_Example.png" alt="Kirchhoff preview">
+            <div class="preview">
+                <img src="../images/Kirchoff_Example.png" alt="Kirchhoff preview">
+            </div>
             <a href="https://wangleyi.top/pages/kirchhoff" class="button">Open &rarr;</a>
         </div>
     </div>
