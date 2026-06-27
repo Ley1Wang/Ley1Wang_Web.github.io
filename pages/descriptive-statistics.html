@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descriptive Statistics Calculator</title>
+<link rel="icon" href="../assets/nana.ico">
+<style>
+:root {
+    --bg: #f3fdf8;
+    --card: #ffffff;
+    --primary: #065f46;
+    --accent: #10b981;
+    --text: #1f2937;
+    --subtext: #6b7280;
+    --border: #d1d5db;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.topbar {
+    height: 60px;
+    background: #072E33;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.topbar .title,
+.topbar a {
+    color: white;
+}
+
+.topbar a {
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+.container {
+    max-width: 1180px;
+    margin: 42px auto;
+    padding: 0 24px 50px;
+}
+
+h1 {
+    color: var(--primary);
+    margin: 0 0 18px;
+    font-size: 34px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+textarea {
+    width: 100%;
+    min-height: 190px;
+    resize: vertical;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font: inherit;
+    line-height: 1.5;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+button {
+    border: 0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    background: var(--accent);
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: #e7f5ef;
+    color: var(--primary);
+}
+
+.hint {
+    margin: 12px 0 0;
+    color: var(--subtext);
+    line-height: 1.5;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.stat {
+    border: 1px solid #d1fae5;
+    border-radius: 8px;
+    padding: 14px;
+    background: #fbfffd;
+}
+
+.stat span {
+    display: block;
+    color: var(--subtext);
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.stat strong {
+    color: var(--primary);
+    font-size: 22px;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+canvas {
+    width: 100%;
+    height: 300px;
+    display: block;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.error {
+    min-height: 24px;
+    margin-top: 12px;
+    color: #b42318;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .layout,
+    .charts {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+    <div class="title">Statistics Projects</div>
+    <a href="https://wangleyi.top/pages/stat">Projects</a>
+</div>
+
+<div class="container">
+    <h1>Descriptive Statistics Calculator</h1>
+
+    <div class="layout">
+        <section class="panel">
+            <label for="dataInput"><strong>Data</strong></label>
+            <textarea id="dataInput">12, 15, 18, 20, 21, 21, 25, 30, 31, 35, 40, 42</textarea>
+            <div class="button-row">
+                <button id="calculateBtn" type="button">Calculate</button>
+                <button id="sampleBtn" class="secondary" type="button">Sample</button>
+            </div>
+            <p class="hint">Use commas, spaces, or new lines. Example: <code>12, 15, 18, 20</code></p>
+            <div id="error" class="error"></div>
+        </section>
+
+        <section class="panel">
+            <div class="stats-grid">
+                <div class="stat"><span>Count</span><strong id="count">0</strong></div>
+                <div class="stat"><span>Mean</span><strong id="mean">0</strong></div>
+                <div class="stat"><span>Median</span><strong id="median">0</strong></div>
+                <div class="stat"><span>Mode</span><strong id="mode">0</strong></div>
+                <div class="stat"><span>Range</span><strong id="range">0</strong></div>
+                <div class="stat"><span>Variance</span><strong id="variance">0</strong></div>
+                <div class="stat"><span>Std. Dev.</span><strong id="stdDev">0</strong></div>
+                <div class="stat"><span>Q1 / Q3</span><strong id="quartiles">0 / 0</strong></div>
+            </div>
+
+            <div class="charts">
+                <canvas id="histogram" width="520" height="300"></canvas>
+                <canvas id="boxplot" width="520" height="300"></canvas>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script data-goatcounter="https://wangleyi.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+const input = document.getElementById("dataInput");
+const error = document.getElementById("error");
+const histogram = document.getElementById("histogram");
+const boxplot = document.getElementById("boxplot");
+
+function parseNumbers(text) {
+    return text
+        .split(/[,\s]+/)
+        .map(value => value.trim())
+        .filter(Boolean)
+        .map(Number)
+        .filter(Number.isFinite);
+}
+
+function round(value) {
+    return Number(value).toFixed(2);
+}
+
+function median(sorted) {
+    const mid = Math.floor(sorted.length / 2);
+    if (sorted.length % 2) return sorted[mid];
+    return (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+function mode(values) {
+    const counts = new Map();
+    for (const value of values) counts.set(value, (counts.get(value) || 0) + 1);
+    let bestValue = values[0];
+    let bestCount = 0;
+    for (const [value, count] of counts) {
+        if (count > bestCount) {
+            bestValue = value;
+            bestCount = count;
+        }
+    }
+    return bestCount <= 1 ? "None" : bestValue;
+}
+
+function quartiles(sorted) {
+    const mid = Math.floor(sorted.length / 2);
+    const lower = sorted.slice(0, mid);
+    const upper = sorted.length % 2 ? sorted.slice(mid + 1) : sorted.slice(mid);
+    return {
+        q1: lower.length ? median(lower) : sorted[0],
+        q3: upper.length ? median(upper) : sorted[sorted.length - 1]
+    };
+}
+
+function drawHistogram(values) {
+    const ctx = histogram.getContext("2d");
+    const w = histogram.width;
+    const h = histogram.height;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const bins = Math.min(8, Math.max(3, Math.ceil(Math.sqrt(values.length))));
+    const width = max === min ? 1 : (max - min) / bins;
+    const counts = Array(bins).fill(0);
+
+    for (const value of values) {
+        const index = Math.min(bins - 1, Math.floor((value - min) / width));
+        counts[index]++;
+    }
+
+    const chartX = 46;
+    const chartY = 24;
+    const chartW = w - 72;
+    const chartH = h - 62;
+    const maxCount = Math.max(...counts);
+
+    ctx.strokeStyle = "#344054";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(chartX, chartY);
+    ctx.lineTo(chartX, chartY + chartH);
+    ctx.lineTo(chartX + chartW, chartY + chartH);
+    ctx.stroke();
+
+    counts.forEach((count, index) => {
+        const barW = chartW / bins - 8;
+        const barH = count / maxCount * (chartH - 10);
+        const x = chartX + index * (chartW / bins) + 4;
+        const y = chartY + chartH - barH;
+        ctx.fillStyle = "#10b981";
+        ctx.fillRect(x, y, barW, barH);
+    });
+
+    ctx.fillStyle = "#065f46";
+    ctx.font = "16px Arial";
+    ctx.fillText("Histogram", 18, 20);
+}
+
+function drawBoxplot(sorted, q1, q3, med) {
+    const ctx = boxplot.getContext("2d");
+    const w = boxplot.width;
+    const h = boxplot.height;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+
+    const min = sorted[0];
+    const max = sorted[sorted.length - 1];
+    const scale = value => 58 + (value - min) / (max - min || 1) * (w - 116);
+    const y = h / 2;
+
+    ctx.strokeStyle = "#344054";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(scale(min), y);
+    ctx.lineTo(scale(max), y);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#065f46";
+    ctx.fillStyle = "#ecfdf5";
+    ctx.lineWidth = 3;
+    ctx.fillRect(scale(q1), y - 42, scale(q3) - scale(q1), 84);
+    ctx.strokeRect(scale(q1), y - 42, scale(q3) - scale(q1), 84);
+
+    ctx.strokeStyle = "#10b981";
+    ctx.beginPath();
+    ctx.moveTo(scale(med), y - 52);
+    ctx.lineTo(scale(med), y + 52);
+    ctx.stroke();
+
+    [min, q1, med, q3, max].forEach(value => {
+        ctx.fillStyle = "#065f46";
+        ctx.beginPath();
+        ctx.arc(scale(value), y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillText(round(value), scale(value) - 14, y + 76);
+    });
+
+    ctx.fillStyle = "#065f46";
+    ctx.font = "16px Arial";
+    ctx.fillText("Box Plot", 18, 20);
+}
+
+function calculate() {
+    const values = parseNumbers(input.value);
+    if (!values.length) {
+        error.textContent = "Enter at least one number.";
+        return;
+    }
+    error.textContent = "";
+
+    const sorted = [...values].sort((a, b) => a - b);
+    const sum = values.reduce((total, value) => total + value, 0);
+    const mean = sum / values.length;
+    const med = median(sorted);
+    const variance = values.reduce((total, value) => total + (value - mean) ** 2, 0) / values.length;
+    const stdDev = Math.sqrt(variance);
+    const qs = quartiles(sorted);
+
+    document.getElementById("count").textContent = values.length;
+    document.getElementById("mean").textContent = round(mean);
+    document.getElementById("median").textContent = round(med);
+    document.getElementById("mode").textContent = mode(values);
+    document.getElementById("range").textContent = round(sorted[sorted.length - 1] - sorted[0]);
+    document.getElementById("variance").textContent = round(variance);
+    document.getElementById("stdDev").textContent = round(stdDev);
+    document.getElementById("quartiles").textContent = `${round(qs.q1)} / ${round(qs.q3)}`;
+
+    drawHistogram(values);
+    drawBoxplot(sorted, qs.q1, qs.q3, med);
+}
+
+document.getElementById("calculateBtn").addEventListener("click", calculate);
+document.getElementById("sampleBtn").addEventListener("click", () => {
+    input.value = "8, 9, 10, 13, 13, 15, 18, 21, 21, 22, 25, 29, 34, 35";
+    calculate();
+});
+
+calculate();
+</script>
+</body>
+</html>
