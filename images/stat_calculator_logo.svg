@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Statistics calculator logo">
+  <rect width="640" height="400" rx="28" fill="#ffffff"/>
+  <rect x="1.5" y="1.5" width="637" height="397" rx="26.5" fill="none" stroke="#d1fae5" stroke-width="3"/>
+  <g transform="translate(78 74)">
+    <rect x="0" y="170" width="56" height="82" rx="10" fill="#10b981"/>
+    <rect x="78" y="118" width="56" height="134" rx="10" fill="#34d399"/>
+    <rect x="156" y="72" width="56" height="180" rx="10" fill="#059669"/>
+    <rect x="234" y="138" width="56" height="114" rx="10" fill="#6ee7b7"/>
+    <line x1="0" y1="252" x2="304" y2="252" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(396 92)">
+    <circle cx="68" cy="68" r="68" fill="#ecfdf5" stroke="#10b981" stroke-width="8"/>
+    <path d="M30 78c16-40 40-40 56 0s40 40 56 0" fill="none" stroke="#065f46" stroke-width="10" stroke-linecap="round"/>
+    <path d="M24 148h176" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
+    <path d="M52 188h120" stroke="#10b981" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <text x="78" y="348" fill="#065f46" font-family="Arial, sans-serif" font-size="42" font-weight="700">STAT CALC</text>
+</svg>
