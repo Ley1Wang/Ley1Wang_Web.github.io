@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Scatter plot abstract preview">
+  <rect width="640" height="400" rx="28" fill="#ffffff"/>
+  <rect x="1.5" y="1.5" width="637" height="397" rx="26.5" fill="none" stroke="#d1fae5" stroke-width="3"/>
+  <g transform="translate(88 72)">
+    <path d="M0 230h450" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+    <path d="M0 230V24" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+    <path d="M36 188C100 152 143 168 197 118C260 60 332 86 408 36" fill="none" stroke="#10b981" stroke-width="11" stroke-linecap="round"/>
+    <circle cx="48" cy="182" r="15" fill="#34d399"/>
+    <circle cx="126" cy="152" r="13" fill="#059669"/>
+    <circle cx="198" cy="118" r="16" fill="#6ee7b7"/>
+    <circle cx="286" cy="88" r="13" fill="#10b981"/>
+    <circle cx="402" cy="40" r="16" fill="#065f46"/>
+    <path d="M44 232v26M150 232v26M256 232v26M362 232v26" stroke="#d1fae5" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>
