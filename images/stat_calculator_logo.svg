@@ -1,18 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Statistics calculator logo">
   <rect width="640" height="400" rx="28" fill="#ffffff"/>
-  <rect x="1.5" y="1.5" width="637" height="397" rx="26.5" fill="none" stroke="#d1fae5" stroke-width="3"/>
-  <g transform="translate(92 82)">
-    <rect x="0" y="136" width="48" height="72" rx="9" fill="#10b981"/>
-    <rect x="72" y="98" width="48" height="110" rx="9" fill="#34d399"/>
-    <rect x="144" y="56" width="48" height="152" rx="9" fill="#059669"/>
-    <rect x="216" y="116" width="48" height="92" rx="9" fill="#6ee7b7"/>
-    <line x1="0" y1="208" x2="284" y2="208" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+  <g transform="translate(104 88)">
+    <rect x="0" y="128" width="46" height="70" rx="9" fill="#10b981"/>
+    <rect x="72" y="92" width="46" height="106" rx="9" fill="#34d399"/>
+    <rect x="144" y="50" width="46" height="148" rx="9" fill="#059669"/>
+    <rect x="216" y="112" width="46" height="86" rx="9" fill="#6ee7b7"/>
+    <line x1="0" y1="198" x2="278" y2="198" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
   </g>
-  <g transform="translate(398 82)">
-    <circle cx="70" cy="70" r="58" fill="#ecfdf5" stroke="#10b981" stroke-width="7"/>
-    <path d="M36 78c15-36 37-36 52 0s37 36 52 0" fill="none" stroke="#065f46" stroke-width="8" stroke-linecap="round"/>
-    <path d="M24 154h168" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
-    <path d="M54 188h108" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+  <g transform="translate(402 92)">
+    <circle cx="66" cy="66" r="54" fill="#ecfdf5" stroke="#10b981" stroke-width="7"/>
+    <path d="M34 74c14-32 34-32 48 0s34 32 48 0" fill="none" stroke="#065f46" stroke-width="8" stroke-linecap="round"/>
+    <path d="M20 146h156" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+    <path d="M52 180h96" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
   </g>
-  <text x="92" y="332" fill="#065f46" font-family="Arial, sans-serif" font-size="34" font-weight="700">STAT CALC</text>
+  <text x="104" y="334" fill="#065f46" font-family="Arial, sans-serif" font-size="32" font-weight="700">STAT CALC</text>
 </svg>

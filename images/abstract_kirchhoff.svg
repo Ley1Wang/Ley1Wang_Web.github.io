@@ -1,15 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Kirchhoff circuit abstract preview">
   <rect width="640" height="400" rx="28" fill="#ffffff"/>
-  <rect x="1.5" y="1.5" width="637" height="397" rx="26.5" fill="none" stroke="#d1fae5" stroke-width="3"/>
-  <g transform="translate(86 74)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M60 58h122M300 58h122M60 58v162h362V58" stroke="#072E33" stroke-width="10"/>
-    <path d="M182 58l22-28l44 56l44-56l22 28" stroke="#065f46" stroke-width="9"/>
-    <circle cx="242" cy="140" r="18" fill="#10b981" stroke="#072E33" stroke-width="7"/>
-    <path d="M242 158v62" stroke="#072E33" stroke-width="10"/>
-    <path d="M242 168l-28 22l56 44l-56 44l28 22" stroke="#065f46" stroke-width="9"/>
-    <path d="M126 118c34 28 72 30 110 2" stroke="#2563eb" stroke-width="12"/>
-    <path d="M214 94l32 32l-44 12" stroke="#2563eb" stroke-width="12"/>
-    <path d="M286 120c42-24 82-20 120 10" stroke="#dc2626" stroke-width="12"/>
-    <path d="M388 94l28 44l-50-8" stroke="#dc2626" stroke-width="12"/>
+  <g transform="translate(112 82)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M44 70h112M268 70h112M44 70v150h336V70" stroke="#072E33" stroke-width="10"/>
+    <path d="M156 70l24-30l44 60l44-60l24 30" stroke="#065f46" stroke-width="9"/>
+    <circle cx="212" cy="152" r="17" fill="#10b981" stroke="#072E33" stroke-width="7"/>
+    <path d="M212 172v86" stroke="#072E33" stroke-width="10"/>
+    <path d="M212 176l-24 22l48 42l-48 42l24 22" stroke="#065f46" stroke-width="9"/>
+    <path d="M86 152c32 24 64 24 96 0" stroke="#2563eb" stroke-width="11"/>
+    <path d="M166 130l26 26l-36 10" stroke="#2563eb" stroke-width="11"/>
+    <path d="M282 154c34-20 68-18 102 6" stroke="#dc2626" stroke-width="11"/>
+    <path d="M366 132l26 34l-40-6" stroke="#dc2626" stroke-width="11"/>
   </g>
 </svg>

@@ -1,14 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Free fall abstract preview">
   <rect width="640" height="400" rx="28" fill="#ffffff"/>
-  <rect x="1.5" y="1.5" width="637" height="397" rx="26.5" fill="none" stroke="#d1fae5" stroke-width="3"/>
-  <g transform="translate(92 62)">
-    <circle cx="110" cy="56" r="32" fill="#10b981"/>
-    <path d="M110 110v148" stroke="#072E33" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 24"/>
-    <path d="M76 222l34 40l34-40" fill="none" stroke="#10b981" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M260 244c38-96 90-144 156-182" fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/>
-    <path d="M260 244c55-62 114-90 178-102" fill="none" stroke="#065f46" stroke-width="10" stroke-linecap="round"/>
-    <path d="M250 260h220" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
-    <circle cx="416" cy="62" r="18" fill="#6ee7b7"/>
-    <circle cx="438" cy="142" r="15" fill="#10b981"/>
+  <g transform="translate(110 74)">
+    <circle cx="94" cy="58" r="30" fill="#10b981"/>
+    <path d="M94 116v118" stroke="#072E33" stroke-width="9" stroke-linecap="round" stroke-dasharray="2 22"/>
+    <path d="M64 206l30 36l30-36" fill="none" stroke="#10b981" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M276 244c46-92 96-140 154-174" fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/>
+    <path d="M276 244c58-54 112-82 168-92" fill="none" stroke="#065f46" stroke-width="10" stroke-linecap="round"/>
+    <path d="M264 258h210" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="430" cy="70" r="16" fill="#6ee7b7"/>
+    <circle cx="444" cy="152" r="14" fill="#10b981"/>
   </g>
 </svg>

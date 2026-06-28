@@ -1,13 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Lenz effect abstract preview">
   <rect width="640" height="400" rx="28" fill="#ffffff"/>
-  <rect x="1.5" y="1.5" width="637" height="397" rx="26.5" fill="none" stroke="#d1fae5" stroke-width="3"/>
-  <g transform="translate(76 78)">
-    <rect x="20" y="64" width="122" height="126" rx="18" fill="#ecfdf5" stroke="#10b981" stroke-width="8"/>
-    <rect x="36" y="84" width="90" height="86" rx="14" fill="#10b981"/>
-    <path d="M216 42c-44 0-80 37-80 84s36 84 80 84s80-37 80-84s-36-84-80-84z" fill="none" stroke="#072E33" stroke-width="10"/>
-    <path d="M252 42c-44 0-80 37-80 84s36 84 80 84s80-37 80-84s-36-84-80-84z" fill="none" stroke="#34d399" stroke-width="10"/>
-    <path d="M288 42c-44 0-80 37-80 84s36 84 80 84s80-37 80-84s-36-84-80-84z" fill="none" stroke="#065f46" stroke-width="10"/>
-    <path d="M410 126h82" stroke="#10b981" stroke-width="12" stroke-linecap="round"/>
-    <path d="M468 92l38 34l-38 34" fill="none" stroke="#10b981" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(92 96)">
+    <rect x="18" y="62" width="108" height="108" rx="18" fill="#ecfdf5" stroke="#10b981" stroke-width="8"/>
+    <rect x="36" y="84" width="72" height="64" rx="12" fill="#10b981"/>
+    <ellipse cx="250" cy="116" rx="58" ry="82" fill="none" stroke="#072E33" stroke-width="9"/>
+    <ellipse cx="322" cy="116" rx="58" ry="82" fill="none" stroke="#34d399" stroke-width="9"/>
+    <path d="M418 116h72" stroke="#10b981" stroke-width="12" stroke-linecap="round"/>
+    <path d="M466 84l34 32l-34 32" fill="none" stroke="#10b981" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>
