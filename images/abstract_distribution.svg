@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Probability distribution abstract preview">
+  <rect width="640" height="400" rx="28" fill="#ffffff"/>
+  <g transform="translate(92 74)">
+    <path d="M36 250h456" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
+    <path d="M36 250V44" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
+    <path d="M70 246C132 244 156 198 190 132C220 74 266 48 314 48C362 48 408 74 438 132C472 198 496 244 558 246" fill="none" stroke="#10b981" stroke-width="13" stroke-linecap="round"/>
+    <rect x="92" y="190" width="30" height="60" rx="8" fill="#d1fae5"/>
+    <rect x="142" y="154" width="30" height="96" rx="8" fill="#6ee7b7"/>
+    <rect x="192" y="112" width="30" height="138" rx="8" fill="#34d399"/>
+    <rect x="242" y="82" width="30" height="168" rx="8" fill="#10b981"/>
+    <rect x="292" y="74" width="30" height="176" rx="8" fill="#059669"/>
+    <rect x="342" y="98" width="30" height="152" rx="8" fill="#10b981"/>
+    <rect x="392" y="142" width="30" height="108" rx="8" fill="#34d399"/>
+    <rect x="442" y="184" width="30" height="66" rx="8" fill="#6ee7b7"/>
+  </g>
+</svg>

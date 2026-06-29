@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Probability Distribution Explorer</title>
+<link rel="icon" href="../assets/nana.ico">
+
+<style>
+:root {
+    --bg: #f3fdf8;
+    --panel: #ffffff;
+    --primary: #065f46;
+    --accent: #10b981;
+    --ink: #072E33;
+    --text: #1f2937;
+    --subtext: #6b7280;
+    --line: #d1fae5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.topbar {
+    height: 60px;
+    padding: 0 20px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar .title {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.topbar a {
+    color: #ffffff;
+    opacity: 0.85;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1180px;
+    margin: 58px auto;
+    padding: 0 28px;
+}
+
+h1 {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 34px;
+}
+
+.intro {
+    max-width: 720px;
+    margin: 0 0 28px;
+    color: var(--subtext);
+    line-height: 1.65;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.panel {
+    background: var(--panel);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.control-group {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+}
+
+select:focus,
+input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.14);
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: 0;
+    border-radius: 8px;
+    padding: 11px 16px;
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: #ecfdf5;
+    color: var(--primary);
+}
+
+.chart-wrap {
+    min-height: 430px;
+}
+
+canvas {
+    width: 100%;
+    height: 390px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fbfffd;
+    display: block;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.stat {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px;
+    background: #fbfffd;
+}
+
+.stat span {
+    display: block;
+    color: var(--subtext);
+    font-size: 13px;
+}
+
+.stat strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.hint {
+    margin-top: 14px;
+    color: var(--subtext);
+    line-height: 1.55;
+    font-size: 14px;
+}
+
+@media (max-width: 860px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">
+    <div class="title">Probability Distribution Explorer</div>
+    <a href="https://wangleyi.top/pages/stat">Statistics</a>
+</div>
+
+<main class="container">
+    <h1>Probability Distribution Explorer</h1>
+    <p class="intro">Compare common probability distributions by changing their parameters and reading the summary values from the graph.</p>
+
+    <div class="workspace">
+        <section class="panel">
+            <div class="control-group">
+                <label for="distribution">Distribution</label>
+                <select id="distribution">
+                    <option value="normal">Normal</option>
+                    <option value="binomial">Binomial</option>
+                    <option value="poisson">Poisson</option>
+                </select>
+            </div>
+
+            <div id="normalControls">
+                <div class="grid-2">
+                    <div class="control-group">
+                        <label for="mean">Mean</label>
+                        <input id="mean" type="number" value="0" step="0.1">
+                    </div>
+                    <div class="control-group">
+                        <label for="sd">Std Dev</label>
+                        <input id="sd" type="number" value="1" min="0.1" step="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <div id="binomialControls" hidden>
+                <div class="grid-2">
+                    <div class="control-group">
+                        <label for="trials">Trials</label>
+                        <input id="trials" type="number" value="12" min="1" max="80" step="1">
+                    </div>
+                    <div class="control-group">
+                        <label for="probability">Probability</label>
+                        <input id="probability" type="number" value="0.5" min="0" max="1" step="0.01">
+                    </div>
+                </div>
+            </div>
+
+            <div id="poissonControls" hidden>
+                <div class="control-group">
+                    <label for="lambda">Lambda</label>
+                    <input id="lambda" type="number" value="4" min="0.1" step="0.1">
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button id="drawButton">Draw</button>
+                <button class="secondary" id="resetButton">Reset</button>
+            </div>
+
+            <p class="hint" id="hint"></p>
+        </section>
+
+        <section class="panel chart-wrap">
+            <canvas id="chart" width="900" height="420"></canvas>
+            <div class="stats">
+                <div class="stat">
+                    <span>Mean</span>
+                    <strong id="meanOut">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Variance</span>
+                    <strong id="varianceOut">1</strong>
+                </div>
+                <div class="stat">
+                    <span>Std Dev</span>
+                    <strong id="sdOut">1</strong>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script>
+const distributionSelect = document.getElementById("distribution");
+const normalControls = document.getElementById("normalControls");
+const binomialControls = document.getElementById("binomialControls");
+const poissonControls = document.getElementById("poissonControls");
+const chart = document.getElementById("chart");
+const ctx = chart.getContext("2d");
+
+function value(id) {
+    return Number(document.getElementById(id).value);
+}
+
+function factorial(n) {
+    let result = 1;
+    for (let i = 2; i <= n; i += 1) {
+        result *= i;
+    }
+    return result;
+}
+
+function combination(n, k) {
+    if (k < 0 || k > n) return 0;
+    const r = Math.min(k, n - k);
+    let result = 1;
+    for (let i = 1; i <= r; i += 1) {
+        result = result * (n - r + i) / i;
+    }
+    return result;
+}
+
+function normalPdf(x, mean, sd) {
+    const exponent = -0.5 * ((x - mean) / sd) ** 2;
+    return Math.exp(exponent) / (sd * Math.sqrt(2 * Math.PI));
+}
+
+function binomialPmf(k, n, p) {
+    return combination(n, k) * (p ** k) * ((1 - p) ** (n - k));
+}
+
+function poissonPmf(k, lambda) {
+    return Math.exp(-lambda) * (lambda ** k) / factorial(k);
+}
+
+function formatNumber(number) {
+    return Number.isFinite(number) ? Number(number.toFixed(4)).toString() : "0";
+}
+
+function setControls() {
+    const type = distributionSelect.value;
+    normalControls.hidden = type !== "normal";
+    binomialControls.hidden = type !== "binomial";
+    poissonControls.hidden = type !== "poisson";
+}
+
+function makeData() {
+    const type = distributionSelect.value;
+
+    if (type === "normal") {
+        const mean = value("mean");
+        const sd = Math.max(0.1, value("sd"));
+        const start = mean - 4 * sd;
+        const end = mean + 4 * sd;
+        const points = [];
+
+        for (let i = 0; i <= 100; i += 1) {
+            const x = start + (end - start) * i / 100;
+            points.push({ x, y: normalPdf(x, mean, sd) });
+        }
+
+        return {
+            type,
+            points,
+            mean,
+            variance: sd ** 2,
+            sd,
+            hint: "Normal distribution is continuous and symmetric around the mean."
+        };
+    }
+
+    if (type === "binomial") {
+        const n = Math.min(80, Math.max(1, Math.round(value("trials"))));
+        const p = Math.min(1, Math.max(0, value("probability")));
+        const points = [];
+
+        for (let k = 0; k <= n; k += 1) {
+            points.push({ x: k, y: binomialPmf(k, n, p) });
+        }
+
+        return {
+            type,
+            points,
+            mean: n * p,
+            variance: n * p * (1 - p),
+            sd: Math.sqrt(n * p * (1 - p)),
+            hint: "Binomial distribution models the number of successes in fixed independent trials."
+        };
+    }
+
+    const lambda = Math.max(0.1, value("lambda"));
+    const maxK = Math.max(12, Math.ceil(lambda + 5 * Math.sqrt(lambda)));
+    const points = [];
+
+    for (let k = 0; k <= maxK; k += 1) {
+        points.push({ x: k, y: poissonPmf(k, lambda) });
+    }
+
+    return {
+        type,
+        points,
+        mean: lambda,
+        variance: lambda,
+        sd: Math.sqrt(lambda),
+        hint: "Poisson distribution models counts of events happening at an average rate."
+    };
+}
+
+function drawAxes(left, top, width, height) {
+    ctx.strokeStyle = "#072E33";
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(left, top + height);
+    ctx.lineTo(left + width, top + height);
+    ctx.moveTo(left, top);
+    ctx.lineTo(left, top + height);
+    ctx.stroke();
+}
+
+function drawChart() {
+    const data = makeData();
+    const points = data.points;
+    const maxY = Math.max(...points.map(point => point.y)) * 1.12 || 1;
+    const left = 70;
+    const top = 36;
+    const width = chart.width - 120;
+    const height = chart.height - 92;
+
+    ctx.clearRect(0, 0, chart.width, chart.height);
+    drawAxes(left, top, width, height);
+
+    ctx.strokeStyle = "#d1fae5";
+    ctx.lineWidth = 2;
+    for (let i = 1; i <= 4; i += 1) {
+        const y = top + height * i / 5;
+        ctx.beginPath();
+        ctx.moveTo(left, y);
+        ctx.lineTo(left + width, y);
+        ctx.stroke();
+    }
+
+    if (data.type === "normal") {
+        ctx.strokeStyle = "#10b981";
+        ctx.lineWidth = 6;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+
+        points.forEach((point, index) => {
+            const x = left + width * index / (points.length - 1);
+            const y = top + height - point.y / maxY * height;
+            if (index === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+
+        ctx.stroke();
+    } else {
+        const barGap = 6;
+        const barWidth = Math.max(8, width / points.length - barGap);
+
+        points.forEach((point, index) => {
+            const x = left + width * index / points.length + barGap / 2;
+            const barHeight = point.y / maxY * height;
+            ctx.fillStyle = index % 2 === 0 ? "#10b981" : "#34d399";
+            ctx.beginPath();
+            ctx.roundRect(x, top + height - barHeight, barWidth, barHeight, 7);
+            ctx.fill();
+        });
+    }
+
+    ctx.fillStyle = "#065f46";
+    ctx.font = "16px Arial";
+    ctx.fillText(`Distribution: ${distributionSelect.options[distributionSelect.selectedIndex].text}`, left, chart.height - 22);
+
+    document.getElementById("meanOut").textContent = formatNumber(data.mean);
+    document.getElementById("varianceOut").textContent = formatNumber(data.variance);
+    document.getElementById("sdOut").textContent = formatNumber(data.sd);
+    document.getElementById("hint").textContent = data.hint;
+}
+
+function resetValues() {
+    document.getElementById("mean").value = 0;
+    document.getElementById("sd").value = 1;
+    document.getElementById("trials").value = 12;
+    document.getElementById("probability").value = 0.5;
+    document.getElementById("lambda").value = 4;
+    distributionSelect.value = "normal";
+    setControls();
+    drawChart();
+}
+
+distributionSelect.addEventListener("change", () => {
+    setControls();
+    drawChart();
+});
+
+document.getElementById("drawButton").addEventListener("click", drawChart);
+document.getElementById("resetButton").addEventListener("click", resetValues);
+document.querySelectorAll("input").forEach(input => input.addEventListener("input", drawChart));
+
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height / 2);
+        this.moveTo(x + r, y);
+        this.arcTo(x + width, y, x + width, y + height, r);
+        this.arcTo(x + width, y + height, x, y + height, r);
+        this.arcTo(x, y + height, x, y, r);
+        this.arcTo(x, y, x + width, y, r);
+        return this;
+    };
+}
+
+setControls();
+drawChart();
+</script>
+
+<script data-goatcounter="https://wangleyi.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
