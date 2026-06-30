@@ -1,15 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Probability distribution abstract preview">
   <rect width="640" height="400" rx="28" fill="#ffffff"/>
-  <g transform="translate(104 78)">
-    <path d="M38 250h432" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
-    <path d="M38 250V62" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
-    <path d="M78 246c62-2 88-48 116-104c30-58 70-84 118-84s88 26 118 84c28 56 54 102 116 104" fill="none" stroke="#10b981" stroke-width="14" stroke-linecap="round"/>
-    <rect x="112" y="202" width="24" height="48" rx="8" fill="#d1fae5"/>
-    <rect x="162" y="168" width="24" height="82" rx="8" fill="#6ee7b7"/>
-    <rect x="212" y="132" width="24" height="118" rx="8" fill="#34d399"/>
-    <rect x="262" y="106" width="24" height="144" rx="8" fill="#10b981"/>
-    <rect x="312" y="106" width="24" height="144" rx="8" fill="#059669"/>
-    <rect x="362" y="132" width="24" height="118" rx="8" fill="#10b981"/>
-    <rect x="412" y="168" width="24" height="82" rx="8" fill="#6ee7b7"/>
+  <g transform="translate(112 66)">
+    <path d="M38 244h416" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+    <path d="M38 244V70" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+    <path d="M92 240c58-2 86-42 116-96c30-54 66-78 106-78s76 24 106 78c30 54 58 94 116 96" fill="none" stroke="#10b981" stroke-width="12" stroke-linecap="round"/>
+    <rect x="134" y="196" width="24" height="48" rx="8" fill="#d1fae5"/>
+    <rect x="196" y="154" width="24" height="90" rx="8" fill="#6ee7b7"/>
+    <rect x="258" y="120" width="24" height="124" rx="8" fill="#10b981"/>
+    <rect x="320" y="120" width="24" height="124" rx="8" fill="#059669"/>
+    <rect x="382" y="154" width="24" height="90" rx="8" fill="#6ee7b7"/>
   </g>
 </svg>

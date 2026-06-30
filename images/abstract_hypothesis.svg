@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Hypothesis test abstract preview">
   <rect width="640" height="400" rx="28" fill="#ffffff"/>
-  <g transform="translate(100 78)">
-    <path d="M42 250h430" stroke="#072E33" stroke-width="10" stroke-linecap="round"/>
-    <path d="M78 246c54-2 80-44 110-100c30-56 68-82 112-82s82 26 112 82c30 56 56 98 110 100" fill="none" stroke="#10b981" stroke-width="14" stroke-linecap="round"/>
-    <path d="M92 242c24-8 44-28 62-58" fill="none" stroke="#dc2626" stroke-width="14" stroke-linecap="round"/>
-    <path d="M446 184c18 30 38 50 62 58" fill="none" stroke="#dc2626" stroke-width="14" stroke-linecap="round"/>
-    <path d="M300 66v182" stroke="#065f46" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 18"/>
-    <circle cx="382" cy="146" r="17" fill="#34d399"/>
-    <path d="M366 146h-68" stroke="#34d399" stroke-width="8" stroke-linecap="round"/>
+  <g transform="translate(108 66)">
+    <path d="M42 244h414" stroke="#072E33" stroke-width="9" stroke-linecap="round"/>
+    <path d="M82 240c52-2 78-40 106-92c30-54 64-78 102-78s72 24 102 78c28 52 54 90 106 92" fill="none" stroke="#10b981" stroke-width="12" stroke-linecap="round"/>
+    <path d="M96 236c22-8 40-26 56-52" fill="none" stroke="#dc2626" stroke-width="12" stroke-linecap="round"/>
+    <path d="M428 184c16 26 34 44 56 52" fill="none" stroke="#dc2626" stroke-width="12" stroke-linecap="round"/>
+    <path d="M290 84v156" stroke="#065f46" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 16"/>
+    <circle cx="364" cy="146" r="14" fill="#34d399"/>
+    <path d="M350 146h-54" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
   </g>
 </svg>
