@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Wave interference abstract preview">
+  <rect width="640" height="400" rx="28" fill="#ffffff"/>
+  <g transform="translate(92 74)" fill="none" stroke-linecap="round">
+    <circle cx="118" cy="132" r="14" fill="#10b981" stroke="#065f46" stroke-width="7"/>
+    <circle cx="338" cy="132" r="14" fill="#34d399" stroke="#065f46" stroke-width="7"/>
+    <path d="M76 132c22-46 62-46 84 0s62 46 84 0s62-46 84 0s62 46 84 0" stroke="#10b981" stroke-width="11"/>
+    <path d="M76 206c22 46 62 46 84 0s62-46 84 0s62 46 84 0s62-46 84 0" stroke="#065f46" stroke-width="10"/>
+    <path d="M98 268h320" stroke="#072E33" stroke-width="10"/>
+    <path d="M144 252l-32 16l32 16M372 252l32 16l-32 16" stroke="#10b981" stroke-width="9" stroke-linejoin="round"/>
+  </g>
+</svg>
