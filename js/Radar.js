@@ -1,104 +1,99 @@
 const canvas = document.getElementById("radar");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 500;
-canvas.height = 500;
+const points = [];
+let scanAngle = 0;
+let tick = 0;
 
-const center = canvas.width / 2;
-const radius = 220;
+function addDemoPoint() {
+    scanAngle = (scanAngle + 2) % 360;
+    tick += 1;
 
-let angle = 0;
-const speed = 0.02;
+    const inActiveZone =
+        (scanAngle > 24 && scanAngle < 82) ||
+        (scanAngle > 218 && scanAngle < 258);
+    const pulse = Math.sin(tick / 11) > -0.35;
 
+    points.push({
+        angle: scanAngle,
+        presence: inActiveZone && pulse ? 1 : 0
+    });
 
-let target = {
-    angle: Math.random() * Math.PI * 2,
-    dist: Math.random() * radius,
-
-
-    vAngle: (Math.random() - 0.5) * 0.02,
-    vDist: (Math.random() - 0.5) * 0.5,
-
-    life: 0,
-    nextMoveTime: Date.now() + 2000
-};
-
-function update() {
-    let now = Date.now();
-
-
-    angle += speed;
-    angle %= Math.PI * 2;
-
-
-    target.angle += target.vAngle;
-    target.dist += target.vDist;
-
-
-    if (target.dist < 30 || target.dist > radius) {
-        target.vDist *= -1;
-    }
-
-
-    if (now > target.nextMoveTime) {
-        target.vAngle += (Math.random() - 0.5) * 0.02;
-        target.vDist += (Math.random() - 0.5) * 0.3;
-
-        target.nextMoveTime = now + 2000 + Math.random() * 2000;
-    }
-
-
-    let diff = Math.abs(angle - target.angle);
-    diff = Math.min(diff, Math.PI * 2 - diff);
-
-    if (diff < 0.03) {
-        target.life = 20;
-    }
-
-    if (target.life > 0) {
-        target.life--;
+    if (points.length > 140) {
+        points.shift();
     }
 }
 
-function draw() {
+function drawRadar(data) {
+    const w = canvas.width;
+    const h = canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+    const radius = Math.min(w, h) * 0.42;
+    const activePoints = data.filter(point => point.presence > 0);
 
-    ctx.fillStyle = "rgba(0, 20, 0, 0.25)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#061f22";
+    ctx.fillRect(0, 0, w, h);
 
-    ctx.strokeStyle = "rgba(0,255,0,0.4)";
-    ctx.beginPath();
-    ctx.arc(center, center, radius, 0, Math.PI * 2);
-    ctx.stroke();
+    for (let i = 0; i < activePoints.length; i++) {
+        const point = activePoints[i];
+        const rad = point.angle * Math.PI / 180;
+        const spread = Math.PI / 50;
+        const alpha = 0.04 + 0.24 * ((i + 1) / activePoints.length);
 
-
-    let x = center + radius * Math.cos(angle);
-    let y = center + radius * Math.sin(angle);
-
-    ctx.strokeStyle = "lime";
-    ctx.beginPath();
-    ctx.moveTo(center, center);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-
-
-    let tx = center + target.dist * Math.cos(target.angle);
-    let ty = center + target.dist * Math.sin(target.angle);
-
-    if (target.life > 0) {
-        ctx.fillStyle = "lime"; // 高亮
-    } else {
-        ctx.fillStyle = "rgba(0,255,0,0.3)";
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, -rad - spread, -rad + spread, false);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(16, 185, 129, " + alpha + ")";
+        ctx.fill();
     }
 
-    ctx.beginPath();
-    ctx.arc(tx, ty, 5, 0, Math.PI * 2);
-    ctx.fill();
-}
+    ctx.strokeStyle = "rgba(16, 185, 129, 0.28)";
+    ctx.lineWidth = 2;
+    for (let i = 1; i <= 4; i++) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius * i / 4, 0, Math.PI * 2);
+        ctx.stroke();
+    }
 
+    for (let deg = 0; deg < 360; deg += 30) {
+        const rad = deg * Math.PI / 180;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(rad) * radius, cy - Math.sin(rad) * radius);
+        ctx.stroke();
+    }
+
+    const latest = data[data.length - 1];
+    if (latest) {
+        const rad = latest.angle * Math.PI / 180;
+        ctx.strokeStyle = latest.presence ? "rgba(52, 211, 153, 0.95)" : "rgba(255, 255, 255, 0.34)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(rad) * radius, cy - Math.sin(rad) * radius);
+        ctx.stroke();
+    }
+
+    ctx.fillStyle = "#d1fae5";
+    ctx.font = "18px Inter, Arial";
+    ctx.fillText("0 deg", cx + radius - 54, cy - 10);
+    ctx.fillText("90 deg", cx + 10, cy - radius + 22);
+    ctx.fillText("180 deg", cx - radius + 10, cy - 10);
+    ctx.fillText("270 deg", cx + 10, cy + radius - 10);
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "rgba(209, 250, 229, 0.75)";
+    ctx.font = "19px Inter, Arial";
+    ctx.fillText("Presence direction demo", cx, cy + radius + 36);
+    ctx.textAlign = "start";
+}
 
 function loop() {
-    update();
-    draw();
+    addDemoPoint();
+    drawRadar(points);
     requestAnimationFrame(loop);
 }
 
