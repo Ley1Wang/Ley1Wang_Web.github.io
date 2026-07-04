@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electric Field Visualizer</title>
+<link rel="icon" href="../assets/physics.ico">
+<style>
+:root {
+    --bg: #f3fdf8;
+    --panel: #ffffff;
+    --primary: #065f46;
+    --accent: #10b981;
+    --ink: #072E33;
+    --text: #1f2937;
+    --subtext: #64748b;
+    --line: #d1fae5;
+    --red: #dc2626;
+    --blue: #2563eb;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+.topbar {
+    height: 60px;
+    padding: 0 20px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.topbar .title, .topbar a { color: #fff; }
+.topbar a { opacity: .86; text-decoration: none; }
+.container {
+    max-width: 1180px;
+    margin: 42px auto 56px;
+    padding: 0 28px;
+}
+h1 {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 34px;
+}
+.intro {
+    max-width: 780px;
+    margin: 0 0 26px;
+    color: var(--subtext);
+    line-height: 1.65;
+}
+.workspace {
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(7, 46, 51, .08);
+}
+.controls { padding: 22px; }
+h2 {
+    margin: 0 0 14px;
+    color: var(--primary);
+    font-size: 20px;
+}
+.control-group {
+    margin: 18px 0;
+}
+label {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    color: var(--subtext);
+    font-size: 14px;
+}
+input[type="range"] { width: 100%; }
+.button-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+}
+button {
+    border: 0;
+    border-radius: 7px;
+    min-height: 40px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+button.secondary {
+    background: #e9fbf3;
+    color: var(--primary);
+    border: 1px solid #b8efd6;
+}
+.canvas-panel { padding: 18px; }
+canvas {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    display: block;
+    border-radius: 10px;
+    background: #fbfffd;
+    border: 1px solid var(--line);
+    cursor: grab;
+}
+canvas:active { cursor: grabbing; }
+.readout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+}
+.metric {
+    padding: 12px;
+    border: 1px solid #e5f6ee;
+    border-radius: 8px;
+    background: #fbfffd;
+}
+.metric strong {
+    display: block;
+    color: var(--primary);
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+.metric span { color: var(--subtext); font-size: 13px; }
+.note {
+    color: var(--subtext);
+    line-height: 1.58;
+    font-size: 14px;
+}
+.charge-list {
+    margin-top: 16px;
+    display: grid;
+    gap: 10px;
+}
+.charge-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #e5f6ee;
+    border-radius: 8px;
+    background: #fbfffd;
+    color: var(--subtext);
+}
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: -2px;
+}
+.dot.pos { background: var(--red); }
+.dot.neg { background: var(--blue); }
+@media (max-width: 820px) {
+    .workspace { grid-template-columns: 1fr; }
+    .readout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+    <div class="title">Electric Field Visualizer</div>
+    <a href="https://wangleyi.top/pages/physics">Back to Physics</a>
+</div>
+
+<main class="container">
+    <h1>Electric Field Visualizer</h1>
+    <p class="intro">
+        Drag positive and negative charges to see how electric field vectors combine through superposition.
+        The arrows show the local direction of the field, while the background tint gives a simple potential map.
+    </p>
+
+    <section class="workspace">
+        <aside class="panel controls">
+            <h2>Controls</h2>
+            <p class="note">Move charges directly on the canvas. Add a positive or negative charge, then adjust the grid density and field strength.</p>
+
+            <div class="control-group">
+                <label><span>Field scale</span><strong id="scaleValue">1.0</strong></label>
+                <input id="scale" type="range" min="0.4" max="2.2" value="1" step="0.1">
+            </div>
+
+            <div class="control-group">
+                <label><span>Vector density</span><strong id="densityValue">34</strong></label>
+                <input id="density" type="range" min="24" max="54" value="34" step="2">
+            </div>
+
+            <div class="button-row">
+                <button id="addPositive">+ Charge</button>
+                <button id="addNegative" class="secondary">- Charge</button>
+                <button id="reset" class="secondary">Reset</button>
+                <button id="clear">Clear</button>
+            </div>
+
+            <div class="charge-list" id="chargeList"></div>
+        </aside>
+
+        <section class="panel canvas-panel">
+            <canvas id="fieldCanvas" width="920" height="575"></canvas>
+            <div class="readout">
+                <div class="metric"><strong id="chargeCount">3</strong><span>charges</span></div>
+                <div class="metric"><strong id="sampleField">0.00</strong><span>field at center</span></div>
+                <div class="metric"><strong id="samplePotential">0.00</strong><span>potential at center</span></div>
+            </div>
+        </section>
+    </section>
+</main>
+
+<script>
+const canvas = document.getElementById("fieldCanvas");
+const ctx = canvas.getContext("2d");
+const scaleSlider = document.getElementById("scale");
+const densitySlider = document.getElementById("density");
+const scaleValue = document.getElementById("scaleValue");
+const densityValue = document.getElementById("densityValue");
+const chargeList = document.getElementById("chargeList");
+const chargeCount = document.getElementById("chargeCount");
+const sampleField = document.getElementById("sampleField");
+const samplePotential = document.getElementById("samplePotential");
+
+let charges = [];
+let dragging = null;
+
+function resetCharges() {
+    charges = [
+        { x: 320, y: 280, q: 1 },
+        { x: 590, y: 280, q: -1 },
+        { x: 455, y: 190, q: 1 }
+    ];
+}
+
+function fieldAt(x, y) {
+    let ex = 0;
+    let ey = 0;
+    let potential = 0;
+    for (const charge of charges) {
+        const dx = x - charge.x;
+        const dy = y - charge.y;
+        const r2 = dx * dx + dy * dy + 900;
+        const r = Math.sqrt(r2);
+        const strength = charge.q / r2;
+        ex += strength * dx / r;
+        ey += strength * dy / r;
+        potential += charge.q / r;
+    }
+    return { ex, ey, potential };
+}
+
+function drawBackground() {
+    const cell = 18;
+    for (let y = 0; y < canvas.height; y += cell) {
+        for (let x = 0; x < canvas.width; x += cell) {
+            const sample = fieldAt(x + cell / 2, y + cell / 2);
+            const v = Math.max(-0.018, Math.min(0.018, sample.potential));
+            const intensity = Math.abs(v) / 0.018;
+            if (v >= 0) {
+                ctx.fillStyle = "rgba(220, 38, 38, " + (0.04 + intensity * 0.16) + ")";
+            } else {
+                ctx.fillStyle = "rgba(37, 99, 235, " + (0.04 + intensity * 0.16) + ")";
+            }
+            ctx.fillRect(x, y, cell, cell);
+        }
+    }
+}
+
+function drawVectors() {
+    const step = Number(densitySlider.value);
+    const scale = Number(scaleSlider.value);
+    for (let y = step / 2; y < canvas.height; y += step) {
+        for (let x = step / 2; x < canvas.width; x += step) {
+            const f = fieldAt(x, y);
+            const mag = Math.sqrt(f.ex * f.ex + f.ey * f.ey);
+            if (mag < 0.000003) continue;
+
+            const angle = Math.atan2(f.ey, f.ex);
+            const len = Math.min(18, 280000 * mag * scale);
+            const x2 = x + Math.cos(angle) * len;
+            const y2 = y + Math.sin(angle) * len;
+
+            ctx.strokeStyle = "rgba(6, 95, 70, 0.72)";
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - Math.cos(angle - 0.55) * 5, y2 - Math.sin(angle - 0.55) * 5);
+            ctx.moveTo(x2, y2);
+            ctx.lineTo(x2 - Math.cos(angle + 0.55) * 5, y2 - Math.sin(angle + 0.55) * 5);
+            ctx.stroke();
+        }
+    }
+}
+
+function drawCharges() {
+    for (const charge of charges) {
+        ctx.beginPath();
+        ctx.arc(charge.x, charge.y, 18, 0, Math.PI * 2);
+        ctx.fillStyle = charge.q > 0 ? "#dc2626" : "#2563eb";
+        ctx.fill();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "rgba(255,255,255,.9)";
+        ctx.stroke();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "700 22px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(charge.q > 0 ? "+" : "-", charge.x, charge.y - 1);
+    }
+    ctx.textAlign = "start";
+    ctx.textBaseline = "alphabetic";
+}
+
+function updateReadout() {
+    scaleValue.textContent = Number(scaleSlider.value).toFixed(1);
+    densityValue.textContent = densitySlider.value;
+    chargeCount.textContent = charges.length;
+
+    const center = fieldAt(canvas.width / 2, canvas.height / 2);
+    const mag = Math.sqrt(center.ex * center.ex + center.ey * center.ey);
+    sampleField.textContent = (mag * 100000).toFixed(2);
+    samplePotential.textContent = (center.potential * 100).toFixed(2);
+
+    chargeList.innerHTML = charges.map((charge, index) => {
+        const kind = charge.q > 0 ? "pos" : "neg";
+        const label = charge.q > 0 ? "Positive" : "Negative";
+        return `<div class="charge-item"><span><i class="dot ${kind}"></i>${label} ${index + 1}</span><span>(${Math.round(charge.x)}, ${Math.round(charge.y)})</span></div>`;
+    }).join("");
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#fbfffd";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drawBackground();
+    drawVectors();
+    drawCharges();
+    updateReadout();
+}
+
+function pointerPosition(event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: (event.clientX - rect.left) * canvas.width / rect.width,
+        y: (event.clientY - rect.top) * canvas.height / rect.height
+    };
+}
+
+canvas.addEventListener("pointerdown", event => {
+    const pos = pointerPosition(event);
+    dragging = charges.find(charge => Math.hypot(charge.x - pos.x, charge.y - pos.y) < 24) || null;
+});
+
+canvas.addEventListener("pointermove", event => {
+    if (!dragging) return;
+    const pos = pointerPosition(event);
+    dragging.x = Math.max(24, Math.min(canvas.width - 24, pos.x));
+    dragging.y = Math.max(24, Math.min(canvas.height - 24, pos.y));
+    draw();
+});
+
+window.addEventListener("pointerup", () => { dragging = null; });
+scaleSlider.addEventListener("input", draw);
+densitySlider.addEventListener("input", draw);
+document.getElementById("addPositive").addEventListener("click", () => {
+    charges.push({ x: 260 + Math.random() * 360, y: 180 + Math.random() * 220, q: 1 });
+    draw();
+});
+document.getElementById("addNegative").addEventListener("click", () => {
+    charges.push({ x: 260 + Math.random() * 360, y: 180 + Math.random() * 220, q: -1 });
+    draw();
+});
+document.getElementById("reset").addEventListener("click", () => { resetCharges(); draw(); });
+document.getElementById("clear").addEventListener("click", () => { charges = []; draw(); });
+
+resetCharges();
+draw();
+</script>
+<script data-goatcounter="https://wangleyi.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
