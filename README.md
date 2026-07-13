@@ -1,2 +1,9 @@
-This Github program is where I build up my personal website and post updates with my undergrad projects.
-There are several online and real-world physics experiment inside this project, and I hope this open-source proeject can help highschool and bachelor degree students who are thrilled on learning physics.
+# Leyi Wang Portfolio Site
+
+This repository contains my personal website at wangleyi.top. It includes interactive physics simulations, statistics tools, computer science projects, and a radar visualization project.
+
+Main sections:
+- Physics visualizations
+- Statistics calculators and dashboards
+- Computer science projects
+- Radar hardware/software project

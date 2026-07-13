@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-<div class="topbar"><span>Bootstrap Sampling Simulator</span><a href="https://wangleyi.top/pages/stat">Back</a></div>
+<div class="topbar"><span>Bootstrap Sampling Simulator</span><a href="stat.html">Back</a></div>
 <main class="wrap"><h1>Bootstrap Sampling Simulator</h1><p>Generate a bootstrap distribution for a sample mean and see how the confidence interval changes with resampling.</p><section class="grid"><aside class="panel"><h2>Controls</h2><label><span>Sample data</span></label><textarea id="data" rows="5">12, 14, 15, 19, 21, 22, 24, 27, 28, 31</textarea><label><span>Resamples</span><strong id="nText">600</strong></label><input id="n" type="range" min="100" max="2000" step="100" value="600"><div class="buttons"><button id="run">Run Bootstrap</button></div><div class="metric"><div><strong id="mean">0</strong><span>sample mean</span></div><div><strong id="low">0</strong><span>2.5%</span></div><div><strong id="high">0</strong><span>97.5%</span></div></div></aside><section class="panel"><canvas id="canvas" width="900" height="560"></canvas></section></section></main>
 <script>
 const c=document.getElementById('canvas'),ctx=c.getContext('2d');function nums(){return data.value.split(/[,
