@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flask Frontend Demo</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3fdf8;
+    color: #1f2937;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+}
+
+.panel {
+    width: min(520px, 100%);
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    margin: 0 0 24px;
+    color: #065f46;
+}
+
+label {
+    display: block;
+    margin-top: 16px;
+    color: #065f46;
+    font-weight: 700;
+}
+
+input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 11px 12px;
+    border: 1px solid #d1fae5;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 14px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: #10b981;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.result {
+    margin-top: 24px;
+    padding: 16px;
+    border: 1px solid #d1fae5;
+    border-radius: 10px;
+    background: #fbfffd;
+}
+
+.result span {
+    display: block;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.result strong {
+    display: block;
+    margin-top: 6px;
+    color: #065f46;
+    line-height: 1.5;
+}
+</style>
+</head>
+<body>
+<main class="page">
+    <section class="panel">
+        <h1>Flask Frontend Demo</h1>
+
+        <label>
+            第一个输入框 GET 参数
+            <input id="input1" placeholder="例如 hello">
+        </label>
+
+        <button id="getButton">发送 GET 请求</button>
+
+        <label>
+            第二个输入框 POST body
+            <input id="input2" placeholder="例如 body-value">
+        </label>
+
+        <label>
+            第三个输入框 POST param
+            <input id="input3" placeholder="例如 param-value">
+        </label>
+
+        <button id="postButton">发送 POST 请求</button>
+
+        <div class="result">
+            <span>后端返回</span>
+            <strong id="result">等待请求...</strong>
+        </div>
+    </section>
+</main>
+
+<script>
+const input1 = document.getElementById("input1");
+const input2 = document.getElementById("input2");
+const input3 = document.getElementById("input3");
+const result = document.getElementById("result");
+const getButton = document.getElementById("getButton");
+const postButton = document.getElementById("postButton");
+
+async function sendGetRequest() {
+    setLoading(true);
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/get?value=" + encodeURIComponent(input1.value)
+        );
+        result.textContent = await response.text();
+    } catch (error) {
+        result.textContent = "请求失败，请先启动 Flask 后端。";
+    } finally {
+        setLoading(false);
+    }
+}
+
+async function sendPostRequest() {
+    setLoading(true);
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:5000/api/post?param=" + encodeURIComponent(input3.value),
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    body: input2.value
+                })
+            }
+        );
+        result.textContent = await response.text();
+    } catch (error) {
+        result.textContent = "请求失败，请先启动 Flask 后端。";
+    } finally {
+        setLoading(false);
+    }
+}
+
+function setLoading(isLoading) {
+    getButton.disabled = isLoading;
+    postButton.disabled = isLoading;
+}
+
+getButton.addEventListener("click", sendGetRequest);
+postButton.addEventListener("click", sendPostRequest);
+</script>
+</body>
+</html>

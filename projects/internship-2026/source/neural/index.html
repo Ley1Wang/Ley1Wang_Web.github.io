@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写数字识别</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    canvas {
+      display: block;
+      margin: 20px auto;
+      background: #000;
+      border: 2px solid #555;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      min-height: 32px;
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1>手写数字识别</h1>
+  <p>请在黑色画板中写一个 0～9 的数字</p>
+
+  <canvas id="canvas" width="280" height="280"></canvas>
+
+  <button id="clearButton" type="button">清空</button>
+  <button id="predictButton" type="button">识别</button>
+
+  <div id="result">识别结果：--</div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+    const result = document.getElementById("result");
+    let drawing = false;
+
+    function clearCanvas() {
+      context.fillStyle = "black";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      result.textContent = "识别结果：--";
+    }
+
+    function getPosition(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) * canvas.width / rect.width,
+        y: (event.clientY - rect.top) * canvas.height / rect.height
+      };
+    }
+
+    canvas.addEventListener("pointerdown", (event) => {
+      drawing = true;
+      const position = getPosition(event);
+      context.beginPath();
+      context.moveTo(position.x, position.y);
+      canvas.setPointerCapture(event.pointerId);
+    });
+
+    canvas.addEventListener("pointermove", (event) => {
+      if (!drawing) return;
+
+      const position = getPosition(event);
+      context.strokeStyle = "white";
+      context.lineWidth = 20;
+      context.lineCap = "round";
+      context.lineJoin = "round";
+      context.lineTo(position.x, position.y);
+      context.stroke();
+    });
+
+    function stopDrawing() {
+      drawing = false;
+      context.closePath();
+    }
+
+    canvas.addEventListener("pointerup", stopDrawing);
+    canvas.addEventListener("pointercancel", stopDrawing);
+
+    document.getElementById("clearButton").addEventListener("click", clearCanvas);
+
+    document.getElementById("predictButton").addEventListener("click", async () => {
+      result.textContent = "正在识别……";
+
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: canvas.toDataURL("image/png") })
+        });
+
+        if (!response.ok) throw new Error("请求失败");
+
+        const data = await response.json();
+        result.textContent = `识别结果：${data.prediction}`;
+      } catch (error) {
+        result.textContent = "识别服务尚未启动";
+      }
+    });
+
+    clearCanvas();
+  </script>
+</body>
+</html>
