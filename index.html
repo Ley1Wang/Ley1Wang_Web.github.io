@@ -28,32 +28,31 @@ body {
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: none; }
 .topbar {
-    height: 64px;
+    min-height: 68px;
     background: var(--dark);
     color: white;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 28px;
+    padding: 0 clamp(20px, 4vw, 64px);
     position: sticky;
     top: 0;
     z-index: 10;
 }
 .name { font-size: 19px; font-weight: 700; }
-.nav { display: flex; align-items: center; gap: 18px; }
+.nav { display: flex; align-items: center; gap: 22px; margin-left: auto; }
 .nav a { color: white; opacity: 0.86; font-size: 14px; }
 .nav a:hover { opacity: 1; }
-.socials { display: flex; align-items: center; gap: 8px; }
+.socials { display: flex; align-items: center; gap: 10px; margin-left: 28px; }
 .socials a {
-    width: 34px;
-    height: 34px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .socials a:hover { background: rgba(255,255,255,0.12); }
-.socials img { max-width: 24px; max-height: 24px; opacity: 0.88; }
+.socials img { width: 30px; height: 30px; object-fit: contain; opacity: 0.92; }
 .container {
     max-width: 1120px;
     margin: 0 auto;
@@ -101,16 +100,46 @@ h1 {
     position: relative;
     background: white;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 14px;
     box-shadow: 0 18px 42px rgba(0,0,0,0.12);
     overflow: hidden;
 }
 .gallery img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: top center;
     display: block;
-    background: white;
+    background: #eef4f1;
+    transition: opacity .2s ease;
+}
+.gallery-chrome {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 34px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 13px;
+    background: rgba(255,255,255,.94);
+    border-bottom: 1px solid rgba(209,213,219,.75);
+    backdrop-filter: blur(8px);
+}
+.gallery-chrome i { width: 7px; height: 7px; border-radius: 50%; background: #cbd5d1; }
+.gallery-caption {
+    position: absolute;
+    z-index: 2;
+    left: 16px;
+    bottom: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(7,46,51,.88);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .01em;
+    backdrop-filter: blur(7px);
 }
 .gallery button {
     position: absolute;
@@ -189,6 +218,9 @@ h2 {
 }
 @media (max-width: 560px) {
     .topbar { padding: 0 16px; }
+    .socials { margin-left: auto; gap: 6px; }
+    .socials a { width: 38px; height: 38px; }
+    .socials img { width: 27px; height: 27px; }
     .container { padding: 34px 18px 56px; }
     h1 { font-size: 34px; }
     .project-grid,
@@ -224,8 +256,10 @@ h2 {
             </div>
         </div>
         <div class="gallery" aria-label="Featured project gallery">
+            <div class="gallery-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
             <button onclick="prev()" aria-label="Previous slide">&larr;</button>
-            <img id="slide" src="images/abstract_kirchhoff.svg" alt="Featured project preview">
+            <img id="slide" src="images/Kirchoff_Example.png" alt="Kirchhoff circuit simulator interface">
+            <span class="gallery-caption" id="slide-caption">Kirchhoff Circuit Simulator</span>
             <button onclick="next()" aria-label="Next slide">&rarr;</button>
         </div>
     </section>
@@ -270,20 +304,29 @@ h2 {
 <script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 history.scrollRestoration = "manual";
-const images = [
-    "images/abstract_kirchhoff.svg",
-    "images/abstract_electric_field.svg",
-    "images/abstract_distribution.svg",
-    "images/abstract_sorting.svg",
-    "images/abstract_api_dashboard.svg",
-    "images/abstract_lens.svg"
+const projects = [
+    { src: "images/Kirchoff_Example.png", label: "Kirchhoff Circuit Simulator", alt: "Kirchhoff circuit simulator interface" },
+    { src: "images/Lenz_Example.jpg", label: "Lenz Effect Experiment", alt: "Lenz effect experiment interface" },
+    { src: "images/Freefalling_Example.jpg", label: "Planetary Freefall Lab", alt: "Freefall simulator interface" },
+    { src: "images/Plot_Example.jpg", label: "Experimental Data Plotter", alt: "Experimental plot interface" },
+    { src: "images/radar_photo2.jpg", label: "Radar Hardware Prototype", alt: "Radar hardware project" }
 ];
 let index = 0;
 let timer = setInterval(next, 3200);
 const slide = document.getElementById("slide");
-function show() { slide.src = images[index]; }
-function next() { index = (index + 1) % images.length; show(); }
-function prev() { index = (index - 1 + images.length) % images.length; show(); }
+const slideCaption = document.getElementById("slide-caption");
+function show() {
+    const project = projects[index];
+    slide.style.opacity = 0;
+    setTimeout(() => {
+        slide.src = project.src;
+        slide.alt = project.alt;
+        slideCaption.textContent = project.label;
+        slide.style.opacity = 1;
+    }, 140);
+}
+function next() { index = (index + 1) % projects.length; show(); }
+function prev() { index = (index - 1 + projects.length) % projects.length; show(); }
 slide.addEventListener("mouseenter", () => clearInterval(timer));
 slide.addEventListener("mouseleave", () => timer = setInterval(next, 3200));
 </script>
