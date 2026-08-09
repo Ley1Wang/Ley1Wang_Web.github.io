@@ -113,23 +113,17 @@ h1 {
     width: 100%;
     aspect-ratio: 16 / 10;
     margin-top: 16px;
-    padding: 18px;
+    padding: 28px 0 0;
     box-sizing: border-box;
     border: 1px solid #d1fae5;
     border-radius: 10px;
     background: #fbfffd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
     overflow: hidden;
 }
 
-.preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-}
+.preview::before { content:""; position:absolute; z-index:2; top:10px; left:13px; width:6px; height:6px; border-radius:50%; background:#b7c8c1; box-shadow:11px 0 #c8d6d0,22px 0 #d7e2dd; }
+.preview iframe { width:200%; height:200%; border:0; transform:scale(.5); transform-origin:top left; pointer-events:none; background:white; }
 
 .button {
     display: inline-block;
@@ -167,21 +161,21 @@ h1 {
         <div class="card">
             <h3>Central Limit Theorem Simulator</h3>
             <p>Sample from uniform, skewed, or Bernoulli populations and watch the sampling distribution of the mean emerge.</p>
-            <div class="visual">x̄ → N</div>
+            <div class="preview"><iframe src="central-limit-theorem.html" title="Central limit theorem interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="central-limit-theorem.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Mean Confidence Interval</h3>
             <p>Calculate and visualize 90%, 95%, or 99% confidence intervals from sample summary statistics.</p>
-            <div class="visual">[ μ̂ ± ME ]</div>
+            <div class="preview"><iframe src="confidence-interval.html" title="Confidence interval interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="confidence-interval.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Chi-square Independence Test</h3>
             <p>Analyze a 2×2 contingency table, inspect expected counts, and interpret the chi-square p-value.</p>
-            <div class="visual">χ²</div>
+            <div class="preview"><iframe src="chi-square-test.html" title="Chi-square test interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="chi-square-test.html" class="button">Open &rarr;</a>
         </div>
 
@@ -189,7 +183,7 @@ h1 {
             <h3>Scatter Plot & Linear Regression</h3>
             <p>Add data points, draw a scatter plot, and fit a linear regression line.</p>
             <div class="preview">
-                <img src="../images/abstract_plot.svg" alt="Scatter plot and linear regression preview">
+                <iframe src="Plot.html" title="Scatter plot interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="Plot.html" class="button">Open &rarr;</a>
         </div>
@@ -198,7 +192,7 @@ h1 {
             <h3>Descriptive Statistics Calculator</h3>
             <p>Enter a data set and instantly calculate mean, median, mode, variance, standard deviation, quartiles, histogram, and box plot.</p>
             <div class="preview">
-                <img src="../images/stat_calculator_logo.svg" alt="Descriptive statistics calculator preview">
+                <iframe src="descriptive-statistics.html" title="Descriptive statistics interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="descriptive-statistics.html" class="button">Open &rarr;</a>
         </div>
@@ -207,7 +201,7 @@ h1 {
             <h3>Probability Distribution Explorer</h3>
             <p>Switch between normal, binomial, and Poisson distributions, then compare their shape and summary values.</p>
             <div class="preview">
-                <img src="../images/abstract_distribution.svg" alt="Probability distribution preview">
+                <iframe src="probability-distribution.html" title="Probability distribution interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="probability-distribution.html" class="button">Open &rarr;</a>
         </div>
@@ -216,7 +210,7 @@ h1 {
             <h3>Hypothesis Test Simulator</h3>
             <p>Run a one-sample z-test or t-test, visualize the rejection region, and compare the p-value with alpha.</p>
             <div class="preview">
-                <img src="../images/abstract_hypothesis.svg" alt="Hypothesis test preview">
+                <iframe src="hypothesis-test.html" title="Hypothesis test interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="hypothesis-test.html" class="button">Open &rarr;</a>
         </div>
@@ -225,7 +219,7 @@ h1 {
             <h3>Data Dashboard</h3>
             <p>View summary cards, trend charts, and compact data tables in a dashboard layout.</p>
             <div class="preview">
-                <img src="../images/abstract_dashboard.svg" alt="Data dashboard preview">
+                <iframe src="data-dashboard.html" title="Data dashboard interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="data-dashboard.html" class="button">Open &rarr;</a>
         </div>
@@ -234,7 +228,7 @@ h1 {
             <h3>Bootstrap Sampling Simulator</h3>
             <p>Resample a data set and visualize a bootstrap distribution with a confidence interval.</p>
             <div class="preview">
-                <img src="../images/abstract_bootstrap.svg" alt="Bootstrap simulator preview">
+                <iframe src="bootstrap-simulator.html" title="Bootstrap simulator interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="bootstrap-simulator.html" class="button">Open &rarr;</a>
         </div>
@@ -243,7 +237,7 @@ h1 {
             <h3>Bayes Rule Diagnostic Calculator</h3>
             <p>Adjust prevalence, sensitivity, and specificity to see how diagnostic test results change.</p>
             <div class="preview">
-                <img src="../images/abstract_bayes.svg" alt="Bayes calculator preview">
+                <iframe src="bayes-diagnostic.html" title="Bayes calculator interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="bayes-diagnostic.html" class="button">Open &rarr;</a>
         </div>    </div>

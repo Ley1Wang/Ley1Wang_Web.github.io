@@ -95,23 +95,17 @@ h1 {
     width: 100%;
     aspect-ratio: 16 / 10;
     margin-top: 16px;
-    padding: 18px;
+    padding: 28px 0 0;
     box-sizing: border-box;
     border: 1px solid #d1fae5;
     border-radius: 10px;
     background: #fbfffd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
     overflow: hidden;
 }
 
-.visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-}
+.visual::before { content:""; position:absolute; z-index:2; top:10px; left:13px; width:6px; height:6px; border-radius:50%; background:#b7c8c1; box-shadow:11px 0 #c8d6d0,22px 0 #d7e2dd; }
+.visual iframe { width:200%; height:200%; border:0; transform:scale(.5); transform-origin:top left; pointer-events:none; background:white; }
 
 .button {
     display: inline-block;
@@ -149,42 +143,42 @@ h1 {
         <div class="card">
             <h3>Handwritten Digit Recognition</h3>
             <p>A locally trained PyTorch CNN with canvas input, MNIST preprocessing, Flask inference, confidence scores, and class probabilities.</p>
-            <div class="visual" style="background:#072e33;color:white;flex-direction:column"><strong style="font-size:64px">0–9</strong><span>CNN · MNIST · PyTorch</span></div>
+            <div class="visual"><iframe src="neural-digit.html" title="Digit recognition interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="neural-digit.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Movie Crawler Dashboard</h3>
             <p>A React, Flask, SQLite, and ECharts dashboard for crawler runs, deduplication, persisted records, and summaries.</p>
-            <div class="visual" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);color:#065f46;flex-direction:column"><strong style="font-size:34px">React + Flask</strong><span>Full-stack data dashboard</span></div>
+            <div class="visual"><iframe src="movie-dashboard.html" title="Movie dashboard interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="movie-dashboard.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Douban Movie Dataset</h3>
             <p>A Python crawler and cleaned Top 100 dataset with ranks, years, ratings, categories, and source links.</p>
-            <div class="visual" style="font-size:54px;color:#065f46">★ 9.7</div>
+            <div class="visual"><iframe src="douban-crawler.html" title="Douban dataset interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="douban-crawler.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Baidu Hot-topic Crawler</h3>
             <p>A Requests and BeautifulSoup pipeline that archives structured trending-topic data as JSON.</p>
-            <div class="visual" style="font-size:42px;color:#065f46">Web → JSON</div>
+            <div class="visual"><iframe src="baidu-crawler.html" title="Baidu crawler interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="baidu-crawler.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Flask Request Lab</h3>
             <p>An interactive introduction to GET parameters, POST bodies, JSON responses, CORS, and browser requests.</p>
-            <div class="visual" style="font-size:42px;color:#065f46">GET / POST</div>
+            <div class="visual"><iframe src="flask-api-lab.html" title="Flask request lab interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="flask-api-lab.html" class="button">Open &rarr;</a>
         </div>
 
         <div class="card">
             <h3>Python SQL Helper</h3>
             <p>An in-memory table abstraction implementing CRUD operations and JSON persistence alongside SQL practice.</p>
-            <div class="visual" style="font-size:42px;color:#065f46">CREATE · SELECT</div>
+            <div class="visual"><iframe src="sql-helper.html" title="SQL helper interface preview" loading="lazy" tabindex="-1"></iframe></div>
             <a href="sql-helper.html" class="button">Open &rarr;</a>
         </div>
 
@@ -192,7 +186,7 @@ h1 {
             <h3>Personal Website</h3>
             <p>A GitHub Pages portfolio site for projects, physics simulations, and contact links.</p>
             <div class="visual">
-                <img src="../images/abstract_web.svg" alt="Personal website preview">
+                <iframe src="../index.html" title="Personal website interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="../index.html" class="button">Open &rarr;</a>
         </div>
@@ -201,7 +195,7 @@ h1 {
             <h3>Web Analytics Setup</h3>
             <p>Lightweight page-view tracking with GoatCounter across the portfolio site.</p>
             <div class="visual">
-                <img src="../images/abstract_analytics.svg" alt="Web analytics preview">
+                <iframe src="data-dashboard.html" title="Web analytics dashboard preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="https://wangleyi.goatcounter.com" class="button">Open &rarr;</a>
         </div>
@@ -210,7 +204,7 @@ h1 {
             <h3>Sorting Algorithm Visualizer</h3>
             <p>Animate classic sorting algorithms and compare comparisons, swaps, and runtime behavior.</p>
             <div class="visual">
-                <img src="../images/abstract_sorting.svg" alt="Sorting visualizer preview">
+                <iframe src="sorting-visualizer.html" title="Sorting visualizer interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="sorting-visualizer.html" class="button">Open &rarr;</a>
         </div>
@@ -219,7 +213,7 @@ h1 {
             <h3>API Request Dashboard</h3>
             <p>Build simulated frontend-backend requests and inspect structured JSON responses.</p>
             <div class="visual">
-                <img src="../images/abstract_api_dashboard.svg" alt="API dashboard preview">
+                <iframe src="api-dashboard.html" title="API dashboard interface preview" loading="lazy" tabindex="-1"></iframe>
             </div>
             <a href="api-dashboard.html" class="button">Open &rarr;</a>
         </div>    </div>
