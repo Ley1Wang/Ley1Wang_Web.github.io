@@ -65,6 +65,24 @@ a:hover { text-decoration: none; }
     align-items: center;
     min-height: 420px;
 }
+.hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 14px;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+.hero-kicker::before {
+    content: "";
+    width: 28px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+}
 h1 {
     margin: 0;
     color: var(--primary);
@@ -169,6 +187,65 @@ h2 {
     gap: 18px;
 }
 .info-grid { grid-template-columns: repeat(3, 1fr); }
+.profile-spotlight {
+    display: grid;
+    grid-template-columns: 1.35fr .65fr;
+    gap: 0;
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 18px 38px rgba(7,46,51,.1);
+}
+.profile-main {
+    padding: 34px;
+    background: linear-gradient(135deg, #064e3b, #0f766e);
+    color: white;
+}
+.profile-label {
+    color: #a7f3d0;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+.profile-main h3 {
+    margin: 10px 0 6px;
+    font-size: 34px;
+    line-height: 1.1;
+}
+.profile-role {
+    margin: 0;
+    color: #d1fae5;
+    font-size: 18px;
+    font-weight: 700;
+}
+.profile-main .profile-summary {
+    max-width: 620px;
+    margin: 20px 0 0;
+    color: #ecfdf5;
+    line-height: 1.7;
+}
+.profile-details {
+    display: grid;
+    align-content: center;
+    gap: 20px;
+    padding: 30px;
+}
+.profile-detail span {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--subtext);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+.profile-detail strong {
+    color: var(--primary);
+    font-size: 16px;
+    line-height: 1.45;
+}
 .project-grid { grid-template-columns: repeat(4, 1fr); }
 .link-grid { grid-template-columns: repeat(4, 1fr); }
 .card,
@@ -211,6 +288,8 @@ h2 {
 }
 @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
+    .profile-spotlight { grid-template-columns: 1fr; }
+    .profile-details { grid-template-columns: repeat(3, 1fr); }
     .project-grid,
     .info-grid { grid-template-columns: repeat(2, 1fr); }
     .link-grid { grid-template-columns: repeat(2, 1fr); }
@@ -223,6 +302,9 @@ h2 {
     .socials img { width: 27px; height: 27px; }
     .container { padding: 34px 18px 56px; }
     h1 { font-size: 34px; }
+    .profile-main { padding: 26px; }
+    .profile-main h3 { font-size: 29px; }
+    .profile-details { grid-template-columns: 1fr; padding: 24px 26px; }
     .project-grid,
     .info-grid,
     .link-grid { grid-template-columns: 1fr; }
@@ -234,6 +316,7 @@ h2 {
     <div class="name">Leyi Wang</div>
     <nav class="nav">
         <a href="#home">Home</a>
+        <a href="#about">Profile</a>
         <a href="#projects">Projects</a>
         <a href="#quick-links">Quick Links</a>
     </nav>
@@ -247,6 +330,7 @@ h2 {
 <main class="container">
     <section id="home" class="hero">
         <div>
+            <div class="hero-kicker">Hi, I'm Leyi Wang</div>
             <h1>Undergraduate Projects in Physics, CS, and Statistics</h1>
             <p>This site collects my interactive simulations, embedded radar work, data tools, and small web applications. Most projects are built as lightweight browser experiences for learning, testing, and visualization.</p>
             <div class="hero-actions">
@@ -266,10 +350,18 @@ h2 {
 
     <section id="about">
         <h2>Profile</h2>
-        <div class="info-grid">
-            <div class="card"><strong>School</strong><p>University of California, Irvine</p></div>
-            <div class="card"><strong>Interests</strong><p>Mathematics, computer engineering, embedded systems, and visualization.</p></div>
-            <div class="card"><strong>Current Focus</strong><p>Building interactive tools that connect code, data, and physical systems.</p></div>
+        <div class="profile-spotlight">
+            <div class="profile-main">
+                <div class="profile-label">About me</div>
+                <h3>Leyi Wang</h3>
+                <p class="profile-role">Undergraduate at the University of California, Irvine</p>
+                <p class="profile-summary">I build interactive projects that connect mathematical ideas, physical systems, data, and software—from browser simulations and statistical tools to embedded radar and neural networks.</p>
+            </div>
+            <div class="profile-details">
+                <div class="profile-detail"><span>School</span><strong>UC Irvine</strong></div>
+                <div class="profile-detail"><span>Interests</span><strong>Mathematics · Computer Engineering · Embedded Systems</strong></div>
+                <div class="profile-detail"><span>Current focus</span><strong>Interactive tools, visualization, and applied machine learning</strong></div>
+            </div>
         </div>
     </section>
 
