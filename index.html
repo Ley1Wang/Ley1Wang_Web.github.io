@@ -28,7 +28,7 @@ body {
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: none; }
 .topbar {
-    min-height: 112px;
+    min-height: 72px;
     background: var(--dark);
     color: white;
     display: flex;
@@ -44,15 +44,15 @@ a:hover { text-decoration: none; }
 .nav a:hover { opacity: 1; }
 .socials { display: flex; align-items: center; gap: 10px; margin-left: 28px; }
 .socials a {
-    width: 96px;
-    height: 96px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .socials a:hover { background: rgba(255,255,255,0.12); }
-.socials img { width: 90px; height: 90px; object-fit: contain; opacity: 0.92; }
+.socials img { width: 34px; height: 34px; object-fit: contain; opacity: 0.94; }
 .container {
     max-width: 1120px;
     margin: 0 auto;
@@ -174,6 +174,13 @@ h1 {
 }
 .gallery button:first-of-type { left: 14px; }
 .gallery button:last-of-type { right: 14px; }
+.gallery-dots { position:absolute; z-index:3; right:16px; bottom:17px; display:flex; gap:6px; }
+.gallery-dots button { position:static; width:7px; height:7px; min-width:0; padding:0; transform:none; background:rgba(255,255,255,.58); }
+.gallery-dots button.active { width:22px; border-radius:999px; background:white; }
+.metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:32px; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--border); box-shadow:0 10px 24px rgba(7,46,51,.05); }
+.metric { padding:20px; background:rgba(255,255,255,.94); }
+.metric strong { display:block; color:var(--primary); font-size:28px; letter-spacing:-.03em; }
+.metric span { display:block; margin-top:4px; color:var(--subtext); font-size:13px; }
 section { margin-top: 64px; scroll-margin-top: 90px; }
 h2 {
     margin: 0 0 20px;
@@ -197,6 +204,9 @@ h2 {
     border-radius: 16px;
     box-shadow: 0 18px 38px rgba(7,46,51,.1);
 }
+.section-head { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:20px; }
+.section-head h2 { margin:0; }
+.section-head p { max-width:560px; margin:0; color:var(--subtext); line-height:1.6; text-align:right; }
 .profile-main {
     padding: 34px;
     background: linear-gradient(135deg, #064e3b, #0f766e);
@@ -265,7 +275,13 @@ h2 {
     min-height: 180px;
     padding: 20px;
     transition: 0.2s;
+    position: relative;
+    overflow: hidden;
 }
+.project-card::after { content:"→"; position:absolute; right:18px; bottom:14px; color:var(--accent); font-size:22px; transition:.2s; }
+.project-card:hover::after { transform:translateX(4px); }
+.project-number { display:block; margin-bottom:28px; color:#94a3b8; font-size:12px; font-weight:800; letter-spacing:.12em; }
+.project-tag { display:inline-flex; margin-top:16px; padding:5px 8px; border-radius:999px; background:var(--accent-soft); color:var(--primary); font-size:11px; font-weight:800; }
 .project-card:hover,
 .link-card:hover {
     transform: translateY(-3px);
@@ -280,6 +296,21 @@ h2 {
     font-weight: 700;
     transition: 0.2s;
 }
+.build-card { display:grid; grid-template-columns:1.15fr .85fr; overflow:hidden; border-radius:18px; background:var(--dark); color:white; box-shadow:0 20px 44px rgba(7,46,51,.16); }
+.build-copy { padding:38px; }
+.build-label { color:#6ee7b7; font-size:12px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+.build-copy h2 { margin:10px 0 12px; color:white; font-size:32px; }
+.build-copy p { margin:0; color:#cbd5d1; line-height:1.7; }
+.build-features { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:24px 0; }
+.build-features span { padding:10px 12px; border:1px solid rgba(255,255,255,.12); border-radius:9px; color:#d1fae5; font-size:13px; }
+.build-visual { display:grid; place-items:center; min-height:320px; padding:30px; background:radial-gradient(circle at 70% 25%,rgba(16,185,129,.28),transparent 42%),#0b3b40; }
+.ai-window { width:min(100%,330px); padding:14px; border:1px solid rgba(255,255,255,.16); border-radius:16px; background:rgba(255,255,255,.08); backdrop-filter:blur(8px); }
+.ai-window-top { display:flex; align-items:center; gap:6px; margin-bottom:14px; }
+.ai-window-top i { width:7px; height:7px; border-radius:50%; background:#6ee7b7; opacity:.7; }
+.ai-message { width:86%; margin-top:9px; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.1); color:#ecfdf5; font-size:12px; line-height:1.45; }
+.ai-message.user { width:70%; margin-left:auto; background:#10b981; color:white; }
+.status-pill { display:inline-flex; align-items:center; gap:7px; margin-top:15px; color:#a7f3d0; font-size:11px; font-weight:800; }
+.status-pill::before { content:""; width:7px; height:7px; border-radius:50%; background:#34d399; box-shadow:0 0 0 4px rgba(52,211,153,.12); }
 .footer {
     background: var(--primary);
     color: #d1fae5;
@@ -288,6 +319,8 @@ h2 {
 }
 @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: 1fr 1fr; }
+    .build-card { grid-template-columns: 1fr; }
     .profile-spotlight { grid-template-columns: 1fr; }
     .profile-details { grid-template-columns: repeat(3, 1fr); }
     .project-grid,
@@ -297,18 +330,30 @@ h2 {
 }
 @media (max-width: 560px) {
     .topbar { padding: 0 16px; }
-    .topbar { min-height: 98px; }
+    .topbar { min-height: 66px; }
     .socials { margin-left: auto; gap: 2px; }
-    .socials a { width: 86px; height: 86px; }
-    .socials img { width: 81px; height: 81px; }
+    .socials a { width: 40px; height: 40px; }
+    .socials img { width: 29px; height: 29px; }
     .container { padding: 34px 18px 56px; }
     h1 { font-size: 34px; }
     .profile-main { padding: 26px; }
     .profile-main h3 { font-size: 29px; }
     .profile-details { grid-template-columns: 1fr; padding: 24px 26px; }
+    .metric { padding: 16px; }
+    .metric strong { font-size: 24px; }
+    .section-head { align-items: start; flex-direction: column; gap: 8px; }
+    .section-head p { text-align: left; }
+    .build-copy { padding: 27px; }
+    .build-copy h2 { font-size: 27px; }
+    .build-features { grid-template-columns: 1fr; }
+    .build-visual { min-height: 260px; }
     .project-grid,
     .info-grid,
     .link-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .project-card, .link-card, .project-card::after, .gallery img { transition: none; }
 }
 </style>
 </head>
@@ -346,8 +391,16 @@ h2 {
             <img id="slide" src="images/Kirchoff_Example.png" alt="Kirchhoff circuit simulator interface">
             <span class="gallery-caption" id="slide-caption">Kirchhoff Circuit Simulator</span>
             <button onclick="next()" aria-label="Next slide">&rarr;</button>
+            <div class="gallery-dots" id="gallery-dots" aria-label="Choose featured project"></div>
         </div>
     </section>
+
+    <div class="metrics" aria-label="Portfolio overview">
+        <div class="metric"><strong>28+</strong><span>interactive projects</span></div>
+        <div class="metric"><strong>4</strong><span>technical areas</span></div>
+        <div class="metric"><strong>Web</strong><span>browser-first experiences</span></div>
+        <div class="metric"><strong>Local</strong><span>privacy-first AI in progress</span></div>
+    </div>
 
     <section id="about">
         <h2>Profile</h2>
@@ -367,12 +420,27 @@ h2 {
     </section>
 
     <section id="projects">
-        <h2>Project Areas</h2>
+        <div class="section-head"><h2>Project Areas</h2><p>Explore complete collections rather than isolated demos—each area combines theory, interaction, and practical implementation.</p></div>
         <div class="project-grid">
-            <a class="project-card" href="pages/physics.html"><h3>Physics</h3><p>Electric fields, waves, lenses, circuits, pendulums, and motion simulations.</p></a>
-            <a class="project-card" href="pages/stat.html"><h3>Statistics</h3><p>Regression, descriptive statistics, distributions, hypothesis tests, and sampling.</p></a>
-            <a class="project-card" href="pages/cs.html"><h3>Computer Science</h3><p>Full-stack internship work, frontend tools, API dashboards, machine learning, and sorting visualization.</p></a>
-            <a class="project-card" href="pages/Radar.html"><h3>Radar</h3><p>Arduino-based presence sensing with local live visualization and data export.</p></a>
+            <a class="project-card" href="pages/physics.html"><span class="project-number">01 / PHYSICS</span><h3>Physics</h3><p>Electric fields, waves, lenses, circuits, pendulums, and motion simulations.</p><span class="project-tag">8 interactive labs</span></a>
+            <a class="project-card" href="pages/stat.html"><span class="project-number">02 / DATA</span><h3>Statistics</h3><p>Regression, descriptive statistics, distributions, hypothesis tests, and sampling.</p><span class="project-tag">10 learning tools</span></a>
+            <a class="project-card" href="pages/cs.html"><span class="project-number">03 / SOFTWARE</span><h3>Computer Science</h3><p>Full-stack internship work, frontend tools, API dashboards, machine learning, and sorting visualization.</p><span class="project-tag">10 projects</span></a>
+            <a class="project-card" href="pages/Radar.html"><span class="project-number">04 / HARDWARE</span><h3>Radar</h3><p>Arduino-based presence sensing with local live visualization and data export.</p><span class="project-tag">embedded system</span></a>
+        </div>
+    </section>
+
+    <section id="building">
+        <div class="build-card">
+            <div class="build-copy">
+                <div class="build-label">Currently building</div>
+                <h2>A private, multi-device AI workspace</h2>
+                <p>A local-first assistant that connects Ollama and optional cloud models, keeps personal data under explicit permissions, and works across phone and desktop.</p>
+                <div class="build-features"><span>Local model routing</span><span>Physics assistant</span><span>Voice and text</span><span>Permissioned agents</span></div>
+                <a class="button" href="https://github.com/Ley1Wang/Local-Ai-Project" target="_blank" rel="noopener">View development on GitHub</a>
+            </div>
+            <div class="build-visual" aria-label="Local AI interface concept">
+                <div class="ai-window"><div class="ai-window-top"><i></i><i></i><i></i></div><div class="ai-message user">Plan my study session for today.</div><div class="ai-message">I found three priorities in your local task list. Shall I create a 90-minute plan?</div><div class="ai-message user">Yes, keep it focused.</div><div class="status-pill">Local model · private</div></div>
+            </div>
         </div>
     </section>
 
@@ -405,9 +473,17 @@ const projects = [
     { src: "images/radar_photo2.jpg", label: "Radar Hardware Prototype", alt: "Radar hardware project" }
 ];
 let index = 0;
-let timer = setInterval(next, 3200);
+let timer = setInterval(next, 4200);
 const slide = document.getElementById("slide");
 const slideCaption = document.getElementById("slide-caption");
+const dots = document.getElementById("gallery-dots");
+projects.forEach((project, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Show ${project.label}`);
+    dot.addEventListener("click", () => { index = i; show(); restartTimer(); });
+    dots.appendChild(dot);
+});
 function show() {
     const project = projects[index];
     slide.style.opacity = 0;
@@ -417,11 +493,14 @@ function show() {
         slideCaption.textContent = project.label;
         slide.style.opacity = 1;
     }, 140);
+    [...dots.children].forEach((dot, i) => dot.classList.toggle("active", i === index));
 }
 function next() { index = (index + 1) % projects.length; show(); }
 function prev() { index = (index - 1 + projects.length) % projects.length; show(); }
+function restartTimer() { clearInterval(timer); timer = setInterval(next, 4200); }
 slide.addEventListener("mouseenter", () => clearInterval(timer));
-slide.addEventListener("mouseleave", () => timer = setInterval(next, 3200));
+slide.addEventListener("mouseleave", restartTimer);
+show();
 </script>
 </body>
 </html>
