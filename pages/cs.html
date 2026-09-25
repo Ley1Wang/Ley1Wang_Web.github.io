@@ -107,6 +107,41 @@ h1 {
 .visual::before { content:""; position:absolute; z-index:2; top:10px; left:13px; width:6px; height:6px; border-radius:50%; background:#b7c8c1; box-shadow:11px 0 #c8d6d0,22px 0 #d7e2dd; }
 .visual iframe { width:200%; height:200%; border:0; transform:scale(.5); transform-origin:top left; pointer-events:none; background:white; }
 
+.editor-preview {
+    display: grid;
+    grid-template-columns: 34px 128px minmax(0, 1fr);
+    min-height: 100%;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font: 11px/1.65 Consolas, "Courier New", monospace;
+}
+
+.editor-preview .editor-rail {
+    background: #333;
+    color: #a8a8a8;
+    padding-top: 11px;
+    text-align: center;
+    font: 18px/1.8 Arial, sans-serif;
+}
+
+.editor-preview .editor-files {
+    padding: 9px 8px;
+    background: #252526;
+    color: #bcbcbc;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.editor-preview .editor-files strong { display: block; margin-bottom: 6px; color: #ddd; font: 10px Arial, sans-serif; letter-spacing: .08em; }
+.editor-preview .editor-files span { display: block; padding-left: 7px; }
+.editor-preview .editor-code { min-width: 0; overflow: hidden; white-space: pre; padding: 8px 11px; }
+.editor-preview .editor-code b { color: #569cd6; font-weight: normal; }
+.editor-preview .editor-code em { color: #ce9178; font-style: normal; }
+.editor-preview .editor-code i { color: #6a9955; font-style: normal; }
+.editor-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.editor-actions .button { margin-top: 10px; }
+.editor-actions .button.secondary { background: transparent; color: var(--primary); border: 1px solid #a7dbc6; }
+
 .button {
     display: inline-block;
     margin-top: 14px;
@@ -140,6 +175,21 @@ h1 {
     <h1>Computer Science Projects</h1>
 
     <div class="project-list">
+        <div class="card">
+            <h3>VS Code in Your Browser</h3>
+            <p>Open this website's source in the VS Code web editor. Sign in to GitHub to save changes. Use Codespaces when you need a terminal or to run code.</p>
+            <div class="visual" aria-hidden="true">
+                <div class="editor-preview"><div class="editor-rail">▤<br>⌕<br>⑂</div><div class="editor-files"><strong>EXPLORER</strong><span>▾ website</span><span>　index.html</span><span>　pages/</span><span>　　cs.html</span><span>　　physics.html</span></div><div class="editor-code"><i>// Your website, ready to edit</i>
+<b>&lt;section</b> class=<em>"projects"</em><b>&gt;</b>
+  <b>&lt;h1&gt;</b>Build something new<b>&lt;/h1&gt;</b>
+  <b>&lt;p&gt;</b>Start coding in the browser.<b>&lt;/p&gt;</b>
+<b>&lt;/section&gt;</b></div></div>
+            </div>
+            <div class="editor-actions">
+                <a href="https://github.dev/Ley1Wang/Ley1Wang_Web.github.io" class="button" target="_blank" rel="noopener noreferrer">Open VS Code &rarr;</a>
+                <a href="https://codespaces.new/Ley1Wang/Ley1Wang_Web.github.io?quickstart=1" class="button secondary" target="_blank" rel="noopener noreferrer">Open with terminal &rarr;</a>
+            </div>
+        </div>
         <div class="card">
             <h3>Handwritten Digit Recognition</h3>
             <p>A locally trained PyTorch CNN with canvas input, MNIST preprocessing, Flask inference, confidence scores, and class probabilities.</p>
