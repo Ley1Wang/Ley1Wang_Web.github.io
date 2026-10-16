@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#181818">
+  <meta name="description" content="A clean, editor-inspired workspace for C++, C, Python, JavaScript, and Java.">
+  <title>Code Lab · Leyi Wang</title>
+  <link rel="icon" href="../assets/nana.ico">
+  <link rel="stylesheet" href="../assets/code-lab.css">
+</head>
+<body>
+  <header class="page-header">
+    <a class="brand" href="cs.html" aria-label="Code Lab, back to Computer Science"><span aria-hidden="true">&lt;/&gt;</span> Code Lab</a>
+    <span class="window-title">Code Lab <span>—</span> Browser workspace</span>
+    <a class="back-link" href="cs.html"><span aria-hidden="true">←</span> Back to CS</a>
+  </header>
+  <main class="lab">
+    <nav class="activity-bar" aria-label="Workspace panels">
+      <button id="explorer-toggle" class="activity-button active" title="Toggle files" aria-label="Toggle files" aria-controls="explorer-panel" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l4 4v13H8zM16 3v5h4M4 7v14h11"/></svg></button>
+      <button id="console-toggle" class="activity-button" title="Toggle input and output" aria-label="Toggle input and output" aria-controls="console-panels" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="m7 9 3 3-3 3m6 0h4"/></svg></button>
+      <span class="activity-caption" aria-hidden="true">LAB</span>
+    </nav>
+    <aside id="explorer-panel" class="explorer" aria-label="Language drafts">
+      <div class="explorer-heading">Explorer</div>
+      <div class="folder-heading"><span aria-hidden="true">⌄</span> CODE LAB</div>
+      <div class="file-list">
+        <button class="file-button" data-language="cpp"><span class="file-icon" aria-hidden="true">C++</span><span data-file-name>main.cpp</span></button>
+        <button class="file-button" data-language="c"><span class="file-icon" aria-hidden="true">C</span><span data-file-name>main.c</span></button>
+        <button class="file-button" data-language="python"><span class="file-icon" aria-hidden="true">PY</span><span data-file-name>main.py</span></button>
+        <button class="file-button" data-language="javascript"><span class="file-icon" aria-hidden="true">JS</span><span data-file-name>main.js</span></button>
+        <button class="file-button" data-language="java"><span class="file-icon" aria-hidden="true">J</span><span data-file-name>Main.java</span></button>
+      </div>
+      <p class="explorer-note">One draft per language.<br>Saved in this browser.</p>
+    </aside>
+    <div class="workspace">
+      <section class="editor-panel" aria-label="Code editor">
+        <div class="editor-topbar">
+          <div class="file-tab"><span id="tab-icon" class="file-icon" aria-hidden="true">C++</span><label id="filename" for="code-input">main.cpp</label><span class="saved-dot" title="Draft saved automatically" aria-hidden="true"></span></div>
+          <div class="toolbar">
+            <label class="sr-only" for="language-select">Language</label>
+            <select id="language-select" aria-label="Language">
+              <option value="cpp">C++ 20</option>
+              <option value="c">C 17</option>
+              <option value="python">Python 3</option>
+              <option value="javascript">JavaScript</option>
+              <option value="java">Java 8</option>
+            </select>
+            <button id="run-button" class="run-button" title="Run · Ctrl+Enter"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m5 3 8 5-8 5z"/></svg>Run</button>
+            <button id="stop-button" title="Stop · Esc" hidden><span aria-hidden="true">■</span> Stop</button>
+          </div>
+        </div>
+        <div class="breadcrumbs"><span>code-lab</span><span aria-hidden="true">›</span><span id="breadcrumb-file">main.cpp</span><span class="shortcut-hint">Ctrl + Enter to run</span></div>
+        <div class="editor-surface">
+          <pre id="line-numbers" aria-hidden="true">1</pre>
+          <div class="code-area">
+            <div id="active-line" class="active-line" aria-hidden="true"></div>
+            <pre id="code-highlight" aria-hidden="true"><code id="highlight-text"></code></pre>
+            <textarea id="code-input" aria-label="Source code" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off"></textarea>
+          </div>
+        </div>
+      </section>
+      <div id="console-panels" class="console-panels">
+        <section class="input-panel">
+          <div class="panel-heading"><label for="stdin-input">Input</label><span>stdin</span></div>
+          <textarea id="stdin-input" aria-label="Standard input" spellcheck="false" placeholder="Optional input, before you run…"></textarea>
+        </section>
+        <section class="output-panel">
+          <div class="panel-heading"><span id="output-label">Output</span><button id="clear-output" class="text-button" title="Clear output">Clear</button></div>
+          <pre id="output-text" aria-labelledby="output-label" tabindex="0"></pre>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="status-bar">
+    <span id="run-result" role="status" aria-live="polite">Ready</span>
+    <span id="run-time">10s execution limit</span>
+    <span id="save-state" class="save-state" role="status">Saved locally</span>
+    <span class="status-spacer"></span>
+    <a id="java-credit" href="https://cheerpj.com/" target="_blank" rel="noopener" hidden>Java powered by CheerpJ</a><span id="runtime-note">Runs locally</span>
+    <span id="cursor-position">Ln 1, Col 1</span><span class="encoding-note">Spaces: 4</span><span class="encoding-note">UTF-8</span><span id="language-status">C++ 20</span>
+  </footer>
+  <script defer src="../js/code-lab-runtime.js"></script>
+  <script defer src="../js/code-lab.js"></script>
+</body>
+</html>
