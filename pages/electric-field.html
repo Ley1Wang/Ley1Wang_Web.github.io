@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Electric Field Visualizer</title>
+<title>Electric Field Studio — Leyi Wang</title>
 <link rel="icon" href="../assets/physics.ico">
 <style>
 :root {
@@ -166,8 +166,12 @@ canvas:active { cursor: grabbing; }
     .readout { grid-template-columns: 1fr; }
 }
 </style>
+<meta name="description" content="Arrange positive and negative charges, then read the field as a pattern of direction, strength, and potential.">
+<link rel="stylesheet" href="../assets/site.css">
+<script defer src="../js/site-content.js"></script>
+<script defer src="../js/site.js"></script>
 </head>
-<body>
+<body class="site-tool" data-project="electric-field">
 <div class="topbar">
     <div class="title">Electric Field Visualizer</div>
     <a href="physics.html">Back to Physics</a>
@@ -389,6 +393,6 @@ resetCharges();
 draw();
 </script>
 <script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+        async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

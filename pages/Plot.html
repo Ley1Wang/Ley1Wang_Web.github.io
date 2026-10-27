@@ -1,130 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-:root {
-    --bg: #f3fdf8;
-    --primary: #065f46;
-    --accent: #10b981;
-    --text: #1f2937;
-    --subtext: #6b7280;
-}
-
-
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
-
-.topbar {
-    height: 50px;
-    background: #072E33;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 15px;
-}
-
-.topbar span {
-    color: white;
-}
-
-.topbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 10px;
-}
-
-
-.container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 15px;
-}
-
-
-h1 {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--primary);
-}
-
-
-input {
-    padding: 8px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-}
-
-button {
-    padding: 8px 12px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-
-canvas {
-    margin-top: 20px;
-    width: 100% !important;
-    max-width: 600px;
-}
-
-#fitResult {
-    margin-top: 15px;
-    color: var(--subtext);
-}
-</style>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Data Analysis - Linear Regression</title>
-    <link rel="icon" href = "../assets/physics.ico">
-    <script src="../chart.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Add measured pairs, inspect a scatter plot, and compare a least-squares line with the observations.">
+  <title>Scatter Plot &amp; Regression — Leyi Wang</title>
+  <link rel="icon" href="../assets/physics.ico">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../chart.js"></script>
+  <script defer src="../js/site-content.js"></script>
+  <script defer src="../js/site.js"></script>
 </head>
-<body>
-
-<div class="topbar">
-    <span>Physics</span>
-    <div>
-        <a href="../index.html">Home</a>
-        <a href="physics.html">Projects</a>
-    </div>
-</div>
-
-<div class="container">
-
-<h1>Scatter Plot & Linear Regression</h1>
-
-<div>
-    <input id="x" placeholder="x (e.g., time)">
-    <input id="y" placeholder="y (e.g., distance)">
-    <button onclick="addData()">Add Point</button>
-    <button onclick="resetData()">Reset</button>
-</div>
-
-<p>Points: <span id="count">0</span></p>
-
-<canvas id="myChart"></canvas>
-
-<p id="fitResult"></p>
-
-</div>
-
-<script src="../js/Plot.js"></script>
-<script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<body class="site-tool" data-project="Plot">
+  <div class="topbar"><a href="physics.html">Physics projects</a></div>
+  <main class="container">
+    <h1>Scatter Plot &amp; Regression</h1>
+    <p>Add measured pairs, fit a straight line, and inspect what changes when an observation moves away from the trend.</p>
+    <section class="legacy-workbench">
+      <div class="legacy-fields">
+        <div class="legacy-field"><label for="x">Independent variable · x</label><input id="x" type="number" step="any" placeholder="e.g. elapsed time"></div>
+        <div class="legacy-field"><label for="y">Response variable · y</label><input id="y" type="number" step="any" placeholder="e.g. displacement"></div>
+        <div class="legacy-actions"><button type="button" onclick="addData()">Add Point</button><button type="button" class="secondary" onclick="loadSample()">Load example</button><button type="button" class="secondary" onclick="resetData()">Clear</button></div>
+      </div>
+      <div id="plotError" class="field-feedback" role="alert"></div>
+      <div class="legacy-results"><span>Observations: <strong id="count">0</strong></span><p id="fitResult" aria-live="polite">Add at least two points with distinct x values to fit a line.</p></div>
+      <div style="height:390px;position:relative"><canvas id="myChart" aria-label="Scatter plot with a least-squares fitted line"></canvas></div>
+    </section>
+  </main>
+  <script src="../js/Plot.js"></script>
+  <script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

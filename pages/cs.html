@@ -1,232 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Computer Science Projects</title>
-<link rel="icon" href="../assets/nana.ico">
-
-<style>
-:root {
-    --bg: #f3fdf8;
-    --card: #ffffff;
-    --primary: #065f46;
-    --accent: #10b981;
-    --text: #1f2937;
-    --subtext: #6b7280;
-}
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
-
-.topbar {
-    height: 60px;
-    background: #072E33;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.topbar .title {
-    color: white;
-    font-size: 18px;
-}
-
-.topbar a {
-    color: white;
-    text-decoration: none;
-    opacity: 0.8;
-}
-
-.topbar a:hover {
-    opacity: 1;
-}
-
-.container {
-    max-width: 1180px;
-    margin: 70px auto;
-    padding: 0 28px;
-}
-
-h1 {
-    color: var(--primary);
-    margin-bottom: 36px;
-    font-size: 34px;
-}
-
-.project-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
-}
-
-.card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 26px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-.card h3 {
-    margin: 0;
-    color: var(--primary);
-    font-size: 24px;
-}
-
-.card p {
-    color: var(--subtext);
-    margin: 12px 0;
-    line-height: 1.58;
-    font-size: 16px;
-}
-
-.visual {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    margin-top: 16px;
-    padding: 28px 0 0;
-    box-sizing: border-box;
-    border: 1px solid #d1fae5;
-    border-radius: 10px;
-    background: #fbfffd;
-    position: relative;
-    overflow: hidden;
-}
-
-.visual::before { content:""; position:absolute; z-index:2; top:10px; left:13px; width:6px; height:6px; border-radius:50%; background:#b7c8c1; box-shadow:11px 0 #c8d6d0,22px 0 #d7e2dd; }
-.visual iframe { width:200%; height:200%; border:0; transform:scale(.5); transform-origin:top left; pointer-events:none; background:white; }
-
-
-.button {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 10px 16px;
-    background: var(--accent);
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.button:hover {
-    opacity: 0.9;
-}
-
-@media (max-width: 720px) {
-    .project-list {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="A collection of coding tools, algorithms, data pipelines, and web experiments. Each project distinguishes the public demo from what needs a local service.">
+  <title>Computer Science — Leyi Wang</title>
+  <link rel="icon" href="../assets/nana.ico">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script defer src="../js/site-content.js"></script>
+  <script defer src="../js/site.js"></script>
 </head>
-
-<body>
-<div class="topbar">
-    <div class="title">Computer Science Projects</div>
-    <a href="../index.html">Home</a>
-</div>
-
-<div class="container">
-    <h1>Computer Science Projects</h1>
-
-    <div class="project-list">
-        <div class="card">
-            <h3>Online Code Lab</h3>
-            <p>A simple editor for C++, C, Python, JavaScript, and Java. Write code, add input, and run it in your browser.</p>
-            <div class="visual"><iframe src="code-lab.html?preview=1" title="Code Lab workspace preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="code-lab.html" class="button">Open Code Lab &rarr;</a>
-        </div>
-        <div class="card">
-            <h3>Handwritten Digit Recognition</h3>
-            <p>A locally trained PyTorch CNN with canvas input, MNIST preprocessing, Flask inference, confidence scores, and class probabilities.</p>
-            <div class="visual"><iframe src="neural-digit.html" title="Digit recognition interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="neural-digit.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Movie Crawler Dashboard</h3>
-            <p>A React, Flask, SQLite, and ECharts dashboard for crawler runs, deduplication, persisted records, and summaries.</p>
-            <div class="visual"><iframe src="movie-dashboard.html" title="Movie dashboard interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="movie-dashboard.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Douban Movie Dataset</h3>
-            <p>A Python crawler and cleaned Top 100 dataset with ranks, years, ratings, categories, and source links.</p>
-            <div class="visual"><iframe src="douban-crawler.html" title="Douban dataset interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="douban-crawler.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Baidu Hot-topic Crawler</h3>
-            <p>A Requests and BeautifulSoup pipeline that archives structured trending-topic data as JSON.</p>
-            <div class="visual"><iframe src="baidu-crawler.html" title="Baidu crawler interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="baidu-crawler.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Flask Request Lab</h3>
-            <p>An interactive introduction to GET parameters, POST bodies, JSON responses, CORS, and browser requests.</p>
-            <div class="visual"><iframe src="flask-api-lab.html" title="Flask request lab interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="flask-api-lab.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Python SQL Helper</h3>
-            <p>An in-memory table abstraction implementing CRUD operations and JSON persistence alongside SQL practice.</p>
-            <div class="visual"><iframe src="sql-helper.html" title="SQL helper interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="sql-helper.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Personal Website</h3>
-            <p>A GitHub Pages portfolio site for projects, physics simulations, and contact links.</p>
-            <div class="visual">
-                <iframe src="../index.html" title="Personal website interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="../index.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Web Analytics Setup</h3>
-            <p>Lightweight page-view tracking with GoatCounter across the portfolio site.</p>
-            <div class="visual">
-                <iframe src="data-dashboard.html" title="Web analytics dashboard preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="https://wangleyi.goatcounter.com" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Sorting Algorithm Visualizer</h3>
-            <p>Animate classic sorting algorithms and compare comparisons, swaps, and runtime behavior.</p>
-            <div class="visual">
-                <iframe src="sorting-visualizer.html" title="Sorting visualizer interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="sorting-visualizer.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>API Request Dashboard</h3>
-            <p>Build simulated frontend-backend requests and inspect structured JSON responses.</p>
-            <div class="visual">
-                <iframe src="api-dashboard.html" title="API dashboard interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="api-dashboard.html" class="button">Open &rarr;</a>
-        </div>    </div>
-</div>
-
-<script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<body data-collection="cs">
+  <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="../index.html">Leyi Wang</a><nav class="site-navigation"><a href="../index.html">Home</a><a href="physics.html">Physics</a><a href="stat.html">Statistics</a><a href="cs.html">Computer Science</a></nav></div></header>
+  <main class="collection-page" id="main-content">
+    <section class="collection-hero"><div><p class="site-eyebrow">03 / Computer Science</p><h1>Build it. Run it.<br>Look a little closer.</h1></div><div><p class="collection-description">A collection of coding tools, algorithms, data pipelines, and web experiments. Each project distinguishes the public demo from what needs a local service.</p><div class="collection-summary">11 projects · Software, from sketch to system</div></div></section>
+    <div class="catalog-toolbar">
+      <div class="catalog-filters" role="group" aria-label="Filter by topic"><button type="button" data-filter="all" aria-pressed="true">All projects</button><button type="button" data-filter="Development tools" aria-pressed="false">Development tools</button><button type="button" data-filter="Machine learning" aria-pressed="false">Machine learning</button><button type="button" data-filter="Algorithms" aria-pressed="false">Algorithms</button><button type="button" data-filter="Data pipelines" aria-pressed="false">Data pipelines</button><button type="button" data-filter="Web systems" aria-pressed="false">Web systems</button></div>
+      <label class="catalog-search"><svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="site-sr-only">Search projects</span><input id="project-search" type="search" placeholder="Find something to explore…" autocomplete="off"></label>
+    </div>
+    <p id="catalog-count" class="catalog-count" aria-live="polite">11 projects</p>
+    <div class="catalog-grid">
+    <article class="catalog-card" data-topic="Development tools">
+      <a class="catalog-preview" href="code-lab.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/code-lab.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Development tools</span><span>01</span></div><h2><a href="code-lab.html">Online Code Lab</a></h2><p>A focused editor for C++, C, Python, JavaScript, and Java. Add input, run a program, and read the result in place.</p><div class="catalog-card-footer"><span class="site-pill">Browser runtime</span><a href="code-lab.html">Open editor <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Machine learning">
+      <a class="catalog-preview" href="neural-digit.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/neural-digit.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Machine learning</span><span>02</span></div><h2><a href="neural-digit.html">Handwritten Digit Recognition</a></h2><p>Draw a digit and inspect a CNN’s prediction and class probabilities when the local inference service is running.</p><div class="catalog-card-footer"><span class="site-pill local">Local service required</span><a href="neural-digit.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Algorithms">
+      <a class="catalog-preview" href="sorting-visualizer.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/sorting-visualizer.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Algorithms</span><span>03</span></div><h2><a href="sorting-visualizer.html">Sorting, Step by Step</a></h2><p>Follow bubble, selection, and insertion sort through an array, with highlighted operations and live counters.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="sorting-visualizer.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Data pipelines">
+      <a class="catalog-preview" href="movie-dashboard.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/movie-dashboard.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Data pipelines</span><span>04</span></div><h2><a href="movie-dashboard.html">Movie Data Dashboard</a></h2><p>Explore an archived movie dataset through rating counts and summaries, with the original React and Flask source alongside.</p><div class="catalog-card-footer"><span class="site-pill">Archived data</span><a href="movie-dashboard.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Data pipelines">
+      <a class="catalog-preview" href="douban-crawler.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/douban-crawler.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Data pipelines</span><span>05</span></div><h2><a href="douban-crawler.html">Douban Movie Archive</a></h2><p>Browse a structured movie snapshot and trace its fields back to the Python collection script.</p><div class="catalog-card-footer"><span class="site-pill">Archived data</span><a href="douban-crawler.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Data pipelines">
+      <a class="catalog-preview" href="baidu-crawler.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/baidu-crawler.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Data pipelines</span><span>06</span></div><h2><a href="baidu-crawler.html">Trending Topics Archive</a></h2><p>A small Requests and BeautifulSoup pipeline, presented with its structured snapshot and original Python source.</p><div class="catalog-card-footer"><span class="site-pill">Archived data</span><a href="baidu-crawler.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Web systems">
+      <a class="catalog-preview" href="flask-api-lab.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/flask-api-lab.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Web systems</span><span>07</span></div><h2><a href="flask-api-lab.html">Frontend–Backend Request Lab</a></h2><p>Make GET parameters, POST bodies, and JSON responses concrete without needing a running backend.</p><div class="catalog-card-footer"><span class="site-pill">Simulated requests</span><a href="flask-api-lab.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Web systems">
+      <a class="catalog-preview" href="api-dashboard.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/api-dashboard.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Web systems</span><span>08</span></div><h2><a href="api-dashboard.html">API Request Inspector</a></h2><p>Build a small request, edit its JSON body, and inspect a structured response in a dashboard-style workspace.</p><div class="catalog-card-footer"><span class="site-pill">Simulated requests</span><a href="api-dashboard.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Web systems">
+      <a class="catalog-preview" href="sql-helper.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/sql-helper.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Web systems</span><span>09</span></div><h2><a href="sql-helper.html">Python &amp; SQL Table Lab</a></h2><p>Try a small CRUD table, then connect the browser demonstration to a Python table class and SQL exercises.</p><div class="catalog-card-footer"><span class="site-pill">Browser demo</span><a href="sql-helper.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Web systems">
+      <div class="catalog-preview catalog-preview-type" aria-hidden="true"><span>DESIGNED & BUILT IN-HOUSE</span><strong>A notebook,<br>not just a showcase.</strong></div>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Web systems</span><span>10</span></div><h2><a href="../index.html">This Portfolio</a></h2><p>The collection itself: a lightweight, responsive website connecting working experiments, project notes, and source code.</p><div class="catalog-card-footer"><span class="site-pill">Static website</span><a href="../index.html">View website <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Web systems">
+      <div class="catalog-preview catalog-preview-type" aria-hidden="true"><span>MEASURING THE EXPERIENCE</span><strong>Small footprint.<br>Clearer insight.</strong></div>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Web systems</span><span>11</span></div><h2><a href="https://wangleyi.goatcounter.com" target="_blank" rel="noopener noreferrer">Lightweight Site Analytics</a></h2><p>A separate GoatCounter dashboard used to understand page visits across the portfolio.</p><div class="catalog-card-footer"><span class="site-pill">External dashboard</span><a href="https://wangleyi.goatcounter.com" target="_blank" rel="noopener noreferrer">View dashboard <span class="site-arrow" aria-hidden="true">↗</span></a></div></div>
+    </article>
+    </div>
+    <div id="catalog-empty" class="catalog-empty" hidden><p>No projects match that combination.</p><button id="reset-search" class="site-button site-button-secondary" type="button">Clear filters</button></div>
+    <p class="collection-note">Look for the mode label: browser tool, archived data, simulated request, or local service.</p>
+  </main>
+  <script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -1,219 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Physics Projects</title>
-<link rel="icon" href="../assets/physics.ico">
-
-<style>
-:root {
-    --bg: #f3fdf8;
-    --card: #ffffff;
-    --primary: #065f46;
-    --accent: #10b981;
-    --text: #1f2937;
-    --subtext: #6b7280;
-}
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
-
-.topbar {
-    height: 60px;
-    background: #072E33;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.topbar .title {
-    color: white;
-    font-size: 18px;
-}
-
-.topbar a {
-    color: white;
-    text-decoration: none;
-    opacity: 0.8;
-}
-
-.topbar a:hover {
-    opacity: 1;
-}
-
-.container {
-    max-width: 1180px;
-    margin: 70px auto;
-    padding: 0 28px;
-}
-
-h1 {
-    color: var(--primary);
-    margin-bottom: 36px;
-    font-size: 34px;
-}
-
-.project-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
-}
-
-.card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 26px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-.preview {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    margin-top: 16px;
-    padding: 28px 0 0;
-    box-sizing: border-box;
-    border: 1px solid #d1fae5;
-    border-radius: 10px;
-    background: #fbfffd;
-    position: relative;
-    overflow: hidden;
-}
-
-.preview::before { content:""; position:absolute; z-index:2; top:10px; left:13px; width:6px; height:6px; border-radius:50%; background:#b7c8c1; box-shadow:11px 0 #c8d6d0,22px 0 #d7e2dd; }
-.preview iframe { width:200%; height:200%; border:0; transform:scale(.5); transform-origin:top left; pointer-events:none; background:white; }
-
-.card h3 {
-    margin: 0;
-    color: var(--primary);
-    font-size: 24px;
-}
-
-.card p {
-    color: var(--subtext);
-    margin: 12px 0;
-    line-height: 1.58;
-    font-size: 16px;
-}
-
-.button {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 10px 16px;
-    background: var(--accent);
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.button:hover {
-    opacity: 0.9;
-}
-
-@media (max-width: 720px) {
-    .project-list {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="Move a charge. Release a pendulum. Trace a ray. These experiments make the relationship between a model and its behavior easier to see.">
+  <title>Physics — Leyi Wang</title>
+  <link rel="icon" href="../assets/physics.ico">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script defer src="../js/site-content.js"></script>
+  <script defer src="../js/site.js"></script>
 </head>
-
-<body>
-<div class="topbar">
-    <div class="title">Physics Projects</div>
-    <a href="../index.html">Home</a>
-</div>
-
-<div class="container">
-    <h1>Physics Visualization Projects</h1>
-
-    <div class="project-list">
-        <div class="card">
-            <h3>Scatter Plot Visualization</h3>
-            <p>Plot experimental data points and visualize relationships.</p>
-            <div class="preview">
-                <iframe src="Plot.html" title="Plot interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="Plot.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Lenz Effect Simulator</h3>
-            <p>Show a magnet passing through a coil and calculate the induced EMF.</p>
-            <div class="preview">
-                <iframe src="lenz.html" title="Lenz simulator preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="lenz.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Freefalling Simulator</h3>
-            <p>Compare free-fall motion under different planetary gravities.</p>
-            <div class="preview">
-                <iframe src="freefalling.html" title="Freefall simulator preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="freefalling.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Kirchhoff Rules Interactive</h3>
-            <p>Explore KCL and KVL with an adjustable circuit diagram and live equations.</p>
-            <div class="preview">
-                <iframe src="kirchhoff.html" title="Kirchhoff simulator preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="kirchhoff.html" class="button">Open &rarr;</a>
-        </div>
-
-
-        <div class="card">
-            <h3>Electric Field Visualizer</h3>
-            <p>Drag positive and negative charges to explore electric field vectors and potential patterns.</p>
-            <div class="preview">
-                <iframe src="electric-field.html" title="Electric field interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="electric-field.html" class="button">Open &rarr;</a>
-        </div>
-        <div class="card">
-            <h3>Wave Interference Simulator</h3>
-            <p>Adjust two coherent wave sources and visualize constructive and destructive interference.</p>
-            <div class="preview">
-                <iframe src="wave-interference.html" title="Wave interference interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="wave-interference.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Pendulum Motion Lab</h3>
-            <p>Adjust length, gravity, and starting angle to study pendulum motion and period.</p>
-            <div class="preview">
-                <iframe src="pendulum-lab.html" title="Pendulum lab interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="pendulum-lab.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Lens Ray Tracing Simulator</h3>
-            <p>Trace principal rays through a thin lens and compare image distance and magnification.</p>
-            <div class="preview">
-                <iframe src="lens-ray-tracing.html" title="Lens ray tracing interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="lens-ray-tracing.html" class="button">Open &rarr;</a>
-        </div>    </div>
-</div>
-
-<script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<body data-collection="physics">
+  <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="../index.html">Leyi Wang</a><nav class="site-navigation"><a href="../index.html">Home</a><a href="physics.html">Physics</a><a href="stat.html">Statistics</a><a href="cs.html">Computer Science</a></nav></div></header>
+  <main class="collection-page" id="main-content">
+    <section class="collection-hero"><div><p class="site-eyebrow">01 / Physics</p><h1>A small change.<br>A clearer understanding.</h1></div><div><p class="collection-description">Move a charge. Release a pendulum. Trace a ray. These experiments make the relationship between a model and its behavior easier to see.</p><div class="collection-summary">8 projects · The physical world, made explorable</div></div></section>
+    <div class="catalog-toolbar">
+      <div class="catalog-filters" role="group" aria-label="Filter by topic"><button type="button" data-filter="all" aria-pressed="true">All projects</button><button type="button" data-filter="Mechanics" aria-pressed="false">Mechanics</button><button type="button" data-filter="Electromagnetism" aria-pressed="false">Electromagnetism</button><button type="button" data-filter="Waves" aria-pressed="false">Waves</button><button type="button" data-filter="Circuits" aria-pressed="false">Circuits</button><button type="button" data-filter="Optics" aria-pressed="false">Optics</button><button type="button" data-filter="Data analysis" aria-pressed="false">Data analysis</button></div>
+      <label class="catalog-search"><svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="site-sr-only">Search projects</span><input id="project-search" type="search" placeholder="Find something to explore…" autocomplete="off"></label>
+    </div>
+    <p id="catalog-count" class="catalog-count" aria-live="polite">8 projects</p>
+    <div class="catalog-grid">
+    <article class="catalog-card" data-topic="Mechanics">
+      <a class="catalog-preview" href="pendulum-lab.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/pendulum-lab.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Mechanics</span><span>01</span></div><h2><a href="pendulum-lab.html">Pendulum Motion Lab</a></h2><p>Compare an ideal prediction with nonlinear motion. Change one variable, record a trial, and follow the evidence.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="pendulum-lab.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Electromagnetism">
+      <a class="catalog-preview" href="electric-field.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/electric-field.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Electromagnetism</span><span>02</span></div><h2><a href="electric-field.html">Electric Field Studio</a></h2><p>Arrange positive and negative charges, then read the field as a pattern of direction, strength, and potential.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="electric-field.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Waves">
+      <a class="catalog-preview" href="wave-interference.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/wave-interference.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Waves</span><span>03</span></div><h2><a href="wave-interference.html">Wave Interference</a></h2><p>Bring two sources together and discover how phase, spacing, and wavelength reshape an interference pattern.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="wave-interference.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Circuits">
+      <a class="catalog-preview" href="kirchhoff.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/kirchhoff.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Circuits</span><span>04</span></div><h2><a href="kirchhoff.html">Kirchhoff’s Circuit Lab</a></h2><p>Connect circuit values to live currents and equations, with node and loop rules shown alongside the diagram.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="kirchhoff.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Optics">
+      <a class="catalog-preview" href="lens-ray-tracing.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/lens-ray-tracing.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Optics</span><span>05</span></div><h2><a href="lens-ray-tracing.html">Lens &amp; Image Formation</a></h2><p>Trace principal rays through a convex lens and connect object position to image distance, orientation, and scale.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="lens-ray-tracing.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Mechanics">
+      <a class="catalog-preview" href="freefalling.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/freefalling.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Mechanics</span><span>06</span></div><h2><a href="freefalling.html">Planetary Freefall</a></h2><p>Take the same drop to different worlds and compare motion, velocity, and acceleration under each gravity.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="freefalling.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Electromagnetism">
+      <a class="catalog-preview" href="lenz.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/lenz.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Electromagnetism</span><span>07</span></div><h2><a href="lenz.html">Induction Sketch</a></h2><p>Explore a moving magnet and a compact B × v × N calculation, with the demonstration’s assumptions made explicit.</p><div class="catalog-card-footer"><span class="site-pill">Simplified model</span><a href="lenz.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Data analysis">
+      <a class="catalog-preview" href="Plot.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/Plot.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Data analysis</span><span>08</span></div><h2><a href="Plot.html">Scatter Plot &amp; Regression</a></h2><p>Turn measured pairs into a scatter plot, fit a straight line, and inspect the relationship behind the coefficients.</p><div class="catalog-card-footer"><span class="site-pill">Browser tool</span><a href="Plot.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    </div>
+    <div id="catalog-empty" class="catalog-empty" hidden><p>No projects match that combination.</p><button id="reset-search" class="site-button site-button-secondary" type="button">Clear filters</button></div>
+    <p class="collection-note">Interactive models for exploring ideas—not substitutes for laboratory measurements.</p>
+  </main>
+  <script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Dashboard</title>
+<title>Data Overview Dashboard — Leyi Wang</title>
 <link rel="icon" href="../assets/nana.ico">
 <script src="../chart.js"></script>
 <style>
@@ -34,8 +34,12 @@ canvas { width: 100%; max-height: 360px; }
 .table th { color: var(--primary); }
 @media (max-width: 820px) { .grid, .chart-grid { grid-template-columns: 1fr; } }
 </style>
+<meta name="description" content="A compact dashboard that brings summary indicators, trends, and tabular data into a single readable view.">
+<link rel="stylesheet" href="../assets/site.css">
+<script defer src="../js/site-content.js"></script>
+<script defer src="../js/site.js"></script>
 </head>
-<body>
+<body class="site-tool" data-project="data-dashboard">
 <div class="topbar">
     <div class="title">Data Dashboard</div>
     <a href="../index.html">Home</a>
@@ -69,7 +73,7 @@ canvas { width: 100%; max-height: 360px; }
     </div>
 </div>
 
-<script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
 new Chart(document.getElementById("lineChart"), {

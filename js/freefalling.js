@@ -1,334 +1,124 @@
-const planets = {
-    Mercury: 3.7,
-    Venus: 8.87,
-    Earth: 9.81,
-    Moon: 1.62,
-    Mars: 3.71,
-    Jupiter: 24.79,
-    Saturn: 10.44,
-    Uranus: 8.69,
-    Neptune: 11.15
-};
-
-const images = {
-    Mercury: "../images/mercury.png",
-    Venus: "../images/venus.png",
-    Earth: "../images/earth.png",
-    Moon: "../images/moon.png",
-    Mars: "../images/mars.png",
-    Jupiter: "../images/jupiter.png",
-    Saturn: "../images/saturn.png",
-    Uranus: "../images/uranus.png",
-    Neptune: "../images/neptune.png"
-};
-
-const skies = {
-    Mercury: "linear-gradient(to bottom,#bfc3c7,#71767b)",
-    Venus: "linear-gradient(to bottom,#f7d89a,#cb8a3d)",
-    Earth: "linear-gradient(to bottom,#5aa8ff,#dff5ff)",
-    Moon: "linear-gradient(to bottom,#0f172a,#475569)",
-    Mars: "linear-gradient(to bottom,#ffb08a,#b55337)",
-    Jupiter: "linear-gradient(to bottom,#f8d9b0,#c48b62)",
-    Saturn: "linear-gradient(to bottom,#f5e5c3,#d4b27b)",
-    Uranus: "linear-gradient(to bottom,#9df4ff,#dfffff)",
-    Neptune: "linear-gradient(to bottom,#1f66c2,#8fd1ff)"
-};
-
-const grounds = {
-    Mercury: "#7a7f84",
-    Venus: "#ba7d3e",
-    Earth: "#3b7d4a",
-    Moon: "#9a9a9a",
-    Mars: "#a3472d",
-    Jupiter: "#c08a5b",
-    Saturn: "#d7bb86",
-    Uranus: "#83dce8",
-    Neptune: "#356bc2"
-};
-
-const horizonLines = {
-    Mercury: "#d1d5db",
-    Venus: "#ffe0a3",
-    Earth: "#ffffff",
-    Moon: "#f3f4f6",
-    Mars: "#ffd1b8",
-    Jupiter: "#ffe4c4",
-    Saturn: "#fff3d4",
-    Uranus: "#e0ffff",
-    Neptune: "#b7d8ff"
-};
-
-const ballColors = {
-    Mercury: "radial-gradient(circle at 25% 25%,#f3f4f6,#9ca3af,#6b7280)",
-    Venus: "radial-gradient(circle at 25% 25%,#ffe2b8,#d89a54,#b9773b)",
-    Earth: "radial-gradient(circle at 25% 25%,#dfffff,#34d399,#059669)",
-    Moon: "radial-gradient(circle at 25% 25%,#ffffff,#cfcfcf,#8a8a8a)",
-    Mars: "radial-gradient(circle at 25% 25%,#ffc0a5,#d46a44,#a3472d)",
-    Jupiter: "radial-gradient(circle at 25% 25%,#ffe0b8,#d9a476,#b37b52)",
-    Saturn: "radial-gradient(circle at 25% 25%,#fff0d4,#e1c58d,#c9a96b)",
-    Uranus: "radial-gradient(circle at 25% 25%,#e8ffff,#9be8ef,#66c6d1)",
-    Neptune: "radial-gradient(circle at 25% 25%,#b8d5ff,#4d86d8,#1457a6)"
-};
-
-const planetSelect = document.getElementById("planet");
-const heightInput = document.getElementById("heightInput");
-
-const ball = document.getElementById("ball");
-const scene = document.querySelector(".scene");
-
-const gravityInfo = document.getElementById("gravityInfo");
-const theoryTime = document.getElementById("theoryTime");
-const timeInfo = document.getElementById("timeInfo");
-const velocityInfo = document.getElementById("velocityInfo");
-
-const planetName = document.getElementById("planetName");
-const planetPreview = document.getElementById("planetPreview");
-const horizon = document.getElementById("horizon");
-
-const SCALE = 3;
-
-let animationId = null;
-let startTime = 0;
-
-let velocityChart;
-let distanceChart;
-
-let timeData = [];
-let velocityData = [];
-let distanceData = [];
-
-planetSelect.addEventListener("change", updatePlanet);
-heightInput.addEventListener("input", updatePlanet);
-
-function updatePlanet() {
-
-    const planet = planetSelect.value;
-
-    planetName.innerText = planet;
-
-    gravityInfo.innerText =
-        `Gravity: ${planets[planet]} m/s²`;
-
-    scene.style.background =
-        skies[planet];
-
-    planetPreview.src =
-        images[planet];
-
-    ball.style.background =
-        ballColors[planet];
-
-    horizon.style.background =
-        `linear-gradient(
-            to bottom,
-            ${grounds[planet]},
-            rgba(0,0,0,0.25)
-        )`;
-
-    horizon.style.borderTop =
-        `4px solid ${horizonLines[planet]}`;
-
-    const g = planets[planet];
-
-    const h =
-        Number(heightInput.value) || 0;
-
-    const theory =
-        h > 0
-        ? Math.sqrt(2 * h / g)
-        : 0;
-
-    theoryTime.innerText =
-        `Expected Time: ${theory.toFixed(2)} s`;
-}
-
-updatePlanet();
-
-velocityChart = new Chart(
-    document
-        .getElementById("velocityChart")
-        .getContext("2d"),
-{
-    type: "line",
-
-    data: {
-        labels: [],
-        datasets: [{
-            label: "Velocity (m/s)",
-            data: [],
-            borderColor: "#10b981",
-            backgroundColor:
-                "rgba(16,185,129,0.15)",
-            fill: true,
-            borderWidth: 3,
-            tension: 0.25
-        }]
-    },
-
-    options: {
-        responsive: true,
-        animation: false
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const planets = { Mercury:3.7, Venus:8.87, Earth:9.81, Moon:1.62, Mars:3.71, Jupiter:24.79, Saturn:10.44, Uranus:8.69, Neptune:11.15 };
+  const input = $('heightInput'), planet = $('planet'), ball = $('ball'), scene = document.querySelector('.scene');
+  let trial = null, frame = null, lastWall = 0, lastChart = 0, points = [], nextSample = 0;
+  const charts = ['velocityChart','distanceChart'].map((id,index) => new Chart($(id), {
+    type:'line', data:{ datasets:[{label:index ? 'Fallen distance (m)' : 'Downward velocity (m/s)',data:[],borderColor:index ? '#827750' : '#426c50',borderWidth:2,pointRadius:0,tension:0,fill:false}] },
+    options:{ responsive:true,maintainAspectRatio:false,animation:false,plugins:{legend:{display:false}},scales:{
+      x:{type:'linear',min:0,title:{display:true,text:'Simulation time (s)'},grid:{color:'#edf0e8'},ticks:{maxTicksLimit:5}},
+      y:{min:0,title:{display:true,text:index ? 'Fallen distance (m)' : 'Velocity (m/s)'},grid:{color:'#edf0e8'},ticks:{maxTicksLimit:5}},
+    } },
+  }));
+  function parameters() {
+    const h = Number(input.value), g = planets[planet.value];
+    return input.value.trim() && Number.isFinite(h) && h >= .1 && h <= 10000 && g ? {h,g,planet:planet.value,duration:Math.sqrt(2*h/g)} : null;
+  }
+  const at = (t, model) => ({ t:Math.min(model.duration,Math.max(0,t)), d:Math.min(model.h,.5*model.g*Math.min(model.duration,Math.max(0,t))**2) });
+  function setStatus(text) { $('fallState').textContent=text; }
+  function renderBall(d,h) {
+    const release=20,ground=$('horizon').offsetTop;
+    const travel=Math.max(0,ground-ball.offsetHeight-release);
+    ball.style.top=(release+travel*Math.min(1,Math.max(0,d/h)))+'px';
+  }
+  function render(force=false) {
+    const p=trial || parameters();
+    if(!p)return;
+    const time=trial?.t || 0, sample=at(time,p);
+    $('timeInfo').textContent='Time: '+sample.t.toFixed(2)+' s';
+    $('velocityInfo').textContent='Velocity: '+(p.g*sample.t).toFixed(2)+' m/s ↓';
+    $('fallenInfo').textContent='Fallen: '+sample.d.toFixed(2)+' m';
+    $('remainingInfo').textContent='Remaining: '+Math.max(0,p.h-sample.d).toFixed(2)+' m';
+    $('fallScaleLabel').textContent=p.h.toLocaleString()+' m fallen';
+    renderBall(sample.d,p.h);
+    if(force || performance.now()-lastChart>120) {
+      charts[0].data.datasets[0].data=points.map(point=>({x:point.t,y:p.g*point.t}));
+      charts[1].data.datasets[0].data=points.map(point=>({x:point.t,y:point.d}));
+      charts.forEach(chart=>chart.update('none'));lastChart=performance.now();
     }
-});
-
-distanceChart = new Chart(
-    document
-        .getElementById("distanceChart")
-        .getContext("2d"),
-{
-    type: "line",
-
-    data: {
-        labels: [],
-        datasets: [{
-            label: "Distance (m)",
-            data: [],
-            borderColor: "#3b82f6",
-            backgroundColor:
-                "rgba(59,130,246,0.15)",
-            fill: true,
-            borderWidth: 3,
-            tension: 0.25
-        }]
-    },
-
-    options: {
-        responsive: true,
-        animation: false
+  }
+  function lock(locked) {
+    input.disabled=planet.disabled=locked;
+    $('startFallButton').disabled=locked;
+    $('pauseFallButton').disabled=!locked;
+    $('exportFallButton').disabled=!points.length;
+  }
+  function recordUntil(time) {
+    while(nextSample <= time+1e-9 && nextSample <= trial.duration+1e-9) {
+      points.push(at(nextSample,trial));nextSample=Math.round((nextSample+.1)*1e9)/1e9;
     }
-});
-
-function startFall() {
-
-    cancelAnimationFrame(animationId);
-
-    ball.style.top = "20px";
-
-    timeData = [];
-    velocityData = [];
-    distanceData = [];
-
-    velocityChart.data.labels = [];
-    velocityChart.data.datasets[0].data = [];
-
-    distanceChart.data.labels = [];
-    distanceChart.data.datasets[0].data = [];
-
-    velocityChart.update();
-    distanceChart.update();
-
-    const planet =
-        planetSelect.value;
-
-    const g =
-        planets[planet];
-
-    const height =
-        Number(heightInput.value);
-
-    const maxY =
-        Math.min(
-            height * SCALE,
-            scene.clientHeight - 120
-        );
-
-    startTime =
-        performance.now();
-
-    function animate(now) {
-
-        const t =
-            (now - startTime) / 1000;
-
-        let y =
-            0.5 * g * t * t * SCALE;
-
-        const v =
-            g * t;
-
-        const d =
-            0.5 * g * t * t;
-
-        if (y >= maxY) {
-
-            y = maxY;
-
-            ball.style.top =
-                (20 + y) + "px";
-
-            timeInfo.innerText =
-                `Time: ${t.toFixed(2)} s`;
-
-            velocityInfo.innerText =
-                `Velocity: ${v.toFixed(2)} m/s`;
-
-            velocityChart.update();
-            distanceChart.update();
-
-            return;
-        }
-
-        ball.style.top =
-            (20 + y) + "px";
-
-        timeInfo.innerText =
-            `Time: ${t.toFixed(2)} s`;
-
-        velocityInfo.innerText =
-            `Velocity: ${v.toFixed(2)} m/s`;
-
-        timeData.push(t.toFixed(2));
-        velocityData.push(v.toFixed(2));
-        distanceData.push(d.toFixed(2));
-
-        velocityChart.data.labels =
-            timeData;
-
-        velocityChart.data.datasets[0].data =
-            velocityData;
-
-        distanceChart.data.labels =
-            timeData;
-
-        distanceChart.data.datasets[0].data =
-            distanceData;
-
-        if (timeData.length % 5 === 0) {
-
-            velocityChart.update();
-            distanceChart.update();
-        }
-
-        animationId =
-            requestAnimationFrame(
-                animate
-            );
+    if(time>=trial.duration && Math.abs((points.at(-1)?.t ?? -1)-trial.duration)>1e-8)points.push(at(trial.duration,trial));
+    $('exportFallButton').disabled=!points.length;
+  }
+  function advance(now) {
+    if(!trial?.running)return;
+    trial.t=Math.min(trial.duration,trial.t+Math.max(0,now-lastWall)/1000*trial.speed);lastWall=now;
+    recordUntil(trial.t);
+    if(trial.t>=trial.duration) {
+      trial.running=false;trial.finished=true;setStatus('Landed');
+      $('pauseFallButton').textContent='Pause';lock(false);$('pauseFallButton').disabled=true;
     }
-
-    animationId =
-        requestAnimationFrame(
-            animate
-        );
-}
-
-function resetFall() {
-
-    cancelAnimationFrame(animationId);
-
-    ball.style.top = "20px";
-
-    timeInfo.innerText =
-        "Time: 0.00 s";
-
-    velocityInfo.innerText =
-        "Velocity: 0.00 m/s";
-
-    velocityChart.data.labels = [];
-    velocityChart.data.datasets[0].data = [];
-
-    distanceChart.data.labels = [];
-    distanceChart.data.datasets[0].data = [];
-
-    velocityChart.update();
-    distanceChart.update();
-}
+    render(!trial.running);
+  }
+  function tick(now) {
+    frame=null;advance(now);
+    if(trial?.running)frame=requestAnimationFrame(tick);
+  }
+  function start() {
+    const p=parameters();
+    if(!p) { $('fallError').textContent='Enter a height between 0.1 and 10,000 metres.';input.setAttribute('aria-invalid','true');return; }
+    cancelAnimationFrame(frame);$('fallError').textContent='';input.removeAttribute('aria-invalid');
+    trial={...p,t:0,speed:Number($('fallSpeed').value),running:true,finished:false};
+    points=[];nextSample=0;lastWall=performance.now();recordUntil(0);lock(true);
+    $('pauseFallButton').textContent='Pause';setStatus('Running');render(true);frame=requestAnimationFrame(tick);
+  }
+  function pause() {
+    if(!trial || trial.finished)return;
+    if(trial.running) {
+      advance(performance.now());cancelAnimationFrame(frame);
+      if(trial.finished)return;
+      trial.running=false;$('pauseFallButton').textContent='Resume';setStatus('Paused');render(true);
+    } else {
+      trial.running=true;lastWall=performance.now();$('pauseFallButton').textContent='Pause';setStatus('Running');frame=requestAnimationFrame(tick);
+    }
+  }
+  function reset() {
+    cancelAnimationFrame(frame);trial=null;points=[];nextSample=0;lock(false);
+    $('pauseFallButton').disabled=true;$('pauseFallButton').textContent='Pause';setStatus('Ready');
+    charts.forEach(chart=>{chart.data.datasets[0].data=[];chart.update('none');});
+    render(true);
+  }
+  function updateParameters() {
+    reset();
+    const p=parameters(), name=planet.value;
+    $('planetName').textContent=name;
+    $('planetPreview').src='../images/'+name.toLowerCase()+'.png';$('planetPreview').alt=name+' illustration';
+    $('gravityInfo').textContent='Gravity: '+planets[name]+' m/s²';
+    $('theoryTime').textContent='Expected time: '+(p ? p.duration.toFixed(2)+' s' : '—');
+    $('impactInfo').textContent='Impact speed: '+(p ? Math.sqrt(2*p.g*p.h).toFixed(2)+' m/s' : '—');
+    $('fallError').textContent=p ? '' : 'Enter a height between 0.1 and 10,000 metres.';
+    if(!p){$('timeInfo').textContent='Time: —';$('velocityInfo').textContent='Velocity: —';$('fallenInfo').textContent='Fallen: —';$('remainingInfo').textContent='Remaining: —';$('fallScaleLabel').textContent='Height not set';ball.style.top='20px';}
+    if(p)input.removeAttribute('aria-invalid');else input.setAttribute('aria-invalid','true');
+    charts.forEach((chart,i)=>{chart.options.scales.x.max=p?.duration || 1;chart.options.scales.y.max=p ? (i ? p.h : p.g*p.duration) : 1;chart.update('none');});
+  }
+  $('startFallButton').addEventListener('click',start);
+  $('pauseFallButton').addEventListener('click',pause);
+  $('resetFallButton').addEventListener('click',updateParameters);
+  planet.addEventListener('change',updateParameters);input.addEventListener('input',updateParameters);
+  $('fallSpeed').addEventListener('change',()=>{
+    if(trial?.running)advance(performance.now());
+    if(trial)trial.speed=Number($('fallSpeed').value);
+  });
+  $('exportFallButton').addEventListener('click',()=>{
+    if(!trial || !points.length)return;
+    if(trial.running)advance(performance.now());
+    const csv=['planet,height_m,gravity_m_s2,time_s,fallen_m,remaining_m,downward_velocity_m_s',...points.map(p=>[trial.planet,trial.h,trial.g,p.t.toFixed(6),p.d.toFixed(6),Math.max(0,trial.h-p.d).toFixed(6),(trial.g*p.t).toFixed(6)].join(','))].join('\r\n');
+    const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');
+    link.href=url;link.download='freefall-'+trial.planet.toLowerCase()+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+  document.addEventListener('visibilitychange',()=>{if(document.hidden && trial?.running){pause();if(!trial.finished)setStatus('Paused · tab hidden');}});
+  addEventListener('pagehide',()=>cancelAnimationFrame(frame));
+  new ResizeObserver(()=>render()).observe(scene);
+  updateParameters();
+})();

@@ -1,506 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leyi Wang | Portfolio</title>
-<link rel="icon" href="assets/nana.ico">
-<style>
-:root {
-    --bg: #f3fdf8;
-    --card: #ffffff;
-    --primary: #065f46;
-    --dark: #072E33;
-    --accent: #10b981;
-    --accent-soft: #d1fae5;
-    --text: #1f2937;
-    --subtext: #6b7280;
-    --border: #d1d5db;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-}
-a { color: inherit; text-decoration: none; }
-a:hover { text-decoration: none; }
-.topbar {
-    min-height: 72px;
-    background: var(--dark);
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0 clamp(20px, 4vw, 64px);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-.name { font-size: 19px; font-weight: 700; }
-.nav { display: flex; align-items: center; gap: 22px; margin-left: auto; }
-.nav a { color: white; opacity: 0.86; font-size: 14px; }
-.nav a:hover { opacity: 1; }
-.socials { display: flex; align-items: center; gap: 10px; margin-left: 28px; }
-.socials a {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.socials a:hover { background: rgba(255,255,255,0.12); }
-.socials img { width: 34px; height: 34px; object-fit: contain; opacity: 0.94; }
-.container {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 48px 28px 70px;
-}
-.hero {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 34px;
-    align-items: center;
-    min-height: 420px;
-}
-.hero-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    margin-bottom: 14px;
-    color: var(--primary);
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-}
-.hero-kicker::before {
-    content: "";
-    width: 28px;
-    height: 3px;
-    border-radius: 999px;
-    background: var(--accent);
-}
-h1 {
-    margin: 0;
-    color: var(--primary);
-    font-size: 44px;
-    line-height: 1.08;
-}
-.hero p {
-    color: var(--subtext);
-    font-size: 18px;
-    line-height: 1.7;
-    margin: 18px 0 0;
-}
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-.button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 42px;
-    padding: 0 16px;
-    border-radius: 6px;
-    background: var(--accent);
-    color: white;
-    font-weight: 700;
-}
-.button.secondary {
-    background: white;
-    color: var(--primary);
-    border: 1px solid var(--border);
-}
-.gallery {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    position: relative;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    box-shadow: 0 18px 42px rgba(0,0,0,0.12);
-    overflow: hidden;
-}
-.gallery img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    background: #eef4f1;
-    transition: opacity .2s ease;
-}
-.gallery-chrome {
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 34px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 13px;
-    background: rgba(255,255,255,.94);
-    border-bottom: 1px solid rgba(209,213,219,.75);
-    backdrop-filter: blur(8px);
-}
-.gallery-chrome i { width: 7px; height: 7px; border-radius: 50%; background: #cbd5d1; }
-.gallery-caption {
-    position: absolute;
-    z-index: 2;
-    left: 16px;
-    bottom: 14px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    background: rgba(7,46,51,.88);
-    color: white;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .01em;
-    backdrop-filter: blur(7px);
-}
-.gallery button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border: 0;
-    border-radius: 50%;
-    color: white;
-    background: rgba(7,46,51,0.68);
-    cursor: pointer;
-    font-size: 18px;
-}
-.gallery button:first-of-type { left: 14px; }
-.gallery button:last-of-type { right: 14px; }
-.gallery-dots { position:absolute; z-index:3; right:16px; bottom:17px; display:flex; gap:6px; }
-.gallery-dots button { position:static; width:7px; height:7px; min-width:0; padding:0; transform:none; background:rgba(255,255,255,.58); }
-.gallery-dots button.active { width:22px; border-radius:999px; background:white; }
-.metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:32px; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--border); box-shadow:0 10px 24px rgba(7,46,51,.05); }
-.metric { padding:20px; background:rgba(255,255,255,.94); }
-.metric strong { display:block; color:var(--primary); font-size:28px; letter-spacing:-.03em; }
-.metric span { display:block; margin-top:4px; color:var(--subtext); font-size:13px; }
-section { margin-top: 64px; scroll-margin-top: 90px; }
-h2 {
-    margin: 0 0 20px;
-    color: var(--primary);
-    font-size: 28px;
-}
-.info-grid,
-.project-grid,
-.link-grid {
-    display: grid;
-    gap: 18px;
-}
-.info-grid { grid-template-columns: repeat(3, 1fr); }
-.profile-spotlight {
-    display: grid;
-    grid-template-columns: 1.35fr .65fr;
-    gap: 0;
-    overflow: hidden;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    box-shadow: 0 18px 38px rgba(7,46,51,.1);
-}
-.section-head { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:20px; }
-.section-head h2 { margin:0; }
-.section-head p { max-width:560px; margin:0; color:var(--subtext); line-height:1.6; text-align:right; }
-.profile-main {
-    padding: 34px;
-    background: linear-gradient(135deg, #064e3b, #0f766e);
-    color: white;
-}
-.profile-label {
-    color: #a7f3d0;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-}
-.profile-main h3 {
-    margin: 10px 0 6px;
-    font-size: 34px;
-    line-height: 1.1;
-}
-.profile-role {
-    margin: 0;
-    color: #d1fae5;
-    font-size: 18px;
-    font-weight: 700;
-}
-.profile-main .profile-summary {
-    max-width: 620px;
-    margin: 20px 0 0;
-    color: #ecfdf5;
-    line-height: 1.7;
-}
-.profile-details {
-    display: grid;
-    align-content: center;
-    gap: 20px;
-    padding: 30px;
-}
-.profile-detail span {
-    display: block;
-    margin-bottom: 5px;
-    color: var(--subtext);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-}
-.profile-detail strong {
-    color: var(--primary);
-    font-size: 16px;
-    line-height: 1.45;
-}
-.project-grid { grid-template-columns: repeat(4, 1fr); }
-.link-grid { grid-template-columns: repeat(4, 1fr); }
-.card,
-.project-card,
-.link-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.06);
-}
-.card { padding: 22px; }
-.card strong,
-.project-card h3 { color: var(--primary); }
-.card p,
-.project-card p { color: var(--subtext); line-height: 1.55; }
-.project-card {
-    min-height: 180px;
-    padding: 20px;
-    transition: 0.2s;
-    position: relative;
-    overflow: hidden;
-}
-.project-card::after { content:"→"; position:absolute; right:18px; bottom:14px; color:var(--accent); font-size:22px; transition:.2s; }
-.project-card:hover::after { transform:translateX(4px); }
-.project-number { display:block; margin-bottom:28px; color:#94a3b8; font-size:12px; font-weight:800; letter-spacing:.12em; }
-.project-tag { display:inline-flex; margin-top:16px; padding:5px 8px; border-radius:999px; background:var(--accent-soft); color:var(--primary); font-size:11px; font-weight:800; }
-.project-card:hover,
-.link-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.09);
-}
-.project-card h3 { margin: 0 0 10px; font-size: 20px; }
-.project-card p { margin: 0; }
-.link-card {
-    padding: 16px;
-    text-align: center;
-    color: var(--primary);
-    font-weight: 700;
-    transition: 0.2s;
-}
-.build-card { display:grid; grid-template-columns:1.15fr .85fr; overflow:hidden; border-radius:18px; background:var(--dark); color:white; box-shadow:0 20px 44px rgba(7,46,51,.16); }
-.build-copy { padding:38px; }
-.build-label { color:#6ee7b7; font-size:12px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
-.build-copy h2 { margin:10px 0 12px; color:white; font-size:32px; }
-.build-copy p { margin:0; color:#cbd5d1; line-height:1.7; }
-.build-features { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:24px 0; }
-.build-features span { padding:10px 12px; border:1px solid rgba(255,255,255,.12); border-radius:9px; color:#d1fae5; font-size:13px; }
-.build-visual { display:grid; place-items:center; min-height:320px; padding:30px; background:radial-gradient(circle at 70% 25%,rgba(16,185,129,.28),transparent 42%),#0b3b40; }
-.ai-window { width:min(100%,330px); padding:14px; border:1px solid rgba(255,255,255,.16); border-radius:16px; background:rgba(255,255,255,.08); backdrop-filter:blur(8px); }
-.ai-window-top { display:flex; align-items:center; gap:6px; margin-bottom:14px; }
-.ai-window-top i { width:7px; height:7px; border-radius:50%; background:#6ee7b7; opacity:.7; }
-.ai-message { width:86%; margin-top:9px; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.1); color:#ecfdf5; font-size:12px; line-height:1.45; }
-.ai-message.user { width:70%; margin-left:auto; background:#10b981; color:white; }
-.status-pill { display:inline-flex; align-items:center; gap:7px; margin-top:15px; color:#a7f3d0; font-size:11px; font-weight:800; }
-.status-pill::before { content:""; width:7px; height:7px; border-radius:50%; background:#34d399; box-shadow:0 0 0 4px rgba(52,211,153,.12); }
-.footer {
-    background: var(--primary);
-    color: #d1fae5;
-    padding: 18px 28px;
-    text-align: center;
-}
-@media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; }
-    .metrics { grid-template-columns: 1fr 1fr; }
-    .build-card { grid-template-columns: 1fr; }
-    .profile-spotlight { grid-template-columns: 1fr; }
-    .profile-details { grid-template-columns: repeat(3, 1fr); }
-    .project-grid,
-    .info-grid { grid-template-columns: repeat(2, 1fr); }
-    .link-grid { grid-template-columns: repeat(2, 1fr); }
-    .nav { display: none; }
-}
-@media (max-width: 560px) {
-    .topbar { padding: 0 16px; }
-    .topbar { min-height: 66px; }
-    .socials { margin-left: auto; gap: 2px; }
-    .socials a { width: 40px; height: 40px; }
-    .socials img { width: 29px; height: 29px; }
-    .container { padding: 34px 18px 56px; }
-    h1 { font-size: 34px; }
-    .profile-main { padding: 26px; }
-    .profile-main h3 { font-size: 29px; }
-    .profile-details { grid-template-columns: 1fr; padding: 24px 26px; }
-    .metric { padding: 16px; }
-    .metric strong { font-size: 24px; }
-    .section-head { align-items: start; flex-direction: column; gap: 8px; }
-    .section-head p { text-align: left; }
-    .build-copy { padding: 27px; }
-    .build-copy h2 { font-size: 27px; }
-    .build-features { grid-template-columns: 1fr; }
-    .build-visual { min-height: 260px; }
-    .project-grid,
-    .info-grid,
-    .link-grid { grid-template-columns: 1fr; }
-}
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .project-card, .link-card, .project-card::after, .gallery img { transition: none; }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="Leyi Wang’s project notebook: interactive physics, statistics tools, software experiments, and an Arduino presence-radar prototype.">
+  <title>Leyi Wang — Experiments, Code &amp; Curiosity</title>
+  <link rel="icon" href="assets/nana.ico">
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="js/site-content.js"></script>
+  <script defer src="js/site.js"></script>
 </head>
 <body>
-<header class="topbar">
-    <div class="name">Leyi Wang</div>
-    <nav class="nav">
-        <a href="#home">Home</a>
-        <a href="#about">Profile</a>
-        <a href="#projects">Projects</a>
-        <a href="#quick-links">Quick Links</a>
+  <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="index.html">Leyi Wang</a><nav class="site-navigation"><a href="pages/physics.html">Physics</a><a href="pages/stat.html">Statistics</a><a href="pages/cs.html">Computer Science</a><a href="pages/Radar.html">Radar</a></nav></div></header>
+  <main class="portfolio-home" id="main-content">
+    <section class="home-hero">
+      <div>
+        <p class="site-eyebrow">A project notebook by Leyi Wang</p>
+        <h1>Making ideas<br><em>tangible.</em></h1>
+        <p class="hero-description">Physics you can experiment with. Data you can explore. Software you can run. A growing collection of things I build to understand how they work.</p>
+        <div class="home-actions"><a class="site-button" href="#selected-work">Explore the work <span class="site-arrow" aria-hidden="true">↘</span></a><a class="site-text-link" href="#about">A little about me <span aria-hidden="true">→</span></a></div>
+        <div class="home-location">Undergraduate at the University of California, Irvine</div>
+      </div>
+      <figure class="hero-project">
+        <a class="hero-project-image" href="pages/Radar.html" aria-label="Explore the presence radar prototype">
+          <img src="images/radar_photo2.jpg" width="1206" height="644" fetchpriority="high" alt="Presence-sensing prototype with a rotating sensor, servo, Arduino, and handmade housing.">
+          <div class="hero-photo-label"><div><span>From the workbench</span><strong>A signal. A direction. A working prototype.</strong></div><b class="site-arrow" aria-hidden="true">↗</b></div>
+        </a>
+        <figcaption><span>Arduino × presence sensing</span><span>Built, wired, and tested locally</span></figcaption>
+      </figure>
+    </section>
+    <nav class="area-strip" aria-label="Project collections">
+      <a href="pages/physics.html"><div><span class="area-no">01 / EXPERIMENT</span><strong>Physics</strong></div><span class="site-arrow" aria-hidden="true">↗</span></a>
+      <a href="pages/stat.html"><div><span class="area-no">02 / MAKE SENSE OF DATA</span><strong>Statistics</strong></div><span class="site-arrow" aria-hidden="true">↗</span></a>
+      <a href="pages/cs.html"><div><span class="area-no">03 / BUILD &amp; ITERATE</span><strong>Computer Science</strong></div><span class="site-arrow" aria-hidden="true">↗</span></a>
+      <a href="pages/Radar.html"><div><span class="area-no">04 / CONNECT TO HARDWARE</span><strong>Radar</strong></div><span class="site-arrow" aria-hidden="true">↗</span></a>
     </nav>
-    <div class="socials">
-        <a href="https://github.com/Ley1Wang" target="_blank" aria-label="GitHub"><img src="images/GitHub-Logo.png" alt="GitHub"></a>
-        <a href="https://www.instagram.com/kuizhiyi?igsh=ZmJ2eWd3MmR3cmM1" target="_blank" aria-label="Instagram"><img src="images/Instagram-Logo.png" alt="Instagram"></a>
-        <a href="mailto:leyiwang0624@gmail.com" aria-label="Email"><img src="images/Gmail-Logo.png" alt="Email"></a>
-    </div>
-</header>
-
-<main class="container">
-    <section id="home" class="hero">
-        <div>
-            <div class="hero-kicker">Hi, I'm Leyi Wang</div>
-            <h1>Undergraduate Projects in Physics, CS, and Statistics</h1>
-            <p>This site collects my interactive simulations, embedded radar work, data tools, and small web applications. Most projects are built as lightweight browser experiences for learning, testing, and visualization.</p>
-            <div class="hero-actions">
-                <a class="button" href="pages/physics.html">View Physics</a>
-                <a class="button secondary" href="pages/stat.html">View Statistics</a>
-                <a class="button secondary" href="pages/cs.html">View CS</a>
-            </div>
-        </div>
-        <div class="gallery" aria-label="Featured project gallery">
-            <div class="gallery-chrome" aria-hidden="true"><i></i><i></i><i></i></div>
-            <button onclick="prev()" aria-label="Previous slide">&larr;</button>
-            <img id="slide" src="images/Kirchoff_Example.png" alt="Kirchhoff circuit simulator interface">
-            <span class="gallery-caption" id="slide-caption">Kirchhoff Circuit Simulator</span>
-            <button onclick="next()" aria-label="Next slide">&rarr;</button>
-            <div class="gallery-dots" id="gallery-dots" aria-label="Choose featured project"></div>
-        </div>
+    <section class="home-section" id="selected-work">
+      <div class="home-section-heading"><div><p class="site-eyebrow">A few places to begin</p><h2>Small experiments.<br>Room for discovery.</h2></div><p>Start with a question, change a parameter, and see what follows. These projects are made to be explored, not just looked at.</p></div>
+      <div class="selected-grid">
+        <a class="selected-project" href="pages/pendulum-lab.html"><div class="selected-image"><img src="assets/previews/pendulum-lab.jpg" width="1000" height="620" loading="lazy" alt="Pendulum experiment with an animation and live measurements."></div><div><div class="selected-meta"><span>Physics / Mechanics</span><span aria-hidden="true">↗</span></div><h3>When is a pendulum simple?</h3><p>Compare theory with nonlinear motion, then record a trial of your own.</p></div></a>
+        <a class="selected-project" href="pages/code-lab.html"><div class="selected-image"><img src="assets/previews/code-lab.jpg" width="1000" height="620" loading="lazy" alt="The dark, focused Code Lab browser editor."></div><div><div class="selected-meta"><span>Computer Science / Tools</span><span aria-hidden="true">↗</span></div><h3>A little space to code.</h3><p>Five languages. One focused workspace. Write, run, and keep experimenting.</p></div></a>
+        <a class="selected-project" href="pages/probability-distribution.html"><div class="selected-image"><img src="assets/previews/probability-distribution.jpg" width="1000" height="620" loading="lazy" alt="A probability distribution plot with adjustable parameters."></div><div><div class="selected-meta"><span>Statistics / Probability</span><span aria-hidden="true">↗</span></div><h3>Find the shape of chance.</h3><p>Make the jump from a distribution’s parameters to its pattern.</p></div></a>
+      </div>
     </section>
-
-    <div class="metrics" aria-label="Portfolio overview">
-        <div class="metric"><strong>28+</strong><span>interactive projects</span></div>
-        <div class="metric"><strong>4</strong><span>technical areas</span></div>
-        <div class="metric"><strong>Web</strong><span>browser-first experiences</span></div>
-        <div class="metric"><strong>Local</strong><span>privacy-first AI in progress</span></div>
-    </div>
-
-    <section id="about">
-        <h2>Profile</h2>
-        <div class="profile-spotlight">
-            <div class="profile-main">
-                <div class="profile-label">About me</div>
-                <h3>Leyi Wang</h3>
-                <p class="profile-role">Undergraduate at the University of California, Irvine</p>
-                <p class="profile-summary">I build interactive projects that connect mathematical ideas, physical systems, data, and software—from browser simulations and statistical tools to embedded radar and neural networks.</p>
-            </div>
-            <div class="profile-details">
-                <div class="profile-detail"><span>School</span><strong>UC Irvine</strong></div>
-                <div class="profile-detail"><span>Interests</span><strong>Mathematics · Computer Engineering · Embedded Systems</strong></div>
-                <div class="profile-detail"><span>Current focus</span><strong>Interactive tools, visualization, and applied machine learning</strong></div>
-            </div>
-        </div>
+    <section class="home-about" id="about">
+      <div><p class="site-eyebrow">The person behind the projects</p><h2>Curious about the theory.<br>Happiest building the experiment.</h2></div>
+      <div><p>I’m Leyi, an undergraduate at UC Irvine interested in mathematics, computer engineering, and embedded systems. I use small, working projects to connect the ideas I study with something I can test.</p><p>This notebook brings together browser simulations, statistical tools, data pipelines, and hardware work. Some are self-contained demos; others document a larger system that runs locally. Each project makes that distinction clear.</p><div class="about-detail"><span>Approach</span><strong>Observe → model → build → refine</strong></div><div class="about-detail"><span>Interests</span><strong>Physical systems, useful software, and learning from data</strong></div></div>
     </section>
-
-    <section id="projects">
-        <div class="section-head"><h2>Project Areas</h2><p>Explore complete collections rather than isolated demos—each area combines theory, interaction, and practical implementation.</p></div>
-        <div class="project-grid">
-            <a class="project-card" href="pages/physics.html"><span class="project-number">01 / PHYSICS</span><h3>Physics</h3><p>Electric fields, waves, lenses, circuits, pendulums, and motion simulations.</p><span class="project-tag">8 interactive labs</span></a>
-            <a class="project-card" href="pages/stat.html"><span class="project-number">02 / DATA</span><h3>Statistics</h3><p>Regression, descriptive statistics, distributions, hypothesis tests, and sampling.</p><span class="project-tag">10 learning tools</span></a>
-            <a class="project-card" href="pages/cs.html"><span class="project-number">03 / SOFTWARE</span><h3>Computer Science</h3><p>Full-stack internship work, frontend tools, API dashboards, machine learning, and sorting visualization.</p><span class="project-tag">10 projects</span></a>
-            <a class="project-card" href="pages/Radar.html"><span class="project-number">04 / HARDWARE</span><h3>Radar</h3><p>Arduino-based presence sensing with local live visualization and data export.</p><span class="project-tag">embedded system</span></a>
-        </div>
+    <section class="in-progress" id="building">
+      <div><span class="site-pill">In development</span><h2>A more personal<br>AI workspace.</h2></div>
+      <div><p>I’m also working on a local-first assistant: a place to try local models and optional cloud APIs, with a longer-term focus on everyday usefulness and explicit control over personal data.</p><a class="site-text-link" href="https://github.com/Ley1Wang/Local-Ai-Project" target="_blank" rel="noopener noreferrer">Follow the development <span aria-hidden="true">↗</span></a><div class="progress-note">An ongoing project—not a finished multi-device service.</div></div>
     </section>
-
-    <section id="building">
-        <div class="build-card">
-            <div class="build-copy">
-                <div class="build-label">Currently building</div>
-                <h2>A private, multi-device AI workspace</h2>
-                <p>A local-first assistant that connects Ollama and optional cloud models, keeps personal data under explicit permissions, and works across phone and desktop.</p>
-                <div class="build-features"><span>Local model routing</span><span>Physics assistant</span><span>Voice and text</span><span>Permissioned agents</span></div>
-                <a class="button" href="https://github.com/Ley1Wang/Local-Ai-Project" target="_blank" rel="noopener">View development on GitHub</a>
-            </div>
-            <div class="build-visual" aria-label="Local AI interface concept">
-                <div class="ai-window"><div class="ai-window-top"><i></i><i></i><i></i></div><div class="ai-message user">Plan my study session for today.</div><div class="ai-message">I found three priorities in your local task list. Shall I create a 90-minute plan?</div><div class="ai-message user">Yes, keep it focused.</div><div class="status-pill">Local model · private</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="quick-links">
-        <h2>Quick Links</h2>
-        <div class="link-grid">
-            <a class="link-card" href="pages/kirchhoff.html">Kirchhoff</a>
-            <a class="link-card" href="pages/electric-field.html">Electric Field</a>
-            <a class="link-card" href="pages/descriptive-statistics.html">Statistics Calculator</a>
-            <a class="link-card" href="pages/probability-distribution.html">Distribution Explorer</a>
-            <a class="link-card" href="pages/sorting-visualizer.html">Sorting Visualizer</a>
-            <a class="link-card" href="pages/api-dashboard.html">API Dashboard</a>
-            <a class="link-card" href="pages/neural-digit.html">Digit Recognition</a>
-            <a class="link-card" href="pages/data-dashboard.html">Data Dashboard</a>
-            <a class="link-card" href="pages/Radar.html">Radar Project</a>
-        </div>
-    </section>
-</main>
-
-<footer class="footer">&copy; 2026 Leyi Wang | wangleyi.top</footer>
-
-<script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-history.scrollRestoration = "manual";
-const projects = [
-    { src: "images/Kirchoff_Example.png", label: "Kirchhoff Circuit Simulator", alt: "Kirchhoff circuit simulator interface" },
-    { src: "images/Lenz_Example.jpg", label: "Lenz Effect Experiment", alt: "Lenz effect experiment interface" },
-    { src: "images/Freefalling_Example.jpg", label: "Planetary Freefall Lab", alt: "Freefall simulator interface" },
-    { src: "images/Plot_Example.jpg", label: "Experimental Data Plotter", alt: "Experimental plot interface" },
-    { src: "images/radar_photo2.jpg", label: "Radar Hardware Prototype", alt: "Radar hardware project" }
-];
-let index = 0;
-let timer = setInterval(next, 4200);
-const slide = document.getElementById("slide");
-const slideCaption = document.getElementById("slide-caption");
-const dots = document.getElementById("gallery-dots");
-projects.forEach((project, i) => {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.setAttribute("aria-label", `Show ${project.label}`);
-    dot.addEventListener("click", () => { index = i; show(); restartTimer(); });
-    dots.appendChild(dot);
-});
-function show() {
-    const project = projects[index];
-    slide.style.opacity = 0;
-    setTimeout(() => {
-        slide.src = project.src;
-        slide.alt = project.alt;
-        slideCaption.textContent = project.label;
-        slide.style.opacity = 1;
-    }, 140);
-    [...dots.children].forEach((dot, i) => dot.classList.toggle("active", i === index));
-}
-function next() { index = (index + 1) % projects.length; show(); }
-function prev() { index = (index - 1 + projects.length) % projects.length; show(); }
-function restartTimer() { clearInterval(timer); timer = setInterval(next, 4200); }
-slide.addEventListener("mouseenter", () => clearInterval(timer));
-slide.addEventListener("mouseleave", restartTimer);
-show();
-</script>
+    <section class="home-contact" id="contact"><div><h2>Good questions are welcome.</h2><p>Want to talk about a project, compare an idea, or share a suggestion?</p></div><a class="site-button site-button-secondary" href="mailto:leyiwang0624@gmail.com">Let’s get in touch <span aria-hidden="true">↗</span></a></section>
+  </main>
+  <noscript><p style="padding:20px;text-align:center">Use the links above to explore. Interactive experiments require JavaScript.</p></noscript>
+  <script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

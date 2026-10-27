@@ -1,249 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Statistics Projects</title>
-<link rel="icon" href="../assets/nana.ico">
-
-<style>
-:root {
-    --bg: #f3fdf8;
-    --card: #ffffff;
-    --primary: #065f46;
-    --accent: #10b981;
-    --text: #1f2937;
-    --subtext: #6b7280;
-}
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
-
-.topbar {
-    height: 60px;
-    background: #072E33;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.topbar .title {
-    color: white;
-    font-size: 18px;
-}
-
-.topbar a {
-    color: white;
-    text-decoration: none;
-    opacity: 0.8;
-}
-
-.topbar a:hover {
-    opacity: 1;
-}
-
-.container {
-    max-width: 1180px;
-    margin: 70px auto;
-    padding: 0 28px;
-}
-
-h1 {
-    color: var(--primary);
-    margin-bottom: 36px;
-    font-size: 34px;
-}
-
-.project-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
-}
-
-.card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 26px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-.card h3 {
-    margin: 0;
-    color: var(--primary);
-    font-size: 24px;
-}
-
-.card p {
-    color: var(--subtext);
-    margin: 12px 0;
-    line-height: 1.58;
-    font-size: 16px;
-}
-
-.visual {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    margin-top: 16px;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background:
-        linear-gradient(135deg, rgba(16,185,129,0.18), rgba(7,46,51,0.08)),
-        #ffffff;
-    border: 1px solid #d1fae5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 52px;
-    font-weight: 700;
-}
-
-.preview {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    margin-top: 16px;
-    padding: 28px 0 0;
-    box-sizing: border-box;
-    border: 1px solid #d1fae5;
-    border-radius: 10px;
-    background: #fbfffd;
-    position: relative;
-    overflow: hidden;
-}
-
-.preview::before { content:""; position:absolute; z-index:2; top:10px; left:13px; width:6px; height:6px; border-radius:50%; background:#b7c8c1; box-shadow:11px 0 #c8d6d0,22px 0 #d7e2dd; }
-.preview iframe { width:200%; height:200%; border:0; transform:scale(.5); transform-origin:top left; pointer-events:none; background:white; }
-
-.button {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 10px 16px;
-    background: var(--accent);
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.button:hover {
-    opacity: 0.9;
-}
-
-@media (max-width: 720px) {
-    .project-list {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="Explore distributions, sampling, and inference with tools that put the plot next to the calculation—and the assumptions next to the result.">
+  <title>Statistics — Leyi Wang</title>
+  <link rel="icon" href="../assets/nana.ico">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script defer src="../js/site-content.js"></script>
+  <script defer src="../js/site.js"></script>
 </head>
-
-<body>
-<div class="topbar">
-    <div class="title">Statistics Projects</div>
-    <a href="../index.html">Home</a>
-</div>
-
-<div class="container">
-    <h1>Statistics Projects</h1>
-
-    <div class="project-list">
-        <div class="card">
-            <h3>Central Limit Theorem Simulator</h3>
-            <p>Sample from uniform, skewed, or Bernoulli populations and watch the sampling distribution of the mean emerge.</p>
-            <div class="preview"><iframe src="central-limit-theorem.html" title="Central limit theorem interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="central-limit-theorem.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Mean Confidence Interval</h3>
-            <p>Calculate and visualize 90%, 95%, or 99% confidence intervals from sample summary statistics.</p>
-            <div class="preview"><iframe src="confidence-interval.html" title="Confidence interval interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="confidence-interval.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Chi-square Independence Test</h3>
-            <p>Analyze a 2×2 contingency table, inspect expected counts, and interpret the chi-square p-value.</p>
-            <div class="preview"><iframe src="chi-square-test.html" title="Chi-square test interface preview" loading="lazy" tabindex="-1"></iframe></div>
-            <a href="chi-square-test.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Scatter Plot & Linear Regression</h3>
-            <p>Add data points, draw a scatter plot, and fit a linear regression line.</p>
-            <div class="preview">
-                <iframe src="Plot.html" title="Scatter plot interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="Plot.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Descriptive Statistics Calculator</h3>
-            <p>Enter a data set and instantly calculate mean, median, mode, variance, standard deviation, quartiles, histogram, and box plot.</p>
-            <div class="preview">
-                <iframe src="descriptive-statistics.html" title="Descriptive statistics interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="descriptive-statistics.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Probability Distribution Explorer</h3>
-            <p>Switch between normal, binomial, and Poisson distributions, then compare their shape and summary values.</p>
-            <div class="preview">
-                <iframe src="probability-distribution.html" title="Probability distribution interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="probability-distribution.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Hypothesis Test Simulator</h3>
-            <p>Run a one-sample z-test or t-test, visualize the rejection region, and compare the p-value with alpha.</p>
-            <div class="preview">
-                <iframe src="hypothesis-test.html" title="Hypothesis test interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="hypothesis-test.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Data Dashboard</h3>
-            <p>View summary cards, trend charts, and compact data tables in a dashboard layout.</p>
-            <div class="preview">
-                <iframe src="data-dashboard.html" title="Data dashboard interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="data-dashboard.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Bootstrap Sampling Simulator</h3>
-            <p>Resample a data set and visualize a bootstrap distribution with a confidence interval.</p>
-            <div class="preview">
-                <iframe src="bootstrap-simulator.html" title="Bootstrap simulator interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="bootstrap-simulator.html" class="button">Open &rarr;</a>
-        </div>
-
-        <div class="card">
-            <h3>Bayes Rule Diagnostic Calculator</h3>
-            <p>Adjust prevalence, sensitivity, and specificity to see how diagnostic test results change.</p>
-            <div class="preview">
-                <iframe src="bayes-diagnostic.html" title="Bayes calculator interface preview" loading="lazy" tabindex="-1"></iframe>
-            </div>
-            <a href="bayes-diagnostic.html" class="button">Open &rarr;</a>
-        </div>    </div>
-</div>
-
-<script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<body data-collection="statistics">
+  <header class="site-header"><div class="site-header-inner"><a class="site-brand" href="../index.html">Leyi Wang</a><nav class="site-navigation"><a href="../index.html">Home</a><a href="physics.html">Physics</a><a href="stat.html">Statistics</a><a href="cs.html">Computer Science</a></nav></div></header>
+  <main class="collection-page" id="main-content">
+    <section class="collection-hero"><div><p class="site-eyebrow">02 / Statistics</p><h1>Let the data<br>tell a fuller story.</h1></div><div><p class="collection-description">Explore distributions, sampling, and inference with tools that put the plot next to the calculation—and the assumptions next to the result.</p><div class="collection-summary">10 projects · From observations to understanding</div></div></section>
+    <div class="catalog-toolbar">
+      <div class="catalog-filters" role="group" aria-label="Filter by topic"><button type="button" data-filter="all" aria-pressed="true">All projects</button><button type="button" data-filter="Data analysis" aria-pressed="false">Data analysis</button><button type="button" data-filter="Explore" aria-pressed="false">Explore</button><button type="button" data-filter="Probability" aria-pressed="false">Probability</button><button type="button" data-filter="Sampling" aria-pressed="false">Sampling</button><button type="button" data-filter="Inference" aria-pressed="false">Inference</button></div>
+      <label class="catalog-search"><svg class="site-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="site-sr-only">Search projects</span><input id="project-search" type="search" placeholder="Find something to explore…" autocomplete="off"></label>
+    </div>
+    <p id="catalog-count" class="catalog-count" aria-live="polite">10 projects</p>
+    <div class="catalog-grid">
+    <article class="catalog-card" data-topic="Data analysis">
+      <a class="catalog-preview" href="Plot.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/Plot.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Data analysis</span><span>01</span></div><h2><a href="Plot.html">Scatter Plot &amp; Regression</a></h2><p>Turn measured pairs into a scatter plot, fit a straight line, and inspect the relationship behind the coefficients.</p><div class="catalog-card-footer"><span class="site-pill">Browser tool</span><a href="Plot.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Explore">
+      <a class="catalog-preview" href="descriptive-statistics.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/descriptive-statistics.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Explore</span><span>02</span></div><h2><a href="descriptive-statistics.html">Descriptive Statistics</a></h2><p>Read the center, spread, and shape of a dataset through summary values, a histogram, and a box plot.</p><div class="catalog-card-footer"><span class="site-pill">Browser tool</span><a href="descriptive-statistics.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Probability">
+      <a class="catalog-preview" href="probability-distribution.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/probability-distribution.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Probability</span><span>03</span></div><h2><a href="probability-distribution.html">Distribution Explorer</a></h2><p>Compare normal, binomial, and Poisson distributions through adjustable parameters and live summary values.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="probability-distribution.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Sampling">
+      <a class="catalog-preview" href="central-limit-theorem.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/central-limit-theorem.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Sampling</span><span>04</span></div><h2><a href="central-limit-theorem.html">The Central Limit Experiment</a></h2><p>Sample repeatedly from different populations and watch a distribution of means take shape.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="central-limit-theorem.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Inference">
+      <a class="catalog-preview" href="confidence-interval.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/confidence-interval.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Inference</span><span>05</span></div><h2><a href="confidence-interval.html">Mean Confidence Interval</a></h2><p>Translate a sample summary into an interval estimate and see how confidence and sample size affect its width.</p><div class="catalog-card-footer"><span class="site-pill">Browser tool</span><a href="confidence-interval.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Inference">
+      <a class="catalog-preview" href="hypothesis-test.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/hypothesis-test.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Inference</span><span>06</span></div><h2><a href="hypothesis-test.html">Hypothesis Test Lab</a></h2><p>Make a one-sample test visible: choose a model, inspect the statistic, and compare a p-value with a decision threshold.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="hypothesis-test.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Inference">
+      <a class="catalog-preview" href="chi-square-test.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/chi-square-test.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Inference</span><span>07</span></div><h2><a href="chi-square-test.html">Chi-square Independence</a></h2><p>Move from a 2 × 2 table of counts to expected frequencies, a test statistic, and an interpretable comparison.</p><div class="catalog-card-footer"><span class="site-pill">Browser tool</span><a href="chi-square-test.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Sampling">
+      <a class="catalog-preview" href="bootstrap-simulator.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/bootstrap-simulator.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Sampling</span><span>08</span></div><h2><a href="bootstrap-simulator.html">Bootstrap Resampling</a></h2><p>Resample an observed dataset and build a distribution of means, including an approximate percentile interval.</p><div class="catalog-card-footer"><span class="site-pill">Interactive lab</span><a href="bootstrap-simulator.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Probability">
+      <a class="catalog-preview" href="bayes-diagnostic.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/bayes-diagnostic.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Probability</span><span>09</span></div><h2><a href="bayes-diagnostic.html">Bayes &amp; Base Rates</a></h2><p>Use prevalence and test characteristics to explore why a positive result does not tell the whole story.</p><div class="catalog-card-footer"><span class="site-pill">Educational model</span><a href="bayes-diagnostic.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    <article class="catalog-card" data-topic="Explore">
+      <a class="catalog-preview" href="data-dashboard.html" tabindex="-1" aria-hidden="true"><img src="../assets/previews/data-dashboard.jpg" alt="" width="1000" height="620" loading="lazy"></a>
+      <div class="catalog-card-body"><div class="catalog-card-meta"><span>Explore</span><span>10</span></div><h2><a href="data-dashboard.html">Data Overview Dashboard</a></h2><p>A compact dashboard that brings summary indicators, trends, and tabular data into a single readable view.</p><div class="catalog-card-footer"><span class="site-pill">Sample data</span><a href="data-dashboard.html">Explore <span class="site-arrow" aria-hidden="true">→</span></a></div></div>
+    </article>
+    </div>
+    <div id="catalog-empty" class="catalog-empty" hidden><p>No projects match that combination.</p><button id="reset-search" class="site-button site-button-secondary" type="button">Clear filters</button></div>
+    <p class="collection-note">Educational tools with explicit model notes. Check assumptions before interpreting a result.</p>
+  </main>
+  <script data-goatcounter="https://wangleyi.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

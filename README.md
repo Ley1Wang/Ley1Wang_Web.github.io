@@ -3,10 +3,38 @@
 This repository contains my personal website at wangleyi.top. It includes interactive physics simulations, statistics tools, computer science projects, and a radar visualization project.
 
 Main sections:
+
 - Physics visualizations
 - Statistics calculators and dashboards
 - Computer science projects
 - Radar hardware/software project
+
+## Shared presentation
+
+The portfolio is buildless HTML, CSS, and JavaScript. The home page and the three collections use a restrained paper-white/forest-green design; the experiments share navigation, responsive controls, contextual notes, and related-project links. Code Lab keeps its separate dark editor interface.
+
+- `assets/site.css`: shared visual system, home/collection layouts, and presentation overrides for existing tools.
+- `js/site-content.js`: project descriptions, execution modes, suggested experiments, observation prompts, and scope notes. These are static editorial data, not visitor data.
+- `js/site.js`: navigation/footer, mobile menu, collection search/topic filtering, and experiment context. Classic deferred scripts also allow the main presentation to open from disk.
+- `assets/previews/`: 27 compressed JPEG captures of the actual project interfaces (about 1 MB combined), replacing nested live iframes on collection pages. The main radar photo is the original hardware image.
+
+Collection cards remain ordinary HTML so their content and links are readable without JavaScript. Keep their copy consistent with `site-content.js` when editing descriptions. Tools that fetch bundled JSON should be previewed through HTTP; a browser can block those fetches on `file://`.
+
+Projects are explicitly labeled as browser tools, archived data, simulated requests, or local-service integrations. The public radar sweep is a demonstration, and digit recognition needs the local trained-model service. The public website does not start services, run crawlers, train models, or connect hardware automatically. The local AI workspace is identified as an ongoing project rather than a finished service.
+
+Polish also includes finite-number feedback and sample data for regression, a distinct-x fit guard, clearer induction assumptions, invalid-table/resampling feedback, a confidence-interval visualization that responds to the inputs, safe table-row rendering, and corrected local inference routing when previewing the portfolio on a port other than 5000.
+
+## Project-internal refinements
+
+The project pages prioritize explicit units, states, assumptions, and inspectable results, without adding another visual redesign:
+
+- Freefall (`js/freefalling.js`): constant-gravity motion ends at physical impact, independent of the responsive drawing height. It supports pause/resume, playback speed, finite height bounds, labeled numeric axes, 0.1-second trial sampling, and CSV export with an exact impact endpoint. Editing parameters starts a fresh trial; hiding the tab pauses playback.
+- Thin lens (`js/lens-lab.js`): signed image distance and magnification, real/virtual/focal presets, dashed virtual-ray extensions, automatic diagram fitting, explicit off-screen states, and a singular focus state rather than fabricated finite values.
+- Sorting (`js/sorting-lab.js`): generator-driven single-step/pause/resume, safe cancellation, a reusable starting array, numeric array inspection, per-input comparison records, and explicit value-comparison / array-write conventions. Animation delay is not a speed benchmark.
+- Sampling (`js/clt-lab.js`): a reproducible 32-bit seed, bounded integer inputs, theoretical population mean/SE versus observed results, relative-frequency histogram axes, an optional scaled normal reference, and raw-means CSV exports with run metadata.
+- API inspector (`js/api-lab.js`): explicit GET/POST handling, query/JSON/schema validation, deterministic page-memory fixtures and creations, 201/400/405 outcomes, response headers, and reset behavior. It performs no actual API requests and invents no measured latency.
+
+The lens, sorting, and sampling canvases redraw for the actual display width and device pixel ratio, keeping labels readable on narrow/high-density screens. Model equations, counter definitions, and assumptions are placed in compact expandable notes rather than decorative panels. All five refined projects can also be opened directly from their local HTML files.
 
 ## Code Lab
 

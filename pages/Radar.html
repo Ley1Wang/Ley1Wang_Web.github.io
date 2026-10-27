@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Presence Radar Project</title>
+<title>Presence Radar Scanner — Leyi Wang</title>
 <link rel="icon" href="../assets/radar.ico">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
     --bg: #f3fdf8;
@@ -179,8 +179,12 @@ video {
     .hero, .grid, .stats, .image-row { grid-template-columns: 1fr; }
 }
 </style>
+<meta name="description" content="A rotating presence-sensing prototype that links Arduino signals to a browser visualization of active directions.">
+<link rel="stylesheet" href="../assets/site.css">
+<script defer src="../js/site-content.js"></script>
+<script defer src="../js/site.js"></script>
 </head>
-<body>
+<body class="site-tool" data-project="Radar">
 <div class="topbar">
     <span>Radar</span>
     <div>
@@ -211,7 +215,8 @@ video {
         </div>
 
         <div class="panel radar-card">
-            <canvas id="radar" width="720" height="720"></canvas>
+            <canvas id="radar" width="720" height="720" aria-label="Demonstration radar sweep using simulated presence data"></canvas>
+            <p class="muted" style="font-size:11px;margin:12px 0 0">DEMONSTRATION DATA · Live serial input is available in the local viewer.</p>
         </div>
     </section>
 
@@ -244,7 +249,8 @@ video {
 
         <div class="panel card">
             <h2>Local Run Flow</h2>
-            <pre class="code">cd E:\GitHub\Ley1Wang_Web.github.io\radar_app
+            <pre class="code"># From this repository's root folder
+cd radar_app
 python app.py
 
 # then open
@@ -275,7 +281,7 @@ Serial.println(presence);</pre>
             <img src="../images/radar_code1.png" alt="Radar code screenshot">
             <img src="../images/radar_photo2.jpg" alt="Radar project wiring">
         </div>
-        <video controls>
+        <video controls preload="none" aria-label="Radar mechanism demonstration">
             <source src="../assets/Mechanism.mp4" type="video/mp4">
         </video>
     </section>
@@ -283,6 +289,6 @@ Serial.println(presence);</pre>
 
 <script src="../js/Radar.js"></script>
 <script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+        async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

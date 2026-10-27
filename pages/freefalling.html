@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Freefalling Simulation</title>
+<title>Planetary Freefall — Leyi Wang</title>
 <link rel="icon" href="../assets/freefalling.ico">
 
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 
 <style>
 :root {
@@ -358,8 +358,12 @@ button:active {
 }
 
 </style>
+<meta name="description" content="Take the same drop to different worlds and compare motion, velocity, and acceleration under each gravity.">
+<link rel="stylesheet" href="../assets/site.css">
+<script defer src="../js/site-content.js"></script>
+<script defer src="../js/site.js"></script>
 </head>
-<body>
+<body class="site-tool" data-project="freefalling">
 <div class="topbar">
     <span>Physics</span>
     <div>
@@ -377,7 +381,7 @@ button:active {
 
     <div class="controls">
 
-        <select id="planet">
+        <label class="tool-field" for="planet"><span>World</span><select id="planet">
             <option>Mercury</option>
             <option>Venus</option>
             <option selected>Earth</option>
@@ -387,25 +391,27 @@ button:active {
             <option>Saturn</option>
             <option>Uranus</option>
             <option>Neptune</option>
-        </select>
+        </select></label>
 
-        <input
+        <label class="tool-field" for="heightInput"><span>Release height (m)</span><input
             id="heightInput"
             type="number"
-            value="100">
+            min="0.1" max="10000" step="any" value="100" aria-describedby="fallError"></label>
 
-        <button onclick="startFall()">
+        <label class="tool-field" for="fallSpeed"><span>Playback speed</span><select id="fallSpeed"><option value="0.5">0.5×</option><option value="1" selected>1× real time</option><option value="2">2×</option><option value="4">4×</option></select></label>
+        <button id="startFallButton" type="button">
             &#9654; Start
         </button>
 
-        <button onclick="resetFall()">
+        <button id="pauseFallButton" type="button" class="secondary" disabled>Pause</button>
+        <button id="resetFallButton" type="button" class="secondary">
             &#8634; Reset
         </button>
 
     </div>
-
-
-
+    <p id="fallError" class="tool-feedback" role="alert"></p>
+    <div class="tool-note-row"><span id="fallState" class="tool-state" role="status">Ready</span><span>Downward values are positive. The picture rescales to the chosen height.</span><button id="exportFallButton" type="button" class="secondary" disabled>Export trial CSV</button></div>
+    <details class="tool-explanation"><summary>Model, units &amp; recording</summary><p>Released from rest: d = ½gt², v = gt, and t₍impact₎ = √(2h/g). Gravity is constant and air resistance is omitted. Playback changes how quickly simulation time passes, not the equations. Trial data are sampled every 0.1 simulation seconds plus the exact impact point. Reset before changing the world or height.</p></details>
     <div class="dashboard">
 
         <div class="charts-column">
@@ -414,11 +420,11 @@ button:active {
 
                 <h2>Velocity-Time</h2>
 
-                <canvas
+                <div class="tool-chart-frame"><canvas
                     id="velocityChart"
                     width="400"
                     height="250">
-                </canvas>
+                </canvas></div>
 
             </div>
 
@@ -426,21 +432,22 @@ button:active {
 
                 <h2>Distance-Time</h2>
 
-                <canvas
+                <div class="tool-chart-frame"><canvas
                     id="distanceChart"
                     width="400"
                     height="250">
-                </canvas>
+                </canvas></div>
 
             </div>
 
         </div>
 
         <div class="scene">
-
+            <span class="fall-mark release">Release · 0 m fallen</span><span class="fall-axis" aria-hidden="true"></span>
             <div id="ball"></div>
 
             <div id="horizon"></div>
+            <span id="fallScaleLabel" class="fall-mark ground">100 m fallen</span>
 
         </div>
 
@@ -453,7 +460,7 @@ button:active {
             <img
                 id="planetPreview"
                 class="planet-preview"
-                src="../images/earth.png">
+                src="../images/earth.png" alt="Earth illustration">
 
             <p id="gravityInfo">
                 Gravity: 9.81 m/s&sup2;
@@ -470,13 +477,14 @@ button:active {
             <p id="velocityInfo">
                 Velocity: 0.00 m/s
             </p>
+            <p id="fallenInfo">Fallen: 0.00 m</p><p id="remainingInfo">Remaining: 100.00 m</p><p id="impactInfo">Impact speed: —</p>
 
         </div>
 
     </div>
 </div>
 <script data-goatcounter="https://wangleyi.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+        async src="https://gc.zgo.at/count.js"></script>
 </body>
 <script src="../chart.js"></script>
 <script src="../js/freefalling.js"></script>
